@@ -9,11 +9,11 @@ console.log(user);
 //7. Работа с примитивами:
 let test = 1;
 test = 2;
-test = test + 1;
-// test = 3
+test = test + "1";
+// test = 21
 console.log(test);
 test = test - 1;
-// 2
+// 20
 console.log(test);
 test = Boolean(test);
 // true
