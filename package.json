@@ -22,5 +22,9 @@
     "eslint-plugin-react": "^7.27.1",
     "husky": "^7.0.0",
     "jest": "^27.4.4"
+  },
+  "dependencies": {
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-plugin-import": "^2.25.3"
   }
 }

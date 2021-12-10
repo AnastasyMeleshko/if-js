@@ -46,12 +46,15 @@
 //     }
 // }
 
-//lesson - 3
-// 6. Функция palindrome (Слово палиндром может читаться справа-налево и слева-направо одинаково. Прим "шалаш".):
+// lesson - 3
+// 6.Функция palindrome (Слово палиндром может читаться
+// справа-налево и слева-направо одинаково.
+// Прим "шалаш".):
 // - создайте функцию `palindrome`, которая будет возвращать bool значение в зависимости от того,
 // является ли переданное функции слово палиндромом или нет.
 //
-// const initialStr = prompt("Введите слово для проверки является ли оно паллиндромом. Выведет true если да, false - если нет");
+// const initialStr = prompt("Введите слово для проверки является ли оно паллиндромом.
+// Выведет true если да, false - если нет");
 // let str = initialStr.toUpperCase().replace(/\s/g, '');
 //
 // function palindrome(str) {
@@ -102,7 +105,8 @@
 //     if (a === b) {
 //         return "Числа равны";
 //     } else {
-//         (a < b) ? (console.log("Меньшее из чисел: " + a)) : (console.log("Меньшее из чисел: " + b));
+//         (a < b) ? (console.log("Меньшее из чисел: " + a)) :
+//         (console.log("Меньшее из чисел: " + b));
 //     }
 // }
 //
@@ -112,7 +116,8 @@
 //     if (a === b) {
 //         return "Числа равны";
 //     } else {
-//         (a > b) ? (console.log("Большее из чисел: " + a)) : (console.log("Большее из чисел: " + b));
+//         (a > b) ? (console.log("Большее из чисел: " + a)) :
+//         (console.log("Большее из чисел: " + b));
 //     }
 // }
 //
@@ -164,24 +169,24 @@
 // console.log("Замена нулей на 'zero' при помощи функции: ");
 // console.log(funZero(newMas));
 
-//lesson-4
+// lesson-4
 
-//5.Напишите функцию sum, которая возвращает сумму чисел следующим образом:
-//console.log(sum(5)(2)); // 7
+// 5.Напишите функцию sum, которая возвращает сумму чисел следующим образом:
+// console.log(sum(5)(2)); // 7
 
 function curry(func) {
-    return function(num1) {
-        return function(num2) {
-            return func(num1, num2);
-        };
+  return function (num1) {
+    return function (num2) {
+      return func(num1, num2);
     };
+  };
 }
 
 function sum(num1, num2) {
-    return num1 + num2;
+  return num1 + num2;
 }
 
-let curriedSum = curry(sum);
+const curriedSum = curry(sum);
 console.log(curriedSum(5)(2));
 
 module.exports = sum;
@@ -193,7 +198,8 @@ module.exports = sum;
 // <p id="text3">Text 3</p>
 // дан массив цветов:
 // const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-// по первому нажатию на абзац он должен покраситься в первый цвет из массива, по второму нажатию - во второй и так далее;
+// по первому нажатию на абзац он должен покраситься в первый цвет из массива,
+// по второму нажатию - во второй и так далее;
 // цвета из массива меняются бесконечно;
 // все абзацы работают независимо.
 
@@ -201,41 +207,38 @@ const colors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
 const firstLine = document.getElementById("text1");
 const secondLine = document.getElementById("text2");
 const thirdLine = document.getElementById("text3");
-function baseColor(Element) {
-    Element.style.color = colors[0];
+function baseColor(element) {
+  element.style.color = colors[0];
 }
-function changeColor (Element) {
-    if (Element.style.color === colors[0]) {
-        Element.style.color = colors[1];
-    } else if (Element.style.color === colors[1]) {
-        Element.style.color = colors[2];
-    } else if ( Element.style.color === colors[2]) {
-        Element.style.color = colors[3];
-    } else if (Element.style.color === colors[3]) {
-        Element.style.color = colors[4];
-    } else {
-       baseColor(Element);
-    }
+function changeColor(element) {
+  if (element.style.color === colors[0]) {
+    element.style.color = colors[1];
+  } else if (element.style.color === colors[1]) {
+    element.style.color = colors[2];
+  } else if (element.style.color === colors[2]) {
+    element.style.color = colors[3];
+  } else if (element.style.color === colors[3]) {
+    element.style.color = colors[4];
+  } else {
+    baseColor(element);
+  }
 }
 
-    firstLine.addEventListener("click", () => {
-        baseColor(firstLine);
-        firstLine.addEventListener("click", () => {
-            changeColor(firstLine);
-        });
+firstLine.addEventListener("click", () => {
+  baseColor(firstLine);
+  firstLine.addEventListener("click", () => {
+    changeColor(firstLine);
+  });
 });
-     secondLine.addEventListener("click", () => {
-        baseColor(secondLine);
-     secondLine.addEventListener("click", () => {
-            changeColor(secondLine);
-        });
+secondLine.addEventListener("click", () => {
+  baseColor(secondLine);
+  secondLine.addEventListener("click", () => {
+    changeColor(secondLine);
+  });
 });
-    thirdLine.addEventListener("click", () => {
-        baseColor(thirdLine);
-    thirdLine.addEventListener("click", () => {
-            changeColor(thirdLine);
-        });
+thirdLine.addEventListener("click", () => {
+  baseColor(thirdLine);
+  thirdLine.addEventListener("click", () => {
+    changeColor(thirdLine);
+  });
 });
-
-
-
