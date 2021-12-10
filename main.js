@@ -197,8 +197,7 @@ module.exports = sum;
 // цвета из массива меняются бесконечно;
 // все абзацы работают независимо.
 
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-let length = colors.length;
+const colors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
 const firstLine = document.getElementById("text1");
 const secondLine = document.getElementById("text2");
 const thirdLine = document.getElementById("text3");
@@ -222,20 +221,20 @@ function changeColor (Element) {
     firstLine.addEventListener("click", () => {
         baseColor(firstLine);
         firstLine.addEventListener("click", () => {
-            changeColor(firstLine)
-        })
+            changeColor(firstLine);
+        });
 });
      secondLine.addEventListener("click", () => {
         baseColor(secondLine);
      secondLine.addEventListener("click", () => {
-            changeColor(secondLine)
-        })
+            changeColor(secondLine);
+        });
 });
     thirdLine.addEventListener("click", () => {
         baseColor(thirdLine);
     thirdLine.addEventListener("click", () => {
-            changeColor(thirdLine)
-        })
+            changeColor(thirdLine);
+        });
 });
 
 
