@@ -242,18 +242,6 @@ thirdLine.addEventListener("click", () => {
   });
 });
 
-let i = 1;
-firstLine.addEventListener("click", () => {
-  firstLine.style.color = colors[i];
-  i = 2;
-  if (firstLine.style.color !== colors[0]) {
-    firstLine.style.color = colors[i];
-  } else {
-    baseColor(firstLine);
-  }
-  i += 1;
-}
-
 // 2 способ
 
 const arrColors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
