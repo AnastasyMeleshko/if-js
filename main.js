@@ -181,14 +181,11 @@ function curry(func) {
     };
   };
 }
-
 function sum(num1, num2) {
   return num1 + num2;
 }
-
 const curriedSum = curry(sum);
 console.log(curriedSum(5)(2));
-
 module.exports = sum;
 
 // Покрасьте абзацы по клику (событие click):
@@ -202,6 +199,8 @@ module.exports = sum;
 // по второму нажатию - во второй и так далее;
 // цвета из массива меняются бесконечно;
 // все абзацы работают независимо.
+
+// 1 способ
 
 const colors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
 const firstLine = document.getElementById("text1");
@@ -242,3 +241,5 @@ thirdLine.addEventListener("click", () => {
     changeColor(thirdLine);
   });
 });
+
+// 2 способ

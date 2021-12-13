@@ -2,6 +2,14 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    amd: true,
+    node: true,
+  },
+  globals: {
+    angular: false,
+    module: false,
+    inject: false,
+    document: false,
   },
   extends: [
     "eslint:recommended",
