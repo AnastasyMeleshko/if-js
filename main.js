@@ -173,7 +173,7 @@
 
 // 5.Напишите функцию sum, которая возвращает сумму чисел следующим образом:
 // console.log(sum(5)(2)); // 7
-
+//
 function curry(func) {
   return function (num1) {
     return function (num2) {
@@ -242,4 +242,37 @@ thirdLine.addEventListener("click", () => {
   });
 });
 
+let i = 1;
+firstLine.addEventListener("click", () => {
+  firstLine.style.color = colors[i];
+  i = 2;
+  if (firstLine.style.color !== colors[0]) {
+    firstLine.style.color = colors[i];
+  } else {
+    baseColor(firstLine);
+  }
+  i += 1;
+}
+
 // 2 способ
+
+const arrColors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
+
+const textFirst = document.getElementById("text1");
+const textMiddle = document.getElementById("text2");
+const textLast = document.getElementById("text3");
+
+function changeColor2() {
+  let color = 0;
+  return function () {
+    this.style.color = arrColors[color];
+    color++;
+    if (color === arrColors.length) {
+      color = 0;
+    }
+  };
+}
+
+textFirst.addEventListener("click", changeColor2());
+textMiddle.addEventListener("click", changeColor2());
+textLast.addEventListener("click", changeColor2());
