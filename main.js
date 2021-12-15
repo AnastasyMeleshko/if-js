@@ -174,19 +174,19 @@
 // 5.Напишите функцию sum, которая возвращает сумму чисел следующим образом:
 // console.log(sum(5)(2)); // 7
 //
-function curry(func) {
-  return function (num1) {
-    return function (num2) {
-      return func(num1, num2);
-    };
-  };
-}
-function sum(num1, num2) {
-  return num1 + num2;
-}
-const curriedSum = curry(sum);
-console.log(curriedSum(5)(2));
-module.exports = sum;
+// function curry(func) {
+//   return function (num1) {
+//     return function (num2) {
+//       return func(num1, num2);
+//     };
+//   };
+// }
+// function sum(num1, num2) {
+//   return num1 + num2;
+// }
+// const curriedSum = curry(sum);
+// console.log(curriedSum(5)(2));
+// module.exports = sum;
 
 // Покрасьте абзацы по клику (событие click):
 // даны 3 абзаца:
@@ -202,65 +202,152 @@ module.exports = sum;
 
 // 1 способ
 
-const colors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
-const firstLine = document.getElementById("text1");
-const secondLine = document.getElementById("text2");
-const thirdLine = document.getElementById("text3");
-function baseColor(element) {
-  element.style.color = colors[0];
+// const colors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
+// const firstLine = document.getElementById("text1");
+// const secondLine = document.getElementById("text2");
+// const thirdLine = document.getElementById("text3");
+// function baseColor(element) {
+//   element.style.color = colors[0];
+// }
+// function changeColor(element) {
+//   if (element.style.color === colors[0]) {
+//     element.style.color = colors[1];
+//   } else if (element.style.color === colors[1]) {
+//     element.style.color = colors[2];
+//   } else if (element.style.color === colors[2]) {
+//     element.style.color = colors[3];
+//   } else if (element.style.color === colors[3]) {
+//     element.style.color = colors[4];
+//   } else {
+//     baseColor(element);
+//   }
+// }
+//
+// firstLine.addEventListener("click", () => {
+//   baseColor(firstLine);
+//   firstLine.addEventListener("click", () => {
+//     changeColor(firstLine);
+//   });
+// });
+// secondLine.addEventListener("click", () => {
+//   baseColor(secondLine);
+//   secondLine.addEventListener("click", () => {
+//     changeColor(secondLine);
+//   });
+// });
+// thirdLine.addEventListener("click", () => {
+//   baseColor(thirdLine);
+//   thirdLine.addEventListener("click", () => {
+//     changeColor(thirdLine);
+//   });
+// });
+//
+// // 2 способ
+//
+// const arrColors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
+//
+// const textFirst = document.getElementById("text1");
+// const textMiddle = document.getElementById("text2");
+// const textLast = document.getElementById("text3");
+//
+// function changeColor2() {
+//   let color = 0;
+//   return function () {
+//     this.style.color = arrColors[color];
+//     color++;
+//     if (color === arrColors.length) {
+//       color = 0;
+//     }
+//   };
+// }
+//
+// textFirst.addEventListener("click", changeColor2());
+// textMiddle.addEventListener("click", changeColor2());
+// textLast.addEventListener("click", changeColor2());
+
+// lesson-5
+
+// 5.Преобразование формата даты:
+// в переменной date лежит дата в формате '2020-11-26';
+// преобразуйте эту дату в формат '26.11.2020';
+// функция должна быть универсальной, т.е. принимать любую дату и приводить
+// ее к поставленному в задании формату.
+
+const date = "2020-11-26";
+function changeFormat(initialDate) {
+  const year = initialDate.slice(0, 4);
+  const month = initialDate.slice(5, 7);
+  const day = initialDate.slice(8, 10);
+  return ((`${day}.${month}.${year}`));
 }
-function changeColor(element) {
-  if (element.style.color === colors[0]) {
-    element.style.color = colors[1];
-  } else if (element.style.color === colors[1]) {
-    element.style.color = colors[2];
-  } else if (element.style.color === colors[2]) {
-    element.style.color = colors[3];
-  } else if (element.style.color === colors[3]) {
-    element.style.color = colors[4];
-  } else {
-    baseColor(element);
+console.log(changeFormat(date));
+module.exports = changeFormat;
+
+// 6. Поиск объектов размещения:
+// дан массив;
+// напишите функцию поиска, которая будет принимать строку;
+// по полученной строке найдите все совпадения в массива;
+// верните список строк в формате: страна, город, отель.
+const data = [
+  {
+    country: "Russia",
+    city: "Saint Petersburg",
+    hotel: "Hotel Leopold",
+  },
+  {
+    country: "Spain",
+    city: "Santa Cruz de Tenerife",
+    hotel: "Apartment Sunshine",
+  },
+  {
+    country: "Slowakia",
+    city: "Vysokie Tatry",
+    hotel: "Villa Kunerad",
+  },
+  {
+    country: "Germany",
+    city: "Berlin",
+    hotel: "Hostel Friendship",
+  },
+  {
+    country: "Indonesia",
+    city: "Bali",
+    hotel: "Ubud Bali Resort&SPA",
+  },
+  {
+    country: "Netherlands",
+    city: "Rotterdam",
+    hotel: "King Kong Hostel",
+  },
+  {
+    country: "Marocco",
+    city: "Ourika",
+    hotel: "Rokoko Hotel",
+  },
+  {
+    country: "Germany",
+    city: "Berlin",
+    hotel: "Hotel Rehberge Berlin Mitte",
+  },
+];
+
+const str = prompt("Введите ваш поисковой запрос");
+const newData = [];
+const resultOfSearch = [];
+
+for (let i = 0; i < data.length; i++) {
+  newData.push(`${data[i].country}, ${data[i].city}, ${data[i].hotel}`);
+}
+
+for (let j = 0; j < newData.length; j++) {
+  if (newData[j].includes(str)) {
+    resultOfSearch.push(newData[j]);
   }
 }
 
-firstLine.addEventListener("click", () => {
-  baseColor(firstLine);
-  firstLine.addEventListener("click", () => {
-    changeColor(firstLine);
-  });
-});
-secondLine.addEventListener("click", () => {
-  baseColor(secondLine);
-  secondLine.addEventListener("click", () => {
-    changeColor(secondLine);
-  });
-});
-thirdLine.addEventListener("click", () => {
-  baseColor(thirdLine);
-  thirdLine.addEventListener("click", () => {
-    changeColor(thirdLine);
-  });
-});
-
-// 2 способ
-
-const arrColors = ["magenta", "cyan", "firebrick", "springgreen", "skyblue"];
-
-const textFirst = document.getElementById("text1");
-const textMiddle = document.getElementById("text2");
-const textLast = document.getElementById("text3");
-
-function changeColor2() {
-  let color = 0;
-  return function () {
-    this.style.color = arrColors[color];
-    color++;
-    if (color === arrColors.length) {
-      color = 0;
-    }
-  };
+if (resultOfSearch.length !== 0) {
+  console.log(`Результат по запросу ${str}: `);
+  console.log(resultOfSearch);
+} else {
+  console.log(`Совпадений по запросу ${str} нет`);
 }
-
-textFirst.addEventListener("click", changeColor2());
-textMiddle.addEventListener("click", changeColor2());
-textLast.addEventListener("click", changeColor2());
