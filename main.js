@@ -273,12 +273,16 @@
 // функция должна быть универсальной, т.е. принимать любую дату и приводить
 // ее к поставленному в задании формату.
 
-const date = "2020-11-26";
+const date = "2020-12-01";
 function changeFormat(initialDate) {
-  const year = initialDate.slice(0, 4);
-  const month = initialDate.slice(5, 7);
-  const day = initialDate.slice(8, 10);
-  return ((`${day}.${month}.${year}`));
+  const reg = /\d{4}.\d{2}.\d{2}/g;
+  if (reg.test(initialDate)) {
+    const year = initialDate.slice(0, 4);
+    const month = initialDate.slice(5, 7);
+    const day = initialDate.slice(8, 10);
+    return ((`${day}.${month}.${year}`));
+  }
+  return "Формат даты не корректен";
 }
 console.log(changeFormat(date));
 module.exports = changeFormat;
@@ -331,23 +335,23 @@ const data = [
   },
 ];
 
-const str = prompt("Введите ваш поисковой запрос");
 const newData = [];
 const resultOfSearch = [];
-
 for (let i = 0; i < data.length; i++) {
   newData.push(`${data[i].country}, ${data[i].city}, ${data[i].hotel}`);
 }
-
-for (let j = 0; j < newData.length; j++) {
-  if (newData[j].includes(str)) {
-    resultOfSearch.push(newData[j]);
+function search(str) {
+  for (let j = 0; j < newData.length; j++) {
+    if (newData[j].includes(str)) {
+      resultOfSearch.push(newData[j]);
+    }
+  }
+  if (resultOfSearch.length !== 0) {
+    console.log(`Результат по запросу ${str}: `);
+    console.log(resultOfSearch);
+  } else {
+    console.log(`Совпадений по запросу ${str} нет`);
   }
 }
 
-if (resultOfSearch.length !== 0) {
-  console.log(`Результат по запросу ${str}: `);
-  console.log(resultOfSearch);
-} else {
-  console.log(`Совпадений по запросу ${str} нет`);
-}
+search("Germany");
