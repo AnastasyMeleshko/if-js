@@ -285,7 +285,7 @@ function changeFormat(initialDate) {
   return "Формат даты не корректен";
 }
 console.log(changeFormat(date));
-module.exports = changeFormat;
+// module.exports = changeFormat;
 
 // 6. Поиск объектов размещения:
 // дан массив;
@@ -342,7 +342,7 @@ for (let i = 0; i < data.length; i++) {
 }
 function search(str) {
   for (let j = 0; j < newData.length; j++) {
-    if (newData[j].includes(str)) {
+    if ((newData[j].toLowerCase()).includes(str.toLowerCase())) {
       resultOfSearch.push(newData[j]);
     }
   }
@@ -354,4 +354,4 @@ function search(str) {
   }
 }
 
-search("Germany");
+search("hotel");
