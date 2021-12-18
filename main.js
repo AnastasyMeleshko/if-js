@@ -789,7 +789,10 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
   if (dayOfWeek > daysInWeek - 1) {
     throw `${dayOfWeek} - введите корректное число старта недели от 0 до 6, где 0 - понедельник`;
   } else {
-    const quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
+    let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
+    if (daysInMonth === 28) {
+      quantatyOfWeeks = 5;
+    }
     const arrayOfDays = [];
     for (let i = 1; i <= daysInMonth; i++) {
       arrayOfDays.push(String(i));
@@ -818,4 +821,4 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
   }
 }
 // число старта недели от 0 до 6, где 0 - понедельник
-getCalendarMonth(29, 7, 5);
+getCalendarMonth(30, 7, 0);
