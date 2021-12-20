@@ -551,6 +551,20 @@ function getSearchData(str, hotels) {
 
 console.log(getSearchData("Germany", hotels));
 
+// 2 способ
+
+function searchInArray(str) {
+  str = str.toLowerCase();
+  return hotels.reduce((acc, item) => {
+    if (Object.values(item).toString().toLowerCase().includes(str)) {
+      acc.push(`${item.country}, ${item.city}, ${item.name}`);
+    }
+    return acc;
+  }, []);
+}
+
+console.log(searchInArray("Germany"));
+
 // 7.Сопоставте страны с городами из массива:
 // дан массив;
 // напишите функцию, которая выберет все уникальные страны и сопоставит с ними города;
@@ -720,7 +734,25 @@ const hotels2 = [
   },
 ];
 
-// 1 способ (сложный и не очень хороший)
+// 1 способ
+
+const resultObj = {};
+for (const hotelData of hotels2) {
+  if (!Object.keys(resultObj).includes(hotelData.country)) {
+    resultObj[hotelData.country] = [];
+  }
+}
+for (const hotelData of hotels2) {
+  if (!Object.values(resultObj).includes(hotelData.city)) {
+    if (!resultObj[hotelData.country].includes(hotelData.city)) {
+      resultObj[hotelData.country].push(hotelData.city);
+    }
+  }
+}
+
+console.log(resultObj);
+
+// 2 способ (сложный и не очень хороший)
 
 // const cityArray = [];
 // for (const hotelData of hotels2) {
@@ -760,21 +792,16 @@ const hotels2 = [
 //
 // console.log(resultObj);
 
-// 2 способ
-
-const resultObj = {};
-for (let hotelData of hotels2) {
-      if (Object.keys(resultObj).indexOf(hotelData.country) === -1) {
-       resultObj[hotelData.country] = [];
-}
-}
-for (let hotelData of hotels2) {
-  if (Object.values(resultObj).indexOf(hotelData.city) === -1) {
-    resultObj[hotelData.country].push(hotelData.city);
+// 3 способ
+const separatedBetweenCounties = {};
+hotels2.forEach((el) => {
+  if (separatedBetweenCounties[el.country] && !separatedBetweenCounties[el.country].includes(el.city)) {
+    separatedBetweenCounties[el.country].push(el.city);
+  } else {
+    separatedBetweenCounties[el.country] = [el.city];
   }
-}
-
-console.log(resultObj);
+});
+console.log(separatedBetweenCounties);
 
 // *Календарный месяц:
 // создайте функцию getCalendarMonth, которая принимает количество дней в месяце,
