@@ -720,40 +720,58 @@ const hotels2 = [
   },
 ];
 
-const cityArray = [];
-for (const hotelData of hotels2) {
-  if (!cityArray.includes(hotelData.city)) {
-    cityArray.push(hotelData.city);
-  }
-}
+// 1 способ (сложный и не очень хороший)
 
-const countryArray = [];
-for (const hotelData of hotels2) {
-  if (!countryArray.includes(hotelData.country)) {
-    countryArray.push(hotelData.country);
-  }
-}
-const countryCityArray = [];
-for (let i = 0; i < hotels2.length; i++) {
-  for (let j = 0; j < cityArray.length; j++) {
-    if (hotels2[i].city.includes(cityArray[j])) {
-      countryCityArray.push(`${hotels2[i].country} ${cityArray[j]}`);
-    }
-  }
-}
+// const cityArray = [];
+// for (const hotelData of hotels2) {
+//   if (!cityArray.includes(hotelData.city)) {
+//     cityArray.push(hotelData.city);
+//   }
+// }
+//
+// const countryArray = [];
+// for (const hotelData of hotels2) {
+//   if (!countryArray.includes(hotelData.country)) {
+//     countryArray.push(hotelData.country);
+//   }
+// }
+// const countryCityArray = [];
+// for (let i = 0; i < hotels2.length; i++) {
+//   for (let j = 0; j < cityArray.length; j++) {
+//     if (hotels2[i].city.includes(cityArray[j])) {
+//       countryCityArray.push(`${hotels2[i].country} ${cityArray[j]}`);
+//     }
+//   }
+// }
+//
+// const resultObj = {};
+// for (let i = 0; i < countryCityArray.length; i++) {
+//   for (let j = 0; j < countryArray.length; j++) {
+//     if (countryCityArray[i].includes(countryArray[j])) {
+//       const key = countryArray[j];
+//       resultObj[key] += `${countryCityArray[i].slice(countryArray[j].length + 1)} `;
+//     }
+//   }
+// }
+//
+// for (key in resultObj) {
+//   resultObj[key] = resultObj[key].slice(9).replace(/\s$/gi, "");
+// }
+//
+// console.log(resultObj);
+
+// 2 способ
 
 const resultObj = {};
-for (let i = 0; i < countryCityArray.length; i++) {
-  for (let j = 0; j < countryArray.length; j++) {
-    if (countryCityArray[i].includes(countryArray[j])) {
-      const key = countryArray[j];
-      resultObj[key] += `${countryCityArray[i].slice(countryArray[j].length + 1)} `;
-    }
-  }
+for (let hotelData of hotels2) {
+      if (Object.keys(resultObj).indexOf(hotelData.country) === -1) {
+       resultObj[hotelData.country] = [];
 }
-
-for (key in resultObj) {
-  resultObj[key] = resultObj[key].slice(9).replace(/\s$/gi, "");
+}
+for (let hotelData of hotels2) {
+  if (Object.values(resultObj).indexOf(hotelData.city) === -1) {
+    resultObj[hotelData.country].push(hotelData.city);
+  }
 }
 
 console.log(resultObj);
@@ -783,13 +801,16 @@ console.log(resultObj);
 // const daysInWeek = 7;
 // const dayOfWeek = 3;
 // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
-
+//
 const result = [];
 function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
   if (dayOfWeek > daysInWeek - 1) {
     throw `${dayOfWeek} - введите корректное число старта недели от 0 до 6, где 0 - понедельник`;
   } else {
-    let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek)+1;
+    let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
+    if (daysInMonth === 28) {
+      quantatyOfWeeks = 5;
+    }
     const arrayOfDays = [];
     for (let i = 1; i <= daysInMonth; i++) {
       arrayOfDays.push(String(i));
@@ -818,4 +839,4 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
   }
 }
 // число старта недели от 0 до 6, где 0 - понедельник
-getCalendarMonth(28, 7, 5);
+getCalendarMonth(30, 7, 5);
