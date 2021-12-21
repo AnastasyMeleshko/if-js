@@ -272,86 +272,598 @@
 // преобразуйте эту дату в формат '26.11.2020';
 // функция должна быть универсальной, т.е. принимать любую дату и приводить
 // ее к поставленному в задании формату.
+//
+// const date = "2020-12-01";
+// function changeFormat(initialDate) {
+//   const reg = /\d{4}.\d{2}.\d{2}/g;
+//   if (reg.test(initialDate)) {
+//     const year = initialDate.slice(0, 4);
+//     const month = initialDate.slice(5, 7);
+//     const day = initialDate.slice(8, 10);
+//     return ((`${day}.${month}.${year}`));
+//   }
+//   return "Формат даты не корректен";
+// }
+// console.log(changeFormat(date));
+// // module.exports = changeFormat;
+//
+// // 6. Поиск объектов размещения:
+// // дан массив;
+// // напишите функцию поиска, которая будет принимать строку;
+// // по полученной строке найдите все совпадения в массива;
+// // верните список строк в формате: страна, город, отель.
+// const data = [
+//   {
+//     country: "Russia",
+//     city: "Saint Petersburg",
+//     hotel: "Hotel Leopold",
+//   },
+//   {
+//     country: "Spain",
+//     city: "Santa Cruz de Tenerife",
+//     hotel: "Apartment Sunshine",
+//   },
+//   {
+//     country: "Slowakia",
+//     city: "Vysokie Tatry",
+//     hotel: "Villa Kunerad",
+//   },
+//   {
+//     country: "Germany",
+//     city: "Berlin",
+//     hotel: "Hostel Friendship",
+//   },
+//   {
+//     country: "Indonesia",
+//     city: "Bali",
+//     hotel: "Ubud Bali Resort&SPA",
+//   },
+//   {
+//     country: "Netherlands",
+//     city: "Rotterdam",
+//     hotel: "King Kong Hostel",
+//   },
+//   {
+//     country: "Marocco",
+//     city: "Ourika",
+//     hotel: "Rokoko Hotel",
+//   },
+//   {
+//     country: "Germany",
+//     city: "Berlin",
+//     hotel: "Hotel Rehberge Berlin Mitte",
+//   },
+// ];
+//
+// const newData = [];
+// const resultOfSearch = [];
+// for (let i = 0; i < data.length; i++) {
+//   newData.push(`${data[i].country}, ${data[i].city}, ${data[i].hotel}`);
+// }
+// function search(str) {
+//   for (let j = 0; j < newData.length; j++) {
+//     if ((newData[j].toLowerCase()).includes(str.toLowerCase())) {
+//       resultOfSearch.push(newData[j]);
+//     }
+//   }
+//   if (resultOfSearch.length !== 0) {
+//     console.log(`Результат по запросу ${str}: `);
+//     console.log(resultOfSearch);
+//   } else {
+//     console.log(`Совпадений по запросу ${str} нет`);
+//   }
+// }
+//
+// search("hotel");
 
-const date = "2020-12-01";
-function changeFormat(initialDate) {
-  const reg = /\d{4}.\d{2}.\d{2}/g;
-  if (reg.test(initialDate)) {
-    const year = initialDate.slice(0, 4);
-    const month = initialDate.slice(5, 7);
-    const day = initialDate.slice(8, 10);
-    return ((`${day}.${month}.${year}`));
-  }
-  return "Формат даты не корректен";
+// lesson -6
+
+// 5.Функция palindrome (Слово палиндром может читаться справа-налево и слева-направо одинаково.
+// Прим "шалаш".):
+// создайте функцию palindrome, которая будет возвращать bool значение в зависимости от того,
+// является ли переданное функции слово палиндромом или нет;
+// теперь уже зная как работать со строками и массивами запишите реализацию
+// этого метода в одну строку.
+
+function palindrome(str) {
+  str = str.toLowerCase().replace(/\s/g, "");
+  return str === str.split("").reverse().join("");
 }
-console.log(changeFormat(date));
-// module.exports = changeFormat;
 
-// 6. Поиск объектов размещения:
-// дан массив;
+console.log(`шалаш ${palindrome("шалаш")}`);
+console.log(`паста ${palindrome("паста")}`);
+console.log(`мадам ${palindrome("мадам")}`);
+console.log(`Анна ${palindrome("Анна")}`);
+
+// 6. Поиск объектов размещения: дан массив;
 // напишите функцию поиска, которая будет принимать строку;
-// по полученной строке найдите все совпадения в массива;
-// верните список строк в формате: страна, город, отель.
-const data = [
+// по полученной строке найдите все совпадения в массиве по любому из полей;
+// верните масcив строк в формате: страна, город, отель;
+// зная как работать с массивами, сократите вашу функцию избавившись от цикла for.
+const hotels = [
   {
-    country: "Russia",
+    name: "Hotel Leopold",
     city: "Saint Petersburg",
-    hotel: "Hotel Leopold",
+    country: "Russia",
   },
   {
-    country: "Spain",
+    name: "Apartment Sunshine",
     city: "Santa Cruz de Tenerife",
-    hotel: "Apartment Sunshine",
+    country: "Spain",
   },
   {
-    country: "Slowakia",
+    name: "Villa Kunerad",
     city: "Vysokie Tatry",
-    hotel: "Villa Kunerad",
+    country: "Slowakia",
   },
   {
-    country: "Germany",
+    name: "Hostel Friendship",
     city: "Berlin",
-    hotel: "Hostel Friendship",
+    country: "Germany",
   },
   {
+    name: "Radisson Blu Hotel",
+    city: "Kyiv",
+    country: "Ukraine",
+  },
+  {
+    name: "Paradise Hotel",
+    city: "Guadalupe",
+    country: "Mexico",
+  },
+  {
+    name: "Hotel Grindewald",
+    city: "Interlaken",
+    country: "Switzerland",
+  },
+  {
+    name: "The Andaman Resort",
+    city: "Port Dickson",
+    country: "Malaysia",
+  },
+  {
+    name: "Virgin Hotel",
+    city: "Chicago",
+    country: "USA",
+  },
+  {
+    name: "Grand Beach Resort",
+    city: "Dubai",
+    country: "United Arab Emirates",
+  },
+  {
+    name: "Shilla Stay",
+    city: "Seoul",
+    country: "South Korea",
+  },
+  {
+    name: "San Firenze Suites",
+    city: "Florence",
+    country: "Italy",
+  },
+  {
+    name: "The Andaman Resort",
+    city: "Port Dickson",
+    country: "Malaysia",
+  },
+  {
+    name: "Black Penny Villas",
+    city: "BTDC, Nuca Dua",
     country: "Indonesia",
-    city: "Bali",
-    hotel: "Ubud Bali Resort&SPA",
   },
   {
+    name: "Koko Hotel",
+    city: "Tokyo",
+    country: "Japan",
+  },
+  {
+    name: "Ramada Plaza",
+    city: "Istanbul",
+    country: "Turkey",
+  },
+  {
+    name: "Waikiki Resort Hotel",
+    city: "Hawaii",
+    country: "USA",
+  },
+  {
+    name: "Puro Hotel",
+    city: "Krakow",
+    country: "Poland",
+  },
+  {
+    name: "Asma Suites",
+    city: "Santorini",
+    country: "Greece",
+  },
+  {
+    name: "Cityden Apartments",
+    city: "Amsterdam",
     country: "Netherlands",
-    city: "Rotterdam",
-    hotel: "King Kong Hostel",
   },
   {
-    country: "Marocco",
-    city: "Ourika",
-    hotel: "Rokoko Hotel",
+    name: "Mandarin Oriental",
+    city: "Miami",
+    country: "USA",
   },
   {
+    name: "Concept Terrace Hotel",
+    city: "Rome",
+    country: "Italy",
+  },
+  {
+    name: "Ponta Mar Hotel",
+    city: "Fortaleza",
+    country: "Brazil",
+  },
+  {
+    name: "Four Seasons Hotel",
+    city: "Sydney",
+    country: "Australia",
+  },
+  {
+    name: "Le Meridien",
+    city: "Nice",
+    country: "France",
+  },
+  {
+    name: "Apart Neptun",
+    city: "Gdansk",
+    country: "Poland",
+  },
+  {
+    name: "Lux Isla",
+    city: "Ibiza",
+    country: "Spain",
+  },
+  {
+    name: "Nox Hostel",
+    city: "London",
+    country: "UK",
+  },
+  {
+    name: "Leonardo Vienna",
+    city: "Vienna",
+    country: "Austria",
+  },
+  {
+    name: "Adagio Aparthotel",
+    city: "Edinburgh",
+    country: "UK",
+  },
+  {
+    name: "Steigenberger Hotel",
+    city: "Hamburg",
     country: "Germany",
+  },
+];
+const formatStr = (searchRequest) => Object.values(searchRequest).reverse().join(", ");
+function getSearchData(str, hotels) {
+  const reg = new RegExp(str, "i");
+  const result = hotels
+    .filter((searchRequest) => reg.test(formatStr(searchRequest)))
+    .map((searchRequest) => formatStr(searchRequest));
+  if (result.length === 0) {
+    return "Совпадение не найдено";
+  }
+  return result;
+}
+
+console.log(getSearchData("Germany", hotels));
+
+// 2 способ
+
+function searchInArray(str) {
+  str = str.toLowerCase();
+  return hotels.reduce((acc, item) => {
+    if (Object.values(item).toString().toLowerCase().includes(str)) {
+      acc.push(`${item.country}, ${item.city}, ${item.name}`);
+    }
+    return acc;
+  }, []);
+}
+
+console.log(searchInArray("Germany"));
+
+// 7.Сопоставте страны с городами из массива:
+// дан массив;
+// напишите функцию, которая выберет все уникальные страны и сопоставит с ними города;
+// в консоли должен быть выведен примерно такой результат:
+// {
+// Australia: ['Sydney'],
+// Germany: ['Berlin', 'Hamburg'],
+// Italy: ['Florence', 'Rome'],
+// USA: ['Chicago', 'Hawaii', 'Miami'],
+// Ukraine: ['Kyiv']
+// }
+const hotels2 = [
+  {
+    name: "Hotel Leopold",
+    city: "Saint Petersburg",
+    country: "Russia",
+  },
+  {
+    name: "Apartment Sunshine",
+    city: "Santa Cruz de Tenerife",
+    country: "Spain",
+  },
+  {
+    name: "Villa Kunerad",
+    city: "Vysokie Tatry",
+    country: "Slowakia",
+  },
+  {
+    name: "Hostel Friendship",
     city: "Berlin",
-    hotel: "Hotel Rehberge Berlin Mitte",
+    country: "Germany",
+  },
+  {
+    name: "Radisson Blu Hotel",
+    city: "Kyiv",
+    country: "Ukraine",
+  },
+  {
+    name: "Paradise Hotel",
+    city: "Guadalupe",
+    country: "Mexico",
+  },
+  {
+    name: "Hotel Grindewald",
+    city: "Interlaken",
+    country: "Switzerland",
+  },
+  {
+    name: "The Andaman Resort",
+    city: "Port Dickson",
+    country: "Malaysia",
+  },
+  {
+    name: "Virgin Hotel",
+    city: "Chicago",
+    country: "USA",
+  },
+  {
+    name: "Grand Beach Resort",
+    city: "Dubai",
+    country: "United Arab Emirates",
+  },
+  {
+    name: "Shilla Stay",
+    city: "Seoul",
+    country: "South Korea",
+  },
+  {
+    name: "San Firenze Suites",
+    city: "Florence",
+    country: "Italy",
+  },
+  {
+    name: "The Andaman Resort",
+    city: "Port Dickson",
+    country: "Malaysia",
+  },
+  {
+    name: "Black Penny Villas",
+    city: "BTDC, Nuca Dua",
+    country: "Indonesia",
+  },
+  {
+    name: "Koko Hotel",
+    city: "Tokyo",
+    country: "Japan",
+  },
+  {
+    name: "Ramada Plaza",
+    city: "Istanbul",
+    country: "Turkey",
+  },
+  {
+    name: "Waikiki Resort Hotel",
+    city: "Hawaii",
+    country: "USA",
+  },
+  {
+    name: "Puro Hotel",
+    city: "Krakow",
+    country: "Poland",
+  },
+  {
+    name: "Asma Suites",
+    city: "Santorini",
+    country: "Greece",
+  },
+  {
+    name: "Cityden Apartments",
+    city: "Amsterdam",
+    country: "Netherlands",
+  },
+  {
+    name: "Mandarin Oriental",
+    city: "Miami",
+    country: "USA",
+  },
+  {
+    name: "Concept Terrace Hotel",
+    city: "Rome",
+    country: "Italy",
+  },
+  {
+    name: "Ponta Mar Hotel",
+    city: "Fortaleza",
+    country: "Brazil",
+  },
+  {
+    name: "Four Seasons Hotel",
+    city: "Sydney",
+    country: "Australia",
+  },
+  {
+    name: "Le Meridien",
+    city: "Nice",
+    country: "France",
+  },
+  {
+    name: "Apart Neptun",
+    city: "Gdansk",
+    country: "Poland",
+  },
+  {
+    name: "Lux Isla",
+    city: "Ibiza",
+    country: "Spain",
+  },
+  {
+    name: "Nox Hostel",
+    city: "London",
+    country: "UK",
+  },
+  {
+    name: "Leonardo Vienna",
+    city: "Vienna",
+    country: "Austria",
+  },
+  {
+    name: "Adagio Aparthotel",
+    city: "Edinburgh",
+    country: "UK",
+  },
+  {
+    name: "Steigenberger Hotel",
+    city: "Hamburg",
+    country: "Germany",
   },
 ];
 
-const newData = [];
-const resultOfSearch = [];
-for (let i = 0; i < data.length; i++) {
-  newData.push(`${data[i].country}, ${data[i].city}, ${data[i].hotel}`);
-}
-function search(str) {
-  for (let j = 0; j < newData.length; j++) {
-    if ((newData[j].toLowerCase()).includes(str.toLowerCase())) {
-      resultOfSearch.push(newData[j]);
-    }
+// 1 способ
+
+const resultObj = {};
+for (const hotelData of hotels2) {
+  if (!Object.keys(resultObj).includes(hotelData.country)) {
+    resultObj[hotelData.country] = [];
   }
-  if (resultOfSearch.length !== 0) {
-    console.log(`Результат по запросу ${str}: `);
-    console.log(resultOfSearch);
-  } else {
-    console.log(`Совпадений по запросу ${str} нет`);
+}
+for (const hotelData of hotels2) {
+  if (!Object.values(resultObj).includes(hotelData.city)) {
+    if (!resultObj[hotelData.country].includes(hotelData.city)) {
+      resultObj[hotelData.country].push(hotelData.city);
+    }
   }
 }
 
-search("hotel");
+console.log(resultObj);
+
+// 2 способ (сложный и не очень хороший)
+
+// const cityArray = [];
+// for (const hotelData of hotels2) {
+//   if (!cityArray.includes(hotelData.city)) {
+//     cityArray.push(hotelData.city);
+//   }
+// }
+//
+// const countryArray = [];
+// for (const hotelData of hotels2) {
+//   if (!countryArray.includes(hotelData.country)) {
+//     countryArray.push(hotelData.country);
+//   }
+// }
+// const countryCityArray = [];
+// for (let i = 0; i < hotels2.length; i++) {
+//   for (let j = 0; j < cityArray.length; j++) {
+//     if (hotels2[i].city.includes(cityArray[j])) {
+//       countryCityArray.push(`${hotels2[i].country} ${cityArray[j]}`);
+//     }
+//   }
+// }
+//
+// const resultObj = {};
+// for (let i = 0; i < countryCityArray.length; i++) {
+//   for (let j = 0; j < countryArray.length; j++) {
+//     if (countryCityArray[i].includes(countryArray[j])) {
+//       const key = countryArray[j];
+//       resultObj[key] += `${countryCityArray[i].slice(countryArray[j].length + 1)} `;
+//     }
+//   }
+// }
+//
+// for (key in resultObj) {
+//   resultObj[key] = resultObj[key].slice(9).replace(/\s$/gi, "");
+// }
+//
+// console.log(resultObj);
+
+// 3 способ
+const separatedBetweenCounties = {};
+hotels2.forEach((el) => {
+  if (separatedBetweenCounties[el.country] && !separatedBetweenCounties[el.country].includes(el.city)) {
+    separatedBetweenCounties[el.country].push(el.city);
+  } else {
+    separatedBetweenCounties[el.country] = [el.city];
+  }
+});
+console.log(separatedBetweenCounties);
+
+// *Календарный месяц:
+// создайте функцию getCalendarMonth, которая принимает количество дней в месяце,
+// количество дней в неделе и день недели на который выпадает первый день месяца;
+// свободные дни (до первого дня месяца и после последнего дня месяца, пока считаем,
+// что в каждом месяце равное количество дней) заполните днями предыдущего месяца или последующего;
+// выбросьте ошибку, если переданный день недели больше, чем количество дней.
+// // пример:
+// const daysInMonth = 30;
+// const daysInWeek = 7;
+// const dayOfWeek = 4; // в моем примере понедельник равен 0. У вас может отличаться
+// const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+//
+// console.log(calendarMonth);
+// /* result:
+// [
+//   [27, 28, 29, 30, 1, 2, 3]
+//   [4, 5, 6, 7, 8, 9, 10]
+//   [11, 12, 13, 14, 15, 16, 17]
+//   [18, 19, 20, 21, 22, 23, 24]
+//   [25, 26, 27, 28, 29, 30, 1]
+// ]
+// const daysInMonth = 30;
+// const daysInWeek = 7;
+// const dayOfWeek = 3;
+// const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+//
+const result = [];
+function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
+  if (dayOfWeek > daysInWeek - 1) {
+    throw `${dayOfWeek} - введите корректное число старта недели от 0 до 6, где 0 - понедельник`;
+  } else {
+    let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
+    if (daysInMonth === 28) {
+      quantatyOfWeeks = 5;
+    }
+    const arrayOfDays = [];
+    for (let i = 1; i <= daysInMonth; i++) {
+      arrayOfDays.push(String(i));
+    }
+    const initialArray = [...arrayOfDays];
+    if (dayOfWeek !== 0) {
+      result[0] = (`${arrayOfDays.slice(-dayOfWeek)},${arrayOfDays.slice(0, daysInWeek - dayOfWeek)}`).split(",");
+    } else {
+      result[0] = arrayOfDays.slice(0, daysInWeek);
+    }
+    for (let i = 1; i < quantatyOfWeeks; i++) {
+      result[i] = arrayOfDays;
+    }
+    for (let i = 1; i < quantatyOfWeeks; i++) {
+      const lastDayOfPrevWeek = result[i - 1].at(-1);
+      const lastDayOfPrevIndex = result[i].indexOf(lastDayOfPrevWeek);
+      result[i] = result[i].slice(lastDayOfPrevIndex + 1, lastDayOfPrevIndex + 1 + daysInWeek);
+      if (result[i].length < daysInWeek) {
+        const diffInDaysWithWeek = daysInWeek - result[i].length;
+        for (let j = 0; j < diffInDaysWithWeek; j++) {
+          result[i].push(initialArray[j]);
+        }
+      }
+    }
+    console.log(result);
+  }
+}
+// число старта недели от 0 до 6, где 0 - понедельник
+getCalendarMonth(30, 7, 5);
