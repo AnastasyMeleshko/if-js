@@ -867,3 +867,71 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
 }
 // число старта недели от 0 до 6, где 0 - понедельник
 getCalendarMonth(30, 7, 5);
+
+
+//lesson 7
+//Напишите функция deepEqual, которая сможет сравнивать 2 объекта
+// с разными уровнями вложенности. Напимер:
+const obj1 = {
+  a: 'a',
+  b: {
+    a: 'a',
+    b: 'b',
+    c: {
+      a: 1,
+    },
+  },
+};
+const obj2 = {
+  b: {
+    c: {
+      a: 1,
+    },
+    b: 'b',
+    a: 'a',
+  },
+  a: 'a',
+};
+const obj3 = {
+  a: {
+    c: {
+      a: 'a',
+    },
+    b: 'b',
+    a: 'a',
+  },
+  b: 'b',
+};
+
+//1 способ
+
+const deepEqual = (object1, object2) => {
+  let obj1 = JSON.stringify(object1).split('').sort().join('');
+  let obj2 = JSON.stringify(object2).split('').sort().join('');
+  console.log(obj1 === obj2);
+}
+
+deepEqual(obj1, obj2); // true
+deepEqual(obj1, obj3); // false
+
+//2 способ
+
+function isEqual(object1, object2) {
+  const arr1 = Object.getOwnPropertyNames(object1);
+  const arr2 = Object.getOwnPropertyNames(object2);
+   if (arr1.length !== arr2.length) {
+    return false;
+  }
+  for (let i = 0; i < arr1.length; i++) {
+    const arr = arr1[i];
+    const bothAreObjects = typeof(object1[arr]) === 'object' && typeof(object2[arr]) === 'object';
+    if ((!bothAreObjects && (object1[arr] !== object2[arr]))
+      || (bothAreObjects && !isEqual(object1[arr], object2[arr]))) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(isEqual(obj1, obj2)); // true
+console.log(isEqual(obj1, obj3)); // false
