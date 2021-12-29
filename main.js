@@ -868,15 +868,14 @@ function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
 // число старта недели от 0 до 6, где 0 - понедельник
 getCalendarMonth(30, 7, 5);
 
-
-//lesson 7
-//Напишите функция deepEqual, которая сможет сравнивать 2 объекта
+// lesson 7
+// Напишите функция deepEqual, которая сможет сравнивать 2 объекта
 // с разными уровнями вложенности. Напимер:
 const obj1 = {
-  a: 'a',
+  a: "a",
   b: {
-    a: 'a',
-    b: 'b',
+    a: "a",
+    b: "b",
     c: {
       a: 1,
     },
@@ -887,44 +886,44 @@ const obj2 = {
     c: {
       a: 1,
     },
-    b: 'b',
-    a: 'a',
+    b: "b",
+    a: "a",
   },
-  a: 'a',
+  a: "a",
 };
 const obj3 = {
   a: {
     c: {
-      a: 'a',
+      a: "a",
     },
-    b: 'b',
-    a: 'a',
+    b: "b",
+    a: "a",
   },
-  b: 'b',
+  b: "b",
 };
 
-//1 способ
+// 1 способ
 
 const deepEqual = (object1, object2) => {
-  let obj1 = JSON.stringify(object1).split('').sort().join('');
-  let obj2 = JSON.stringify(object2).split('').sort().join('');
+  const obj1 = JSON.stringify(object1).split("").sort().join("");
+  const obj2 = JSON.stringify(object2).split("").sort().join("");
   console.log(obj1 === obj2);
-}
+};
 
 deepEqual(obj1, obj2); // true
 deepEqual(obj1, obj3); // false
 
-//2 способ
+// 2 способ
 
 function isEqual(object1, object2) {
   const arr1 = Object.getOwnPropertyNames(object1);
   const arr2 = Object.getOwnPropertyNames(object2);
-   if (arr1.length !== arr2.length) {
+  if (arr1.length !== arr2.length) {
     return false;
   }
   for (let i = 0; i < arr1.length; i++) {
     const arr = arr1[i];
-    const bothAreObjects = typeof(object1[arr]) === 'object' && typeof(object2[arr]) === 'object';
+    const bothAreObjects = typeof (object1[arr]) === "object" && typeof (object2[arr]) === "object";
     if ((!bothAreObjects && (object1[arr] !== object2[arr]))
       || (bothAreObjects && !isEqual(object1[arr], object2[arr]))) {
       return false;
@@ -935,3 +934,88 @@ function isEqual(object1, object2) {
 
 console.log(isEqual(obj1, obj2)); // true
 console.log(isEqual(obj1, obj3)); // false
+
+// lesson 8
+
+const studentsData = [
+  {
+    firstName: "Василий",
+    lastName: "Петров",
+    admissionYear: 2019,
+    courseName: "Java",
+  },
+  {
+    firstName: "Иван",
+    lastName: "Иванов",
+    admissionYear: 2018,
+    courseName: "JavaScript",
+  },
+  {
+    firstName: "Александр",
+    lastName: "Федоров",
+    admissionYear: 2017,
+    courseName: "Python",
+  },
+  {
+    firstName: "Николай",
+    lastName: "Петров",
+    admissionYear: 2019,
+    courseName: "Android",
+  },
+];
+
+class User {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Student extends User {
+  constructor(admissionYear, courseName) {
+    super();
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get course() {
+    this.currentYear = 2021;
+    const courseResult = this.currentYear - this.admissionYear;
+    return courseResult;
+  }
+}
+
+let arrayOfStudents = [];
+for (let i=0; i<studentsData.length; i++) {
+  let student = new Student(studentsData[i].admissionYear, studentsData[i].courseName);
+  student.firstName = studentsData[i].firstName;
+  student.lastName = studentsData[i].lastName;
+  arrayOfStudents.push(student);
+}
+
+class Students {
+  constructor(students) {
+    this.students = students;
+  }
+
+  getInfo() {
+    let resultArray = [];
+    for (let i=0; i<this.students.length; i++) {
+      resultArray.push(this.students[i].fullName + " - " + this.students[i].courseName + ", " + this.students[i].course + " курс");
+    }
+    resultArray.sort(function(a, b){
+      let char1 = a.substr(a.search(/\d/));
+      let char2 = b.substr(b.search(/\d/));
+      return parseInt(char1) - parseInt(char2);
+    });
+    return resultArray;
+    }
+}
+
+let studentsGroup = new Students(arrayOfStudents);
+console.log(studentsGroup.getInfo());
+
