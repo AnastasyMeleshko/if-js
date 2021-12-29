@@ -964,6 +964,8 @@ const studentsData = [
   },
 ];
 
+// 1 способ
+
 class User {
   constructor(firstName, lastName) {
     this.firstName = firstName;
@@ -975,6 +977,8 @@ class User {
   }
 }
 
+const currentYear = new Date().getFullYear();
+
 class Student extends User {
   constructor(admissionYear, courseName) {
     super();
@@ -983,8 +987,7 @@ class Student extends User {
   }
 
   get course() {
-    this.currentYear = 2021;
-    const courseResult = this.currentYear - this.admissionYear;
+    const courseResult = currentYear - this.admissionYear;
     return courseResult;
   }
 }
@@ -996,6 +999,7 @@ for (let i=0; i<studentsData.length; i++) {
   student.lastName = studentsData[i].lastName;
   arrayOfStudents.push(student);
 }
+
 
 class Students {
   constructor(students) {
@@ -1019,3 +1023,51 @@ class Students {
 let studentsGroup = new Students(arrayOfStudents);
 console.log(studentsGroup.getInfo());
 
+//2 способ
+
+class User2 {
+  constructor(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+
+  get fullName() {
+    return this.firstname + ' ' + this.lastname;
+  }
+}
+
+class Student2 extends User2 {
+  constructor({firstName, lastName, admissionYear, courseName}) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get fullname() {
+    return super.fullName;
+  }
+
+  get course() {
+    const currentYear = new Date().getFullYear()
+    return  currentYear - this.admissionYear;
+  }
+}
+
+class Students2 {
+  constructor(students) {
+    this.students = students;
+  }
+
+  sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
+
+  getInfo() {
+    return this.students.forEach(student => {
+      console.log(`${student.fullname} - ${student.courseName}, ${student.course} курс`);
+    })
+  }
+}
+
+const studentInstances = studentsData.map(student => new Student2(student));
+const students = new Students2(studentInstances);
+students.sortByCourse();
+students.getInfo();
