@@ -1088,33 +1088,71 @@ students.getInfo();
 //   }
 // }
 
+// 1 способ (Используя итератор)
+
+// const textFirst = document.getElementById("text1");
+// const textMiddle = document.getElementById("text2");
+// const textLast = document.getElementById("text3");
+//
+// const colors = {
+//   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+//   [Symbol.iterator]() {
+//     const arr = this.data;
+//     return {
+//       next(index) {
+//         return {
+//           value: arr[index],
+//           done: index === arr.length,
+//         };
+//       },
+//     };
+//   },
+// };
+//
+// function changeStyle() {
+//   let i = 0;
+//   return function () {
+//     const iterator = colors[Symbol.iterator]();
+//     this.style.color = iterator.next(i).value;
+//     i += 1;
+//     if (iterator.next(i).done) {
+//       i = 0;
+//     }
+//   };
+// }
+//
+// textFirst.addEventListener("click", changeStyle());
+// textMiddle.addEventListener("click", changeStyle());
+// textLast.addEventListener("click", changeStyle());
+
+// 2 способ (Используя функцию-генератор)
+
 const textFirst = document.getElementById("text1");
 const textMiddle = document.getElementById("text2");
 const textLast = document.getElementById("text3");
 
 const colors = {
   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
-  [Symbol.iterator]() {
-    const arr = this.data;
-    return {
-      next(index) {
-        return {
-          value: arr[index],
-          done: index === arr.length,
-        };
-      },
-    };
-  },
+  from: 0,
+};
+colors.to = [...colors.data].length;
+
+colors[Symbol.iterator] = function* () {
+  const arr = this.data;
+  for (let value = this.from; value < this.to; value++) {
+    yield arr[value];
+  }
 };
 
 function changeStyle() {
-  let i = 0;
+  let index = 0;
   return function () {
-    const iterator = colors[Symbol.iterator]();
-    this.style.color = iterator.next(i).value;
-    i += 1;
-    if (iterator.next(i).done) {
-      i = 0;
+    const generator = colors[Symbol.iterator]();
+    const arr = [...generator];
+    this.style.color = arr[index];
+    index++;
+    if (index === arr.length) {
+      index = 0;
     }
   };
 }
