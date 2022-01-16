@@ -992,14 +992,13 @@ class Student extends User {
   }
 }
 
-let arrayOfStudents = [];
-for (let i=0; i<studentsData.length; i++) {
-  let student = new Student(studentsData[i].admissionYear, studentsData[i].courseName);
+const arrayOfStudents = [];
+for (let i = 0; i < studentsData.length; i++) {
+  const student = new Student(studentsData[i].admissionYear, studentsData[i].courseName);
   student.firstName = studentsData[i].firstName;
   student.lastName = studentsData[i].lastName;
   arrayOfStudents.push(student);
 }
-
 
 class Students {
   constructor(students) {
@@ -1007,23 +1006,23 @@ class Students {
   }
 
   getInfo() {
-    let resultArray = [];
-    for (let i=0; i<this.students.length; i++) {
-      resultArray.push(this.students[i].fullName + " - " + this.students[i].courseName + ", " + this.students[i].course + " курс");
+    const resultArray = [];
+    for (let i = 0; i < this.students.length; i++) {
+      resultArray.push(`${this.students[i].fullName} - ${this.students[i].courseName}, ${this.students[i].course} курс`);
     }
-    resultArray.sort(function(a, b){
-      let char1 = a.substr(a.search(/\d/));
-      let char2 = b.substr(b.search(/\d/));
+    resultArray.sort((a, b) => {
+      const char1 = a.substr(a.search(/\d/));
+      const char2 = b.substr(b.search(/\d/));
       return parseInt(char1) - parseInt(char2);
     });
     return resultArray;
-    }
+  }
 }
 
-let studentsGroup = new Students(arrayOfStudents);
+const studentsGroup = new Students(arrayOfStudents);
 console.log(studentsGroup.getInfo());
 
-//2 способ
+// 2 способ
 
 class User2 {
   constructor(firstname, lastname) {
@@ -1032,12 +1031,14 @@ class User2 {
   }
 
   get fullName() {
-    return this.firstname + ' ' + this.lastname;
+    return `${this.firstname} ${this.lastname}`;
   }
 }
 
 class Student2 extends User2 {
-  constructor({firstName, lastName, admissionYear, courseName}) {
+  constructor({
+    firstName, lastName, admissionYear, courseName,
+  }) {
     super(firstName, lastName);
     this.admissionYear = admissionYear;
     this.courseName = courseName;
@@ -1048,8 +1049,8 @@ class Student2 extends User2 {
   }
 
   get course() {
-    const currentYear = new Date().getFullYear()
-    return  currentYear - this.admissionYear;
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.admissionYear;
   }
 }
 
@@ -1058,16 +1059,104 @@ class Students2 {
     this.students = students;
   }
 
-  sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
+  sortByCourse = () => this.students.sort((a, b) => a.course - b.course);
 
   getInfo() {
-    return this.students.forEach(student => {
+    return this.students.forEach((student) => {
       console.log(`${student.fullname} - ${student.courseName}, ${student.course} курс`);
-    })
+    });
   }
 }
 
-const studentInstances = studentsData.map(student => new Student2(student));
+const studentInstances = studentsData.map((student) => new Student2(student));
 const students = new Students2(studentInstances);
 students.sortByCourse();
 students.getInfo();
+
+// lesson-9
+
+// Покрасьте абзацы по клику
+// даны 3 абзаца:
+// <p id="text1">Text 1</p>
+// <p id="text2">Text 2</p>
+// <p id="text3">Text 3</p>
+// даны цвета:
+// const colors = {
+//   data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+//   [Symbol.iterator]() {
+//     // ваш код
+//   }
+// }
+
+// 1 способ (Используя итератор)
+
+// const textFirst = document.getElementById("text1");
+// const textMiddle = document.getElementById("text2");
+// const textLast = document.getElementById("text3");
+//
+// const colors = {
+//   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+//   [Symbol.iterator]() {
+//     const arr = this.data;
+//     return {
+//       next(index) {
+//         return {
+//           value: arr[index],
+//           done: index === arr.length,
+//         };
+//       },
+//     };
+//   },
+// };
+//
+// function changeStyle() {
+//   let i = 0;
+//   return function () {
+//     const iterator = colors[Symbol.iterator]();
+//     this.style.color = iterator.next(i).value;
+//     i += 1;
+//     if (iterator.next(i).done) {
+//       i = 0;
+//     }
+//   };
+// }
+//
+// textFirst.addEventListener("click", changeStyle());
+// textMiddle.addEventListener("click", changeStyle());
+// textLast.addEventListener("click", changeStyle());
+
+// 2 способ (Используя функцию-генератор)
+
+const textFirst = document.getElementById("text1");
+const textMiddle = document.getElementById("text2");
+const textLast = document.getElementById("text3");
+
+const colors = {
+  data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+  from: 0,
+};
+colors.to = [...colors.data].length;
+
+colors[Symbol.iterator] = function* () {
+  const arr = this.data;
+  for (let value = this.from; value < this.to; value++) {
+    yield arr[value];
+  }
+};
+
+function changeStyle() {
+  let index = 0;
+  return function () {
+    const generator = colors[Symbol.iterator]();
+    const arr = [...generator];
+    this.style.color = arr[index];
+    index++;
+    if (index === arr.length) {
+      index = 0;
+    }
+  };
+}
+
+textFirst.addEventListener("click", changeStyle());
+textMiddle.addEventListener("click", changeStyle());
+textLast.addEventListener("click", changeStyle());
