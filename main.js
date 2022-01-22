@@ -365,205 +365,205 @@
 // теперь уже зная как работать со строками и массивами запишите реализацию
 // этого метода в одну строку.
 
-function palindrome(str) {
-  str = str.toLowerCase().replace(/\s/g, "");
-  return str === str.split("").reverse().join("");
-}
-
-console.log(`шалаш ${palindrome("шалаш")}`);
-console.log(`паста ${palindrome("паста")}`);
-console.log(`мадам ${palindrome("мадам")}`);
-console.log(`Анна ${palindrome("Анна")}`);
+// function palindrome(str) {
+//   str = str.toLowerCase().replace(/\s/g, "");
+//   return str === str.split("").reverse().join("");
+// }
+//
+// console.log(`шалаш ${palindrome("шалаш")}`);
+// console.log(`паста ${palindrome("паста")}`);
+// console.log(`мадам ${palindrome("мадам")}`);
+// console.log(`Анна ${palindrome("Анна")}`);
 
 // 6. Поиск объектов размещения: дан массив;
 // напишите функцию поиска, которая будет принимать строку;
 // по полученной строке найдите все совпадения в массиве по любому из полей;
 // верните масcив строк в формате: страна, город, отель;
 // зная как работать с массивами, сократите вашу функцию избавившись от цикла for.
-const hotels = [
-  {
-    name: "Hotel Leopold",
-    city: "Saint Petersburg",
-    country: "Russia",
-  },
-  {
-    name: "Apartment Sunshine",
-    city: "Santa Cruz de Tenerife",
-    country: "Spain",
-  },
-  {
-    name: "Villa Kunerad",
-    city: "Vysokie Tatry",
-    country: "Slowakia",
-  },
-  {
-    name: "Hostel Friendship",
-    city: "Berlin",
-    country: "Germany",
-  },
-  {
-    name: "Radisson Blu Hotel",
-    city: "Kyiv",
-    country: "Ukraine",
-  },
-  {
-    name: "Paradise Hotel",
-    city: "Guadalupe",
-    country: "Mexico",
-  },
-  {
-    name: "Hotel Grindewald",
-    city: "Interlaken",
-    country: "Switzerland",
-  },
-  {
-    name: "The Andaman Resort",
-    city: "Port Dickson",
-    country: "Malaysia",
-  },
-  {
-    name: "Virgin Hotel",
-    city: "Chicago",
-    country: "USA",
-  },
-  {
-    name: "Grand Beach Resort",
-    city: "Dubai",
-    country: "United Arab Emirates",
-  },
-  {
-    name: "Shilla Stay",
-    city: "Seoul",
-    country: "South Korea",
-  },
-  {
-    name: "San Firenze Suites",
-    city: "Florence",
-    country: "Italy",
-  },
-  {
-    name: "The Andaman Resort",
-    city: "Port Dickson",
-    country: "Malaysia",
-  },
-  {
-    name: "Black Penny Villas",
-    city: "BTDC, Nuca Dua",
-    country: "Indonesia",
-  },
-  {
-    name: "Koko Hotel",
-    city: "Tokyo",
-    country: "Japan",
-  },
-  {
-    name: "Ramada Plaza",
-    city: "Istanbul",
-    country: "Turkey",
-  },
-  {
-    name: "Waikiki Resort Hotel",
-    city: "Hawaii",
-    country: "USA",
-  },
-  {
-    name: "Puro Hotel",
-    city: "Krakow",
-    country: "Poland",
-  },
-  {
-    name: "Asma Suites",
-    city: "Santorini",
-    country: "Greece",
-  },
-  {
-    name: "Cityden Apartments",
-    city: "Amsterdam",
-    country: "Netherlands",
-  },
-  {
-    name: "Mandarin Oriental",
-    city: "Miami",
-    country: "USA",
-  },
-  {
-    name: "Concept Terrace Hotel",
-    city: "Rome",
-    country: "Italy",
-  },
-  {
-    name: "Ponta Mar Hotel",
-    city: "Fortaleza",
-    country: "Brazil",
-  },
-  {
-    name: "Four Seasons Hotel",
-    city: "Sydney",
-    country: "Australia",
-  },
-  {
-    name: "Le Meridien",
-    city: "Nice",
-    country: "France",
-  },
-  {
-    name: "Apart Neptun",
-    city: "Gdansk",
-    country: "Poland",
-  },
-  {
-    name: "Lux Isla",
-    city: "Ibiza",
-    country: "Spain",
-  },
-  {
-    name: "Nox Hostel",
-    city: "London",
-    country: "UK",
-  },
-  {
-    name: "Leonardo Vienna",
-    city: "Vienna",
-    country: "Austria",
-  },
-  {
-    name: "Adagio Aparthotel",
-    city: "Edinburgh",
-    country: "UK",
-  },
-  {
-    name: "Steigenberger Hotel",
-    city: "Hamburg",
-    country: "Germany",
-  },
-];
-const formatStr = (searchRequest) => Object.values(searchRequest).reverse().join(", ");
-function getSearchData(str, hotels) {
-  const reg = new RegExp(str, "i");
-  const result = hotels
-    .filter((searchRequest) => reg.test(formatStr(searchRequest)))
-    .map((searchRequest) => formatStr(searchRequest));
-  if (result.length === 0) {
-    return "Совпадение не найдено";
-  }
-  return result;
-}
-
-console.log(getSearchData("Germany", hotels));
-
-// 2 способ
-
-function searchInArray(str) {
-  str = str.toLowerCase();
-  return hotels.reduce((acc, item) => {
-    if (Object.values(item).toString().toLowerCase().includes(str)) {
-      acc.push(`${item.country}, ${item.city}, ${item.name}`);
-    }
-    return acc;
-  }, []);
-}
-
-console.log(searchInArray("Germany"));
+// const hotels = [
+//   {
+//     name: "Hotel Leopold",
+//     city: "Saint Petersburg",
+//     country: "Russia",
+//   },
+//   {
+//     name: "Apartment Sunshine",
+//     city: "Santa Cruz de Tenerife",
+//     country: "Spain",
+//   },
+//   {
+//     name: "Villa Kunerad",
+//     city: "Vysokie Tatry",
+//     country: "Slowakia",
+//   },
+//   {
+//     name: "Hostel Friendship",
+//     city: "Berlin",
+//     country: "Germany",
+//   },
+//   {
+//     name: "Radisson Blu Hotel",
+//     city: "Kyiv",
+//     country: "Ukraine",
+//   },
+//   {
+//     name: "Paradise Hotel",
+//     city: "Guadalupe",
+//     country: "Mexico",
+//   },
+//   {
+//     name: "Hotel Grindewald",
+//     city: "Interlaken",
+//     country: "Switzerland",
+//   },
+//   {
+//     name: "The Andaman Resort",
+//     city: "Port Dickson",
+//     country: "Malaysia",
+//   },
+//   {
+//     name: "Virgin Hotel",
+//     city: "Chicago",
+//     country: "USA",
+//   },
+//   {
+//     name: "Grand Beach Resort",
+//     city: "Dubai",
+//     country: "United Arab Emirates",
+//   },
+//   {
+//     name: "Shilla Stay",
+//     city: "Seoul",
+//     country: "South Korea",
+//   },
+//   {
+//     name: "San Firenze Suites",
+//     city: "Florence",
+//     country: "Italy",
+//   },
+//   {
+//     name: "The Andaman Resort",
+//     city: "Port Dickson",
+//     country: "Malaysia",
+//   },
+//   {
+//     name: "Black Penny Villas",
+//     city: "BTDC, Nuca Dua",
+//     country: "Indonesia",
+//   },
+//   {
+//     name: "Koko Hotel",
+//     city: "Tokyo",
+//     country: "Japan",
+//   },
+//   {
+//     name: "Ramada Plaza",
+//     city: "Istanbul",
+//     country: "Turkey",
+//   },
+//   {
+//     name: "Waikiki Resort Hotel",
+//     city: "Hawaii",
+//     country: "USA",
+//   },
+//   {
+//     name: "Puro Hotel",
+//     city: "Krakow",
+//     country: "Poland",
+//   },
+//   {
+//     name: "Asma Suites",
+//     city: "Santorini",
+//     country: "Greece",
+//   },
+//   {
+//     name: "Cityden Apartments",
+//     city: "Amsterdam",
+//     country: "Netherlands",
+//   },
+//   {
+//     name: "Mandarin Oriental",
+//     city: "Miami",
+//     country: "USA",
+//   },
+//   {
+//     name: "Concept Terrace Hotel",
+//     city: "Rome",
+//     country: "Italy",
+//   },
+//   {
+//     name: "Ponta Mar Hotel",
+//     city: "Fortaleza",
+//     country: "Brazil",
+//   },
+//   {
+//     name: "Four Seasons Hotel",
+//     city: "Sydney",
+//     country: "Australia",
+//   },
+//   {
+//     name: "Le Meridien",
+//     city: "Nice",
+//     country: "France",
+//   },
+//   {
+//     name: "Apart Neptun",
+//     city: "Gdansk",
+//     country: "Poland",
+//   },
+//   {
+//     name: "Lux Isla",
+//     city: "Ibiza",
+//     country: "Spain",
+//   },
+//   {
+//     name: "Nox Hostel",
+//     city: "London",
+//     country: "UK",
+//   },
+//   {
+//     name: "Leonardo Vienna",
+//     city: "Vienna",
+//     country: "Austria",
+//   },
+//   {
+//     name: "Adagio Aparthotel",
+//     city: "Edinburgh",
+//     country: "UK",
+//   },
+//   {
+//     name: "Steigenberger Hotel",
+//     city: "Hamburg",
+//     country: "Germany",
+//   },
+// ];
+// const formatStr = (searchRequest) => Object.values(searchRequest).reverse().join(", ");
+// function getSearchData(str, hotels) {
+//   const reg = new RegExp(str, "i");
+//   const result = hotels
+//     .filter((searchRequest) => reg.test(formatStr(searchRequest)))
+//     .map((searchRequest) => formatStr(searchRequest));
+//   if (result.length === 0) {
+//     return "Совпадение не найдено";
+//   }
+//   return result;
+// }
+//
+// console.log(getSearchData("Germany", hotels));
+//
+// // 2 способ
+//
+// function searchInArray(str) {
+//   str = str.toLowerCase();
+//   return hotels.reduce((acc, item) => {
+//     if (Object.values(item).toString().toLowerCase().includes(str)) {
+//       acc.push(`${item.country}, ${item.city}, ${item.name}`);
+//     }
+//     return acc;
+//   }, []);
+// }
+//
+// console.log(searchInArray("Germany"));
 
 // 7.Сопоставте страны с городами из массива:
 // дан массив;
@@ -576,181 +576,181 @@ console.log(searchInArray("Germany"));
 // USA: ['Chicago', 'Hawaii', 'Miami'],
 // Ukraine: ['Kyiv']
 // }
-const hotels2 = [
-  {
-    name: "Hotel Leopold",
-    city: "Saint Petersburg",
-    country: "Russia",
-  },
-  {
-    name: "Apartment Sunshine",
-    city: "Santa Cruz de Tenerife",
-    country: "Spain",
-  },
-  {
-    name: "Villa Kunerad",
-    city: "Vysokie Tatry",
-    country: "Slowakia",
-  },
-  {
-    name: "Hostel Friendship",
-    city: "Berlin",
-    country: "Germany",
-  },
-  {
-    name: "Radisson Blu Hotel",
-    city: "Kyiv",
-    country: "Ukraine",
-  },
-  {
-    name: "Paradise Hotel",
-    city: "Guadalupe",
-    country: "Mexico",
-  },
-  {
-    name: "Hotel Grindewald",
-    city: "Interlaken",
-    country: "Switzerland",
-  },
-  {
-    name: "The Andaman Resort",
-    city: "Port Dickson",
-    country: "Malaysia",
-  },
-  {
-    name: "Virgin Hotel",
-    city: "Chicago",
-    country: "USA",
-  },
-  {
-    name: "Grand Beach Resort",
-    city: "Dubai",
-    country: "United Arab Emirates",
-  },
-  {
-    name: "Shilla Stay",
-    city: "Seoul",
-    country: "South Korea",
-  },
-  {
-    name: "San Firenze Suites",
-    city: "Florence",
-    country: "Italy",
-  },
-  {
-    name: "The Andaman Resort",
-    city: "Port Dickson",
-    country: "Malaysia",
-  },
-  {
-    name: "Black Penny Villas",
-    city: "BTDC, Nuca Dua",
-    country: "Indonesia",
-  },
-  {
-    name: "Koko Hotel",
-    city: "Tokyo",
-    country: "Japan",
-  },
-  {
-    name: "Ramada Plaza",
-    city: "Istanbul",
-    country: "Turkey",
-  },
-  {
-    name: "Waikiki Resort Hotel",
-    city: "Hawaii",
-    country: "USA",
-  },
-  {
-    name: "Puro Hotel",
-    city: "Krakow",
-    country: "Poland",
-  },
-  {
-    name: "Asma Suites",
-    city: "Santorini",
-    country: "Greece",
-  },
-  {
-    name: "Cityden Apartments",
-    city: "Amsterdam",
-    country: "Netherlands",
-  },
-  {
-    name: "Mandarin Oriental",
-    city: "Miami",
-    country: "USA",
-  },
-  {
-    name: "Concept Terrace Hotel",
-    city: "Rome",
-    country: "Italy",
-  },
-  {
-    name: "Ponta Mar Hotel",
-    city: "Fortaleza",
-    country: "Brazil",
-  },
-  {
-    name: "Four Seasons Hotel",
-    city: "Sydney",
-    country: "Australia",
-  },
-  {
-    name: "Le Meridien",
-    city: "Nice",
-    country: "France",
-  },
-  {
-    name: "Apart Neptun",
-    city: "Gdansk",
-    country: "Poland",
-  },
-  {
-    name: "Lux Isla",
-    city: "Ibiza",
-    country: "Spain",
-  },
-  {
-    name: "Nox Hostel",
-    city: "London",
-    country: "UK",
-  },
-  {
-    name: "Leonardo Vienna",
-    city: "Vienna",
-    country: "Austria",
-  },
-  {
-    name: "Adagio Aparthotel",
-    city: "Edinburgh",
-    country: "UK",
-  },
-  {
-    name: "Steigenberger Hotel",
-    city: "Hamburg",
-    country: "Germany",
-  },
-];
-
-// 1 способ
-
-const resultObj = {};
-for (const hotelData of hotels2) {
-  if (!Object.keys(resultObj).includes(hotelData.country)) {
-    resultObj[hotelData.country] = [];
-  }
-}
-for (const hotelData of hotels2) {
-  if (!Object.values(resultObj).includes(hotelData.city)) {
-    if (!resultObj[hotelData.country].includes(hotelData.city)) {
-      resultObj[hotelData.country].push(hotelData.city);
-    }
-  }
-}
-
-console.log(resultObj);
+// const hotels2 = [
+//   {
+//     name: "Hotel Leopold",
+//     city: "Saint Petersburg",
+//     country: "Russia",
+//   },
+//   {
+//     name: "Apartment Sunshine",
+//     city: "Santa Cruz de Tenerife",
+//     country: "Spain",
+//   },
+//   {
+//     name: "Villa Kunerad",
+//     city: "Vysokie Tatry",
+//     country: "Slowakia",
+//   },
+//   {
+//     name: "Hostel Friendship",
+//     city: "Berlin",
+//     country: "Germany",
+//   },
+//   {
+//     name: "Radisson Blu Hotel",
+//     city: "Kyiv",
+//     country: "Ukraine",
+//   },
+//   {
+//     name: "Paradise Hotel",
+//     city: "Guadalupe",
+//     country: "Mexico",
+//   },
+//   {
+//     name: "Hotel Grindewald",
+//     city: "Interlaken",
+//     country: "Switzerland",
+//   },
+//   {
+//     name: "The Andaman Resort",
+//     city: "Port Dickson",
+//     country: "Malaysia",
+//   },
+//   {
+//     name: "Virgin Hotel",
+//     city: "Chicago",
+//     country: "USA",
+//   },
+//   {
+//     name: "Grand Beach Resort",
+//     city: "Dubai",
+//     country: "United Arab Emirates",
+//   },
+//   {
+//     name: "Shilla Stay",
+//     city: "Seoul",
+//     country: "South Korea",
+//   },
+//   {
+//     name: "San Firenze Suites",
+//     city: "Florence",
+//     country: "Italy",
+//   },
+//   {
+//     name: "The Andaman Resort",
+//     city: "Port Dickson",
+//     country: "Malaysia",
+//   },
+//   {
+//     name: "Black Penny Villas",
+//     city: "BTDC, Nuca Dua",
+//     country: "Indonesia",
+//   },
+//   {
+//     name: "Koko Hotel",
+//     city: "Tokyo",
+//     country: "Japan",
+//   },
+//   {
+//     name: "Ramada Plaza",
+//     city: "Istanbul",
+//     country: "Turkey",
+//   },
+//   {
+//     name: "Waikiki Resort Hotel",
+//     city: "Hawaii",
+//     country: "USA",
+//   },
+//   {
+//     name: "Puro Hotel",
+//     city: "Krakow",
+//     country: "Poland",
+//   },
+//   {
+//     name: "Asma Suites",
+//     city: "Santorini",
+//     country: "Greece",
+//   },
+//   {
+//     name: "Cityden Apartments",
+//     city: "Amsterdam",
+//     country: "Netherlands",
+//   },
+//   {
+//     name: "Mandarin Oriental",
+//     city: "Miami",
+//     country: "USA",
+//   },
+//   {
+//     name: "Concept Terrace Hotel",
+//     city: "Rome",
+//     country: "Italy",
+//   },
+//   {
+//     name: "Ponta Mar Hotel",
+//     city: "Fortaleza",
+//     country: "Brazil",
+//   },
+//   {
+//     name: "Four Seasons Hotel",
+//     city: "Sydney",
+//     country: "Australia",
+//   },
+//   {
+//     name: "Le Meridien",
+//     city: "Nice",
+//     country: "France",
+//   },
+//   {
+//     name: "Apart Neptun",
+//     city: "Gdansk",
+//     country: "Poland",
+//   },
+//   {
+//     name: "Lux Isla",
+//     city: "Ibiza",
+//     country: "Spain",
+//   },
+//   {
+//     name: "Nox Hostel",
+//     city: "London",
+//     country: "UK",
+//   },
+//   {
+//     name: "Leonardo Vienna",
+//     city: "Vienna",
+//     country: "Austria",
+//   },
+//   {
+//     name: "Adagio Aparthotel",
+//     city: "Edinburgh",
+//     country: "UK",
+//   },
+//   {
+//     name: "Steigenberger Hotel",
+//     city: "Hamburg",
+//     country: "Germany",
+//   },
+// ];
+//
+// // 1 способ
+//
+// const resultObj = {};
+// for (const hotelData of hotels2) {
+//   if (!Object.keys(resultObj).includes(hotelData.country)) {
+//     resultObj[hotelData.country] = [];
+//   }
+// }
+// for (const hotelData of hotels2) {
+//   if (!Object.values(resultObj).includes(hotelData.city)) {
+//     if (!resultObj[hotelData.country].includes(hotelData.city)) {
+//       resultObj[hotelData.country].push(hotelData.city);
+//     }
+//   }
+// }
+//
+// console.log(resultObj);
 
 // 2 способ (сложный и не очень хороший)
 
@@ -793,15 +793,15 @@ console.log(resultObj);
 // console.log(resultObj);
 
 // 3 способ
-const separatedBetweenCounties = {};
-hotels2.forEach((el) => {
-  if (separatedBetweenCounties[el.country] && !separatedBetweenCounties[el.country].includes(el.city)) {
-    separatedBetweenCounties[el.country].push(el.city);
-  } else {
-    separatedBetweenCounties[el.country] = [el.city];
-  }
-});
-console.log(separatedBetweenCounties);
+// const separatedBetweenCounties = {};
+// hotels2.forEach((el) => {
+//   if (separatedBetweenCounties[el.country] && !separatedBetweenCounties[el.country].includes(el.city)) {
+//     separatedBetweenCounties[el.country].push(el.city);
+//   } else {
+//     separatedBetweenCounties[el.country] = [el.city];
+//   }
+// });
+// console.log(separatedBetweenCounties);
 
 // *Календарный месяц:
 // создайте функцию getCalendarMonth, которая принимает количество дней в месяце,
@@ -829,44 +829,101 @@ console.log(separatedBetweenCounties);
 // const dayOfWeek = 3;
 // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 //
-const result = [];
-function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
-  if (dayOfWeek > daysInWeek - 1) {
-    throw `${dayOfWeek} - введите корректное число старта недели от 0 до 6, где 0 - понедельник`;
-  } else {
-    let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
-    if (daysInMonth === 28) {
-      quantatyOfWeeks = 5;
+
+//1 способ
+
+// const result = [];
+// function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
+//   if (dayOfWeek > daysInWeek - 1) {
+//     throw `${dayOfWeek} - введите корректное число старта недели от 0 до 6, где 0 - понедельник`;
+//   } else {
+//     let quantatyOfWeeks = Math.ceil(daysInMonth / daysInWeek);
+//     if (daysInMonth === 28) {
+//       quantatyOfWeeks = 5;
+//     }
+//     const arrayOfDays = [];
+//     for (let i = 1; i <= daysInMonth; i++) {
+//       arrayOfDays.push(String(i));
+//     }
+//     const initialArray = [...arrayOfDays];
+//     if (dayOfWeek !== 0) {
+//       result[0] = (`${arrayOfDays.slice(-dayOfWeek)},${arrayOfDays.slice(0, daysInWeek - dayOfWeek)}`).split(",");
+//     } else {
+//       result[0] = arrayOfDays.slice(0, daysInWeek);
+//     }
+//     for (let i = 1; i < quantatyOfWeeks; i++) {
+//       result[i] = arrayOfDays;
+//     }
+//     for (let i = 1; i < quantatyOfWeeks; i++) {
+//       const lastDayOfPrevWeek = result[i - 1].at(-1);
+//       const lastDayOfPrevIndex = result[i].indexOf(lastDayOfPrevWeek);
+//       result[i] = result[i].slice(lastDayOfPrevIndex + 1, lastDayOfPrevIndex + 1 + daysInWeek);
+//       if (result[i].length < daysInWeek) {
+//         const diffInDaysWithWeek = daysInWeek - result[i].length;
+//         for (let j = 0; j < diffInDaysWithWeek; j++) {
+//           result[i].push(initialArray[j]);
+//         }
+//       }
+//     }
+//     console.log(result);
+//   }
+// }
+// // число старта недели от 0 до 6, где 0 - понедельник
+// getCalendarMonth(30, 7, 5);
+
+
+//2 способ
+
+const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+  const resultMonthArray = [];
+  let weekArray = [];
+  let currentWeekDay = 0;
+
+  //добиваем первую неделю
+  if (dayOfWeek) {
+    for (let i = 0; i < dayOfWeek; i++) {
+      weekArray.unshift(daysInMonth - i);
     }
-    const arrayOfDays = [];
-    for (let i = 1; i <= daysInMonth; i++) {
-      arrayOfDays.push(String(i));
+    while (weekArray.length < daysInWeek) {
+      weekArray.push(++currentWeekDay);
     }
-    const initialArray = [...arrayOfDays];
-    if (dayOfWeek !== 0) {
-      result[0] = (`${arrayOfDays.slice(-dayOfWeek)},${arrayOfDays.slice(0, daysInWeek - dayOfWeek)}`).split(",");
-    } else {
-      result[0] = arrayOfDays.slice(0, daysInWeek);
-    }
-    for (let i = 1; i < quantatyOfWeeks; i++) {
-      result[i] = arrayOfDays;
-    }
-    for (let i = 1; i < quantatyOfWeeks; i++) {
-      const lastDayOfPrevWeek = result[i - 1].at(-1);
-      const lastDayOfPrevIndex = result[i].indexOf(lastDayOfPrevWeek);
-      result[i] = result[i].slice(lastDayOfPrevIndex + 1, lastDayOfPrevIndex + 1 + daysInWeek);
-      if (result[i].length < daysInWeek) {
-        const diffInDaysWithWeek = daysInWeek - result[i].length;
-        for (let j = 0; j < diffInDaysWithWeek; j++) {
-          result[i].push(initialArray[j]);
-        }
-      }
-    }
-    console.log(result);
+    resultMonthArray.push(weekArray);
   }
+
+  currentWeekDay++;
+  weekArray = [];
+
+  //основная часть месяца
+  for(let i=currentWeekDay; i<=daysInMonth; i++) {
+    if(weekArray.length === daysInWeek) {
+      resultMonthArray.push(weekArray);
+      weekArray = [i];
+      currentWeekDay = i;
+    } else {
+      weekArray.push(i);
+    }
+  }
+
+  //добиваем последнюю неделю
+  if(currentWeekDay <= daysInMonth) {
+    weekArray = [];
+    while (weekArray.length < daysInWeek) {
+      if(currentWeekDay > daysInMonth) {
+        currentWeekDay = 1;
+      }
+      weekArray.push(currentWeekDay++);
+    }
+    resultMonthArray.push(weekArray);
+  }
+
+  return resultMonthArray;
 }
-// число старта недели от 0 до 6, где 0 - понедельник
-getCalendarMonth(30, 7, 5);
+
+const daysInMonth = 28;
+const daysInWeek = 7;
+const dayOfWeek = 7; // в моем примере понедельник равен 0. У вас может отличаться
+const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+console.log(calendarMonth);
 
 // lesson 7
 // Напишите функция deepEqual, которая сможет сравнивать 2 объекта
@@ -1127,33 +1184,63 @@ students.getInfo();
 
 // 2 способ (Используя функцию-генератор)
 
+// const textFirst = document.getElementById("text1");
+// const textMiddle = document.getElementById("text2");
+// const textLast = document.getElementById("text3");
+//
+// const colors = {
+//   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+//   from: 0,
+// };
+// colors.to = [...colors.data].length;
+//
+// colors[Symbol.iterator] = function* () {
+//   const arr = this.data;
+//   for (let value = this.from; value < this.to; value++) {
+//     yield arr[value];
+//   }
+// };
+//
+// function changeStyle() {
+//   let index = 0;
+//   return function () {
+//     const generator = colors[Symbol.iterator]();
+//     const arr = [...generator];
+//     this.style.color = arr[index];
+//     index++;
+//     if (index === arr.length) {
+//       index = 0;
+//     }
+//   };
+// }
+//
+// textFirst.addEventListener("click", changeStyle());
+// textMiddle.addEventListener("click", changeStyle());
+// textLast.addEventListener("click", changeStyle());
+
+
+//2 способ
+
 const textFirst = document.getElementById("text1");
 const textMiddle = document.getElementById("text2");
 const textLast = document.getElementById("text3");
 
 const colors = {
   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
-  from: 0,
 };
-colors.to = [...colors.data].length;
-
-colors[Symbol.iterator] = function* () {
-  const arr = this.data;
-  for (let value = this.from; value < this.to; value++) {
-    yield arr[value];
+function* gen() {
+  for(let element of colors.data){
+    yield element;
   }
-};
-
+}
 function changeStyle() {
-  let index = 0;
+  let index = 1;
   return function () {
-    const generator = colors[Symbol.iterator]();
-    const arr = [...generator];
-    this.style.color = arr[index];
-    index++;
-    if (index === arr.length) {
-      index = 0;
+    let iterator = gen();
+    for(let i = 0; i < index; i++){
+      this.style.color = iterator.next().value;
     }
+    iterator.next().done ? index = 1 : index++;
   };
 }
 
