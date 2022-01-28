@@ -192,6 +192,10 @@ labelChildren.classList.add("form-label-children");
 numbersWrap.append(inputChildren);
 inputChildren.append(labelChildren);
 
+const firstLine = document.createElement("div");
+firstLine.classList.add("first-line");
+numbersWrap.insertBefore(firstLine, inputChildren);
+
 const inputRooms = document.createElement("div");
 inputRooms.classList.add("form-input-bg");
 inputRooms.classList.add("form-input-rooms");
@@ -201,6 +205,10 @@ labelRooms.classList.add("form-label-bg");
 labelRooms.classList.add("form-label-rooms");
 numbersWrap.append(inputRooms);
 inputRooms.append(labelRooms);
+
+const secondLine = document.createElement("div");
+secondLine.classList.add("second-line");
+numbersWrap.insertBefore(secondLine, inputRooms);
 
 formNumbersWrap.append(numbersWrap);
 
@@ -221,9 +229,11 @@ function createFilter(dataForFilters) {
   const squareButtonMinus = document.createElement("div");
   squareButtonMinus.classList.add("square-button");
   squareButtonMinus.classList.add("square-button-minus");
+  squareButtonMinus.classList.add(`button-minus-${dataForFilters}`);
   squareButtonMinus.classList.add(`minus-btn-${dataForFilters}`);
   const minusInBtn = document.createElement("div");
   minusInBtn.classList.add("minus-in-btn");
+  minusInBtn.classList.add("minus-minus-in-btn");
   squareButtonMinus.append(minusInBtn);
   filtersBlockElement.append(squareButtonMinus);
   const counter = document.createElement("div");
@@ -234,12 +244,16 @@ function createFilter(dataForFilters) {
 
   const squareButtonPlus = document.createElement("div");
   squareButtonPlus.classList.add("square-button");
+  squareButtonPlus.classList.add("square-button-plus");
+  squareButtonPlus.classList.add(`button-plus-${dataForFilters}`);
   squareButtonPlus.classList.add(`plus-btn-${dataForFilters}`);
   const minusInBtn2 = document.createElement("div");
   minusInBtn2.classList.add("minus-in-btn");
+  minusInBtn2.classList.add("minus-in-btn-plus");
   squareButtonPlus.append(minusInBtn2);
   const minusInBtnVertical = document.createElement("div");
   minusInBtnVertical.classList.add("minus-in-btn-vertical");
+  minusInBtnVertical.classList.add("minus-in-btn-plus");
   squareButtonPlus.append(minusInBtnVertical);
   filtersBlockElement.append(squareButtonPlus);
   return filtersBlockElement;
@@ -259,6 +273,8 @@ textAboutChildren.appendChild(questionText);
 filtersBlock.append(textAboutChildren);
 
 function createSelect() {
+  const selectAgeWrapper = document.createElement("div");
+  selectAgeWrapper.classList.add("select-age-wrap");
   const selectAge = document.createElement("select");
   selectAge.setAttribute("name", "children-age");
   selectAge.classList.add("selector-age");
@@ -272,30 +288,53 @@ function createSelect() {
     }
     selectAge.append(valueOfAge);
   }
-  return selectAge;
+  selectAgeWrapper.append(selectAge);
+  return selectAgeWrapper;
 }
-
-// const arrow = document.createElement("p");
-// arrow.classList.add("arrow");
-// const arrowInside = document.createElement("i");
-// arrowInside.classList.add("arrow-down");
-// arrow.append("arrowInside");
-// selectAge.append(arrow);
 
 const selectFirst = createSelect();
 filtersBlock.append(selectFirst);
 
+function createArrow() {
+  const arrow = document.createElement("p");
+  const arrowInside = document.createElement("i");
+  arrowInside.classList.add("arrow-down");
+  arrow.classList.add("arrow-hidden");
+  arrow.classList.add("arrow");
+  arrow.append(arrowInside);
+  return arrow;
+}
+
 const allFilters = document.querySelector(".filters-in-form");
-const dropdownFilters = document.querySelector(".form-numbers-big-screen");
+
+const labelAdultsInSmallScreen = document.querySelector(".label-adults");
+const labelChildInSmallScreen = document.querySelector(".label-children");
+const labelRoomsInSmallScreen = document.querySelector(".label-rooms");
+const arrOfLabels = [labelAdultsInSmallScreen, labelChildInSmallScreen, labelRoomsInSmallScreen];
+
+const formAdults = document.querySelector(".form-adults");
+const formChildren = document.querySelector(".form-children");
+const formRooms = document.querySelector(".form-rooms");
+const arrOfInputs = [formAdults, formChildren, formRooms];
 
 function openBlockWithNumbers(event) {
   if ((event.target.closest(".filters-in-form"))
     || (event.target.closest(".form-numbers-big-screen"))) {
     allFilters.classList.add("shown");
     numbersWrap.style.setProperty("--borderNumbersColor", "#F5BD41");
+
+    arrOfLabels.forEach((label) => (label.style.top = "0"));
+
+    arrOfInputs.forEach((inputNumbers) => {
+      const textTest = document.createElement("p");
+      textTest.innerHTML = "000";
+      textTest.style.color = "#F5BD41";
+      formAdults.append(textTest);
+    });
   } else {
     allFilters.classList.remove("shown");
     numbersWrap.style.setProperty("--borderNumbersColor", "transparent");
+    arrOfLabels.forEach((label) => (label.style.top = "25px"));
   }
 }
 
@@ -306,6 +345,13 @@ const allBtns = document.querySelectorAll(".square-button");
 const formLabelAdults = document.querySelector(".form-label-adults");
 const formLabelChildren = document.querySelector(".form-label-children");
 const formLabelRooms = document.querySelector(".form-label-rooms");
+
+const buttonMinusAdults = document.querySelector(".button-minus-Adults");
+const buttonMinusChildren = document.querySelector(".button-minus-Children");
+const buttonMinusRooms = document.querySelector(".button-minus-Rooms");
+const buttonPlusAdults = document.querySelector(".button-plus-Adults");
+const buttonPlusChildren = document.querySelector(".button-plus-Children");
+const buttonPlusRooms = document.querySelector(".button-plus-Rooms");
 
 let counter1 = 0;
 let counter2 = 0;
@@ -350,6 +396,19 @@ function changeCounterAdults(event) {
           counterDisplayElem.innerHTML = counter1;
           formLabelAdults.innerHTML = `${counter1} Adults`;
         }
+
+        if (counterDisplayElem.innerHTML === "0") {
+          buttonMinusAdults.style.setProperty("--btn-minus-color", "#CECECE");
+        }
+
+        if ((counterDisplayElem.innerHTML > 0) && (counterDisplayElem.innerHTML < 30)) {
+          buttonMinusAdults.style.setProperty("--btn-minus-color", "#3077C6");
+          buttonPlusAdults.style.setProperty("--btn-plus-color", "#3077C6");
+        }
+
+        if (counter1 >= 30) {
+          buttonPlusAdults.style.setProperty("--btn-plus-color", "#CECECE");
+        }
       }
     }
   }
@@ -378,6 +437,11 @@ function changeCounterChildren(event) {
 
       if (counter2 === 11) {
         counter2 = 10;
+        buttonPlusChildren.style.setProperty("--btn-plus-color", "#CECECE");
+      }
+
+      if (counter2 === 10) {
+        buttonPlusChildren.style.setProperty("--btn-plus-color", "#CECECE");
       }
 
       function changeCounter2() {
@@ -410,26 +474,46 @@ function changeCounterChildren(event) {
           }
 
           if (quantatyShown > 1) {
-            const allcreatedSelects = document.querySelectorAll(".selector-age");
+            const allcreatedSelects = document.querySelectorAll(".select-age-wrap");
             allcreatedSelects.forEach((elem) => elem.parentNode.removeChild(elem));
             for (let quantatyOfSelect = 0; quantatyOfSelect < quantatyShown; quantatyOfSelect++) {
               const selectNext = createSelect();
+              const arrowNext = createArrow();
               selectNext.style.display = "inline-flex";
+              arrowNext.style.display = "inline-flex";
+              selectNext.append(arrowNext);
               filtersBlock.append(selectNext);
             }
           }
 
           if (quantatyShown === "1") {
-            const allcreatedSelects = document.querySelectorAll(".selector-age");
+            const allcreatedSelects = document.querySelectorAll(".select-age-wrap");
             allcreatedSelects.forEach((elem) => elem.parentNode.removeChild(elem));
             const selectNext = createSelect();
+            const arrowNext = createArrow();
             selectNext.style.display = "inline-flex";
+            arrowNext.style.display = "inline-flex";
+            selectNext.append(arrowNext);
             filtersBlock.append(selectNext);
           }
 
           if (quantatyShown === "0") {
-            const allcreatedSelects = document.querySelectorAll(".selector-age");
+            const allcreatedSelects = document.querySelectorAll(".select-age-wrap");
             allcreatedSelects.forEach((elem) => elem.parentNode.removeChild(elem));
+            buttonMinusChildren.style.setProperty("--btn-minus-color", "#CECECE");
+          }
+
+          if ((counterDisplayElem.innerHTML > 0) && (counterDisplayElem.innerHTML < 10)) {
+            buttonMinusChildren.style.setProperty("--btn-minus-color", "#3077C6");
+            buttonPlusChildren.style.setProperty("--btn-plus-color", "#3077C6");
+          }
+
+          if (counter2 === 2) {
+            filtersBlock.classList.add("add-scroll");
+          }
+
+          if (counter2 < 2) {
+            filtersBlock.classList.remove("add-scroll");
           }
         }
       }
@@ -447,12 +531,12 @@ function changeCounterRooms(event) {
 
     function countRooms(event) {
       const counterDisplayElem = document.querySelector(".counter-number-Rooms");
-      if ((counter3 === 0) || (counter3 <= 30)) {
+      if ((counter3 === 1) || (counter3 <= 30)) {
         changeCounter3();
       }
 
-      if (counter3 === -1) {
-        counter3 = 0;
+      if (counter3 === 0) {
+        counter3 = 1;
       }
 
       if (counter3 === 31) {
@@ -472,9 +556,23 @@ function changeCounterRooms(event) {
       }
 
       function updateDisplay3() {
-        if ((counter3 !== -1) && (counter3 !== 31)) {
+        if ((counter3 !== -1) && (counter3 !== 31) && ((counter3 !== 0))) {
           counterDisplayElem.innerHTML = counter3;
           formLabelRooms.innerHTML = `${counter3} Rooms`;
+        }
+
+        if ((counter3 === 0) || ((counterDisplayElem.innerHTML === "1"))) {
+          counterDisplayElem.innerHTML = "1";
+          buttonMinusRooms.style.setProperty("--btn-minus-color", "#CECECE");
+        }
+
+        if ((counterDisplayElem.innerHTML > 1) && (counterDisplayElem.innerHTML < 30)) {
+          buttonMinusRooms.style.setProperty("--btn-minus-color", "#3077C6");
+          buttonPlusRooms.style.setProperty("--btn-plus-color", "#3077C6");
+        }
+
+        if (counter3 >= 30) {
+          buttonPlusRooms.style.setProperty("--btn-plus-color", "#CECECE");
         }
       }
     }
@@ -484,3 +582,18 @@ function changeCounterRooms(event) {
 allBtns.forEach((button) => button.addEventListener("click", changeCounterAdults));
 allBtns.forEach((button) => button.addEventListener("click", changeCounterChildren));
 allBtns.forEach((button) => button.addEventListener("click", changeCounterRooms));
+const event = new Event("click");
+buttonPlusAdults.dispatchEvent(event);
+buttonPlusAdults.dispatchEvent(event);
+buttonPlusRooms.dispatchEvent(event);
+
+window.addEventListener("resize", () => {
+  const screenWidth = innerWidth;
+  if (screenWidth < 1210) {
+    formNumbers.classList.remove("hidden");
+  }
+
+  if (screenWidth >= 1210) {
+    formNumbers.classList.add("hidden");
+  }
+});
