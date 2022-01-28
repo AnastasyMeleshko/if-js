@@ -11,6 +11,7 @@
     --borderNumbersColor: transparent;
     --btn-plus-color: #3077C6;
     --btn-minus-color: #CECECE;
+    --text-for-input-numbers: transparent;
 }
 
 * {
@@ -119,6 +120,7 @@ a {
     font-weight: 400;
     cursor: pointer;
     margin-right: 24px;
+    transition: all 0.3s ease-in-out;
 }
 
 .header-block a {
@@ -181,17 +183,54 @@ a {
 }
 
 .hidden-menu-icon {
-    fill: #FFFFFF;
-    width: 24px;
-    height: 16px;
+    width: 30px;
+    margin-left: 24px;
 }
 
-.hidden-menu-icon:hover {
-    fill: #F5BD41;
+.burger-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.burger-line {
+    display: flex;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 3px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.burger-line:last-child {
+    margin: 0;
+}
+
+.burger-menu:hover > .burger-line {
+    background-color: #F5BD41;
+}
+
+.burger-menu.open .burger-line-one {
+    -webkit-transform: translateY(8px) rotate(45deg);
+}
+
+.burger-menu.open .burger-line-two {
+    opacity: 0;
+}
+
+.burger-menu.open .burger-line-three {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
 }
 
 .header-icons a {
     margin-left: 24px;
+}
+
+.header-icons a svg {
+    transition: all 0.3s ease-in-out;
 }
 
 h1 {
@@ -425,6 +464,7 @@ h1 {
     cursor: pointer;
     width: 100%;
     max-height: 72px;
+    transition: all 0.3s ease-in-out;
 }
 
 .search-button:hover {
@@ -1224,10 +1264,6 @@ h1 {
     max-height: 240px;
 }
 
-.shown {
-    display: flex;
-}
-
 .add-scroll {
     overflow-y: scroll;
 }
@@ -1365,8 +1401,27 @@ i {
     left: 80px;
 }
 
+.text-for-input {
+    font-size: 15px;
+    line-height: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: none;
+    color: var(--text-for-input-numbers);
+    position: relative;
+    top: -25px;
+    left: 25px;
+}
 
-/* For mobile phones: */
+.form-adults > .text-for-input {
+    left: 8px;
+}
+
+.shown {
+    display: flex;
+}
+
+    /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
 }
@@ -1722,7 +1777,7 @@ i {
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
-        max-width: 857px;
+        max-width: 100%;
         max-height: 64px;
         position: static;
     }
@@ -1748,7 +1803,7 @@ i {
     .left-container {
         display: inline-flex;
         justify-content: flex-end;
-        max-width: 857px;
+        max-width: 100%;
         position: relative;
         margin: 0 auto;
     }
@@ -2332,7 +2387,7 @@ i {
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
-        max-width: 857px;
+        max-width: 100%;
         max-height: 64px;
         position: static;
     }
@@ -2357,7 +2412,7 @@ i {
     .left-container {
         display: inline-flex;
         justify-content: flex-end;
-        max-width: 857px;
+        max-width: 100%;
         position: relative;
         margin: 0 auto;
     }

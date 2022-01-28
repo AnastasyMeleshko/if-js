@@ -315,7 +315,15 @@ const arrOfLabels = [labelAdultsInSmallScreen, labelChildInSmallScreen, labelRoo
 const formAdults = document.querySelector(".form-adults");
 const formChildren = document.querySelector(".form-children");
 const formRooms = document.querySelector(".form-rooms");
+
 const arrOfInputs = [formAdults, formChildren, formRooms];
+arrOfInputs.forEach((inputNumbers) => {
+  const textForInput = document.createElement("p");
+  textForInput.classList.add("text-for-input");
+  inputNumbers.append(textForInput);
+});
+
+const allInputsForNumbers = document.querySelectorAll(".text-for-input");
 
 function openBlockWithNumbers(event) {
   if ((event.target.closest(".filters-in-form"))
@@ -325,16 +333,12 @@ function openBlockWithNumbers(event) {
 
     arrOfLabels.forEach((label) => (label.style.top = "0"));
 
-    arrOfInputs.forEach((inputNumbers) => {
-      const textTest = document.createElement("p");
-      textTest.innerHTML = "000";
-      textTest.style.color = "#F5BD41";
-      formAdults.append(textTest);
-    });
+    allInputsForNumbers.forEach((input) => (input.style.setProperty("--text-for-input-numbers", "#383838")));
   } else {
     allFilters.classList.remove("shown");
     numbersWrap.style.setProperty("--borderNumbersColor", "transparent");
-    arrOfLabels.forEach((label) => (label.style.top = "25px"));
+    arrOfLabels.forEach((label) => (label.style.top = "0"));
+    allInputsForNumbers.forEach((input) => (input.style.setProperty("--text-for-input-numbers", "#383838")));
   }
 }
 
@@ -352,6 +356,10 @@ const buttonMinusRooms = document.querySelector(".button-minus-Rooms");
 const buttonPlusAdults = document.querySelector(".button-plus-Adults");
 const buttonPlusChildren = document.querySelector(".button-plus-Children");
 const buttonPlusRooms = document.querySelector(".button-plus-Rooms");
+
+const inputHiddenAdults = document.querySelector(".input-adults");
+const inputHiddenChildren = document.querySelector(".input-children");
+const inputHiddenRooms = document.querySelector(".input-rooms");
 
 let counter1 = 0;
 let counter2 = 0;
@@ -409,6 +417,11 @@ function changeCounterAdults(event) {
         if (counter1 >= 30) {
           buttonPlusAdults.style.setProperty("--btn-plus-color", "#CECECE");
         }
+
+        allInputsForNumbers[0].innerHTML = counterDisplayElem.innerHTML;
+        allInputsForNumbers[0].classList.add("shown");
+
+        inputHiddenAdults.innerHTML = counterDisplayElem.innerHTML;
       }
     }
   }
@@ -471,6 +484,8 @@ function changeCounterChildren(event) {
           if (quantatyShown === "0") {
             textAboutChildren.style.display = "none";
             selectAge2.style.display = "none";
+            allInputsForNumbers[1].innerHTML = quantatyShown;
+            allInputsForNumbers[1].classList.add("shown");
           }
 
           if (quantatyShown > 1) {
@@ -501,6 +516,9 @@ function changeCounterChildren(event) {
             const allcreatedSelects = document.querySelectorAll(".select-age-wrap");
             allcreatedSelects.forEach((elem) => elem.parentNode.removeChild(elem));
             buttonMinusChildren.style.setProperty("--btn-minus-color", "#CECECE");
+
+            allInputsForNumbers[1].innerHTML = quantatyShown;
+            allInputsForNumbers[1].classList.add("shown");
           }
 
           if ((counterDisplayElem.innerHTML > 0) && (counterDisplayElem.innerHTML < 10)) {
@@ -515,6 +533,11 @@ function changeCounterChildren(event) {
           if (counter2 < 2) {
             filtersBlock.classList.remove("add-scroll");
           }
+
+          allInputsForNumbers[1].innerHTML = quantatyShown;
+          allInputsForNumbers[1].classList.add("shown");
+
+          inputHiddenChildren.innerHTML = counterDisplayElem.innerHTML;
         }
       }
     }
@@ -574,6 +597,11 @@ function changeCounterRooms(event) {
         if (counter3 >= 30) {
           buttonPlusRooms.style.setProperty("--btn-plus-color", "#CECECE");
         }
+
+        allInputsForNumbers[2].innerHTML = counterDisplayElem.innerHTML;
+        allInputsForNumbers[2].classList.add("shown");
+
+        inputHiddenRooms.innerHTML = counterDisplayElem.innerHTML;
       }
     }
   }
@@ -586,6 +614,9 @@ const event = new Event("click");
 buttonPlusAdults.dispatchEvent(event);
 buttonPlusAdults.dispatchEvent(event);
 buttonPlusRooms.dispatchEvent(event);
+buttonPlusChildren.dispatchEvent(event);
+numbersWrap.dispatchEvent(event);
+document.body.dispatchEvent(event);
 
 window.addEventListener("resize", () => {
   const screenWidth = innerWidth;
@@ -597,3 +628,11 @@ window.addEventListener("resize", () => {
     formNumbers.classList.add("hidden");
   }
 });
+
+const burger = document.querySelector(".burger-menu");
+
+function toggleMenu() {
+  burger.classList.toggle("open");
+}
+
+burger.addEventListener("click", toggleMenu);
