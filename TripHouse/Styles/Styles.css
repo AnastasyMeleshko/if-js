@@ -8,6 +8,10 @@
     --column-count: 12;
     --container-max-width: 1264px;
     --best-item-img-w-and-h-md: 226px;
+    --borderNumbersColor: transparent;
+    --btn-plus-color: #3077C6;
+    --btn-minus-color: #CECECE;
+    --text-for-input-numbers: transparent;
 }
 
 * {
@@ -116,6 +120,7 @@ a {
     font-weight: 400;
     cursor: pointer;
     margin-right: 24px;
+    transition: all 0.3s ease-in-out;
 }
 
 .header-block a {
@@ -178,17 +183,54 @@ a {
 }
 
 .hidden-menu-icon {
-    fill: #FFFFFF;
-    width: 24px;
-    height: 16px;
+    width: 30px;
+    margin-left: 24px;
 }
 
-.hidden-menu-icon:hover {
-    fill: #F5BD41;
+.burger-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.burger-line {
+    display: flex;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 3px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.burger-line:last-child {
+    margin: 0;
+}
+
+.burger-menu:hover > .burger-line {
+    background-color: #F5BD41;
+}
+
+.burger-menu.open .burger-line-one {
+    -webkit-transform: translateY(8px) rotate(45deg);
+}
+
+.burger-menu.open .burger-line-two {
+    opacity: 0;
+}
+
+.burger-menu.open .burger-line-three {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
 }
 
 .header-icons a {
     margin-left: 24px;
+}
+
+.header-icons a svg {
+    transition: all 0.3s ease-in-out;
 }
 
 h1 {
@@ -249,6 +291,13 @@ h1 {
     outline: none;
 }
 
+/*.input-adults:focus ~ .label-adults,*/
+/*.input-adults:valid + .label-adults {*/
+/*    position: static;*/
+/*}*/
+
+
+
 .form-loupe {
     fill: #BFBFBF;
     width: 16px;
@@ -292,6 +341,7 @@ h1 {
     top: -50px;
     color: #FFFFFF;
 }
+
 .form-input {
     padding: 22px 24px;
     display: inline-flex;
@@ -414,6 +464,7 @@ h1 {
     cursor: pointer;
     width: 100%;
     max-height: 72px;
+    transition: all 0.3s ease-in-out;
 }
 
 .search-button:hover {
@@ -1133,7 +1184,244 @@ h1 {
     text-align:left;
 }
 
-/* For mobile phones: */
+/* Styles for JS */
+
+.hidden {
+    display: none;
+}
+
+.form-numbers-big-screen {
+    display: flex;
+    width: 327px;
+    border: 3px solid var(--borderNumbersColor);
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.form-input-bg {
+    padding: 22px 0;
+    display: inline-flex;
+    justify-content: center;
+    color: #383838;
+    font-size: 18px;
+    line-height: 21px;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 33.33333%;
+    position: relative;
+    height: 65px;
+}
+
+.first-line {
+    width: 12px;
+    height: 1px;
+    background-color: #383838;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 31%;
+}
+
+.second-line {
+    width: 12px;
+    height: 1px;
+    background-color: #383838;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 211px;
+}
+
+.form-label-bg {
+    font-size: 18px;
+    line-height: 21px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    transition: ease 0.3s;
+    max-width: 100%;
+    cursor: pointer;
+    display: flex;
+    position:absolute;
+}
+
+.filters-in-form {
+    display: none;
+    width: 250px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    position: absolute;
+    top: 85px;
+    right: 197px;
+    padding: 15px 22px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    cursor: auto;
+    max-height: 240px;
+}
+
+.add-scroll {
+    overflow-y: scroll;
+}
+
+.filters-block-element {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-height: 40px;
+    width: 100%;
+}
+
+.filters-block-element:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.filters-block-element:last-child {
+    margin-bottom: 35px;
+}
+
+.filter-text {
+    font-size: 16px;
+    line-height: 19px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    display: inline-flex;
+}
+
+.square-button {
+    width: 30px;
+    height: 30px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.square-button-minus {
+    margin-left: auto;
+    border: 1px solid var(--btn-minus-color);
+}
+
+.square-button-plus {
+    border: 1px solid var(--btn-plus-color);
+}
+
+.minus-in-btn {
+    display: flex;
+    width: 8px;
+    height: 1px;
+    margin: 0 auto;
+}
+
+.minus-minus-in-btn {
+    background-color: var(--btn-minus-color);
+}
+
+.minus-in-btn-vertical {
+    display: flex;
+    width: 8px;
+    height: 1px;
+    margin: 0 auto;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 4px);
+}
+
+.minus-in-btn-plus {
+    background-color: var(--btn-plus-color);
+}
+
+.counter-number {
+    font-size: 16px;
+    line-height: 19px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    display: inline-flex;
+    padding: 0 20px;
+}
+
+.text-about-children {
+    font-size: 12px;
+    line-height: 14px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: left;
+    display: none;
+    margin-bottom: 12px;
+}
+
+.select-age-wrap {
+    display: none;
+    position: relative;
+    height: 100%;
+}
+
+.selector-age {
+    font-size: 12px;
+    line-height: 14px;
+    font-style: normal;
+    font-weight: 400;
+    display: inline-flex;
+    border: 1px solid #3077C6;
+    border-radius: 0;
+    padding: 8px;
+    appearance: none;
+    position: relative;
+    width: 100px;
+}
+
+.selector-age > option {
+    border-radius: 0;
+}
+
+i {
+    border: solid #3077C6;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrow-down {
+    transform: rotate(45deg);
+}
+
+.arrow {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 80px;
+}
+
+.text-for-input {
+    font-size: 15px;
+    line-height: 18px;
+    font-style: normal;
+    font-weight: 500;
+    display: none;
+    color: var(--text-for-input-numbers);
+    position: relative;
+    top: -25px;
+    left: 25px;
+}
+
+.form-adults > .text-for-input {
+    left: 8px;
+}
+
+.shown {
+    display: flex;
+}
+
+    /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
 }
@@ -1489,7 +1777,7 @@ h1 {
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
-        max-width: 857px;
+        max-width: 100%;
         max-height: 64px;
         position: static;
     }
@@ -1515,7 +1803,7 @@ h1 {
     .left-container {
         display: inline-flex;
         justify-content: flex-end;
-        max-width: 857px;
+        max-width: 100%;
         position: relative;
         margin: 0 auto;
     }
@@ -1535,7 +1823,7 @@ h1 {
         width: 100%;
         padding: 0 8px 0;
         background-color: #FFFFFF;
-        height: 50px;
+        height: 100%;
     }
 
     .main-numbers-wrap {
@@ -1551,7 +1839,7 @@ h1 {
         padding: 10px;
         border-radius: 8px;
         background-color: #FFFFFF;
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .input-adults, .input-children, .input-rooms {
@@ -1560,7 +1848,7 @@ h1 {
     }
 
     .form-numbers-item {
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .form-dates {
@@ -1582,7 +1870,7 @@ h1 {
     .form-adults  > .label-adults {
         position: absolute;
         top: 25px;
-        left: 34px;
+        left: 16px;
     }
 
     .form-rooms {
@@ -1720,6 +2008,25 @@ h1 {
         top: 36px;
         left: 32px;
     }
+
+    .form-numbers-big-screen {
+        width: 100%;
+        height: 100%;
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    .form-numbers {
+        position: relative;
+        display: flex;
+    }
+
+    .filters-in-form {
+        top: -40%;
+        right: 50%;
+        transform: translateX(50%);
+        border: 2px solid #10367C;
+    }
+
 }
 
 @media only screen and (min-width: 480px) {
@@ -2080,7 +2387,7 @@ h1 {
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
-        max-width: 857px;
+        max-width: 100%;
         max-height: 64px;
         position: static;
     }
@@ -2105,7 +2412,7 @@ h1 {
     .left-container {
         display: inline-flex;
         justify-content: flex-end;
-        max-width: 857px;
+        max-width: 100%;
         position: relative;
         margin: 0 auto;
     }
@@ -2134,12 +2441,12 @@ h1 {
         padding: 10px;
         border-radius: 8px;
         background-color: #FFFFFF;
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .form-numbers {
         background-color: #FFFFFF;
-        height: 50px;
+        height: 100%;
         padding: 0 8px 0;
         width: 100%;
     }
@@ -2150,7 +2457,7 @@ h1 {
     }
 
     .form-numbers-item {
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .form-dates {
@@ -2172,7 +2479,7 @@ h1 {
     .form-adults  > .label-adults {
         position: absolute;
         top: 25px;
-        left: 34px;
+        left: 16px;
     }
 
     .form-rooms {
@@ -2309,6 +2616,25 @@ h1 {
         position: absolute;
         top: 36px;
         left: 32px;
+    }
+
+    .form-numbers-big-screen {
+        width: 100%;
+        height: 100%;
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    .form-numbers {
+        position: relative;
+        display: flex;
+    }
+
+    .filters-in-form {
+        top: -40%;
+        right: 50%;
+        transform: translateX(50%);
+        border: 2px solid #10367C;
     }
 }
 
@@ -2723,12 +3049,12 @@ h1 {
         padding: 10px;
         border-radius: 8px;
         background-color: #FFFFFF;
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .form-numbers {
         background-color: #FFFFFF;
-        height: 50px;
+        height: 100%;
     }
 
     .input-adults, .input-children, .input-rooms {
@@ -2737,7 +3063,7 @@ h1 {
     }
 
     .form-numbers-item {
-        max-height: 67px;
+        max-height: 100%;
     }
 
     .form-dates {
@@ -2758,7 +3084,7 @@ h1 {
     .form-adults  > .label-adults {
         position: absolute;
         top: 25px;
-        left: 35px;
+        left: 16px;
     }
 
     .form-rooms {
@@ -2886,6 +3212,26 @@ h1 {
         height: 100vh;
         min-height: 900px;
     }
+
+    .form-numbers-big-screen {
+        width: 100%;
+        height: 100%;
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    .form-numbers {
+        position: relative;
+        display: flex;
+    }
+
+    .filters-in-form {
+        top: -40%;
+        right: 50%;
+        transform: translateX(50%);
+        border: 2px solid #10367C;
+    }
+
 
 }
 
@@ -3419,6 +3765,24 @@ h1 {
         padding: 22px 24px;
     }
 
+    .form-numbers {
+        position: relative;
+        display: none;
+    }
+
+    .form-numbers-big-screen {
+        width: 327px;
+        /*height: 100%;*/
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .filters-in-form {
+        top: 85px;
+        right: 197px;
+        border: 0;
+        transform: translateX(0);
+    }
 
 }
 
