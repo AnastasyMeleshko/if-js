@@ -576,6 +576,7 @@ h1 {
 .homes-item-img {
     margin-bottom: 24px;
     min-height: 300px;
+    width: 300px;
 }
 
 .homes-item-title {

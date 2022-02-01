@@ -1,57 +1,57 @@
-// lesson-10
+// lesson-10 + corrected from lesson-12
 
 // "Homes guests loves"
 
-const data = [
-  {
-    name: "Hotel Leopold",
-    city: "Saint Petersburg",
-    country: "Russia",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg",
-  },
-  {
-    name: "Apartment Sunshine",
-    city: "Santa  Cruz de Tenerife",
-    country: "Spain",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg",
-  },
-  {
-    name: "Villa Kunerad",
-    city: "Vysokie Tatry",
-    country: "Slowakia",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg",
-  },
-  {
-    name: "Hostel Friendship",
-    city: "Berlin",
-    country: "Germany",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg",
-  },
-  {
-    name: "Radisson Blu Hotel",
-    city: "Kyiv",
-    country: "Ukraine",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/radisson-blu-hotel_jwtowg.jpg",
-  },
-  {
-    name: "Paradise Hotel",
-    city: "Guadalupe",
-    country: "Mexico",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/paradise-hotel_i6whae.jpg",
-  },
-  {
-    name: "Hotel Grindewald",
-    city: "Interlaken",
-    country: "Switzerland",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-grindewald_zsjsmy.jpg",
-  },
-  {
-    name: "The Andaman Resort",
-    city: "Port Dickson",
-    country: "Malaysia",
-    imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/the-andaman-resort_d2xksj.jpg",
-  },
-];
+// const data = [
+//   {
+//     name: "Hotel Leopold",
+//     city: "Saint Petersburg",
+//     country: "Russia",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg",
+//   },
+//   {
+//     name: "Apartment Sunshine",
+//     city: "Santa  Cruz de Tenerife",
+//     country: "Spain",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg",
+//   },
+//   {
+//     name: "Villa Kunerad",
+//     city: "Vysokie Tatry",
+//     country: "Slowakia",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg",
+//   },
+//   {
+//     name: "Hostel Friendship",
+//     city: "Berlin",
+//     country: "Germany",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg",
+//   },
+//   {
+//     name: "Radisson Blu Hotel",
+//     city: "Kyiv",
+//     country: "Ukraine",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/radisson-blu-hotel_jwtowg.jpg",
+//   },
+//   {
+//     name: "Paradise Hotel",
+//     city: "Guadalupe",
+//     country: "Mexico",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/paradise-hotel_i6whae.jpg",
+//   },
+//   {
+//     name: "Hotel Grindewald",
+//     city: "Interlaken",
+//     country: "Switzerland",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-grindewald_zsjsmy.jpg",
+//   },
+//   {
+//     name: "The Andaman Resort",
+//     city: "Port Dickson",
+//     country: "Malaysia",
+//     imageUrl: "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/the-andaman-resort_d2xksj.jpg",
+//   },
+// ];
 
 const homesGroupItems = document.getElementsByClassName("homes-group-items");
 const homesGroupItemsSlider = document.createElement("div");
@@ -84,10 +84,18 @@ function insertHomesItem(homesItemCreated) {
 }
 
 function createInitialItems() {
-  for (let i = 0; i < data.length; i++) {
-    const homesItemCreated = createHomesItem(data, i);
-    insertHomesItem(homesItemCreated);
-  }
+  fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
+    .then((response) => response.json())
+    .then((data) => {
+      const dataFinal = data;
+      for (let i = 0; i < dataFinal.length; i++) {
+        const homesItemCreated = createHomesItem(dataFinal, i);
+        insertHomesItem(homesItemCreated);
+      }
+    })
+    .catch((err) => {
+      console.log("Fetch Error :-S", err);
+    });
 }
 
 createInitialItems();
@@ -128,8 +136,7 @@ arrowHomesLeft.addEventListener("click", () => {
 const slider = document.querySelector(".homes-group-items-slider");
 
 function rollSlider() {
-  const sliderElementWidth = sliderElement.offsetWidth;
-  slider.style.transform = `translate(-${count * (sliderElementWidth + 14)}px )`;
+  slider.style.transform = `translate(-${count * (300 + 14)}px )`;
 }
 
 window.addEventListener("resize", () => {
