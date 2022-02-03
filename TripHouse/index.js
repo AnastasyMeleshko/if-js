@@ -643,3 +643,74 @@ function toggleMenu() {
 }
 
 burger.addEventListener("click", toggleMenu);
+
+// lesson 12.2
+
+const destInputBigScreen = document.getElementById("user-destination");
+const destInputSmallScreen = document.getElementById("user-destination-hidden");
+const destInputs = [destInputBigScreen, destInputSmallScreen];
+
+const adultsInputBigScreen = document.querySelector(".counter-number-Adults");
+const childrenInputBigScreen = document.querySelector(".counter-number-Children");
+const roomsInputBigScreen = document.querySelector(".counter-number-Rooms");
+
+const leftArrowHomes = document.querySelector(".arrow-homes-left");
+const rightArrowHomes = document.querySelector(".arrow-homes");
+
+const searchButton = document.querySelector(".search-button");
+searchButton.addEventListener("click", () => {
+  const searchRequest = destInputBigScreen.value;
+
+  const searchAdults = adultsInputBigScreen.innerHTML;
+  const searchChildren = childrenInputBigScreen.innerHTML;
+  const searchRooms = roomsInputBigScreen.innerHTML;
+  fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${searchRequest}&adults=${searchAdults}&children=${searchChildren},10&rooms=${searchRooms}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const finalData = data;
+      if (finalData.length === 0) {
+        alert("По вашему запросу нет подходящих отелей. Повторите поиск");
+      }
+      if (searchRequest === "") {
+        alert("Введите запрос для поиска");
+      } else {
+        console.log(finalData);
+        const availableHotelsWrap = document.createElement("section");
+        availableHotelsWrap.classList.add("available-hotels");
+        const availableHotels = document.createElement("div");
+        availableHotels.classList.add("container");
+        availableHotels.classList.add("col-lg-12");
+        availableHotels.classList.add("available-container");
+        const availableTitle = document.createElement("h2");
+        availableTitle.classList.add("col-lg-12");
+        availableTitle.classList.add("available-title");
+        availableTitle.innerHTML = "Available hotels";
+        availableHotels.append(availableTitle);
+        const availableItems = document.createElement("div");
+        availableItems.classList.add("available-items");
+        availableHotels.append(availableItems);
+        availableHotelsWrap.append(availableHotels);
+
+        const mainSectionsWrap = document.querySelector(".main-sections-wrapper");
+        const offersSection = document.querySelector(".offers");
+        if (mainSectionsWrap.firstElementChild.classList.contains("available-hotels")) {
+          mainSectionsWrap.removeChild(availableHotelsWrap);
+        }
+        mainSectionsWrap.insertBefore(availableHotelsWrap, offersSection);
+
+        for (let i = 0; i < finalData.length; i++) {
+          const homesItemCreated = createHomesItem(finalData, i);
+          availableItems.append(homesItemCreated);
+        }
+
+        if (finalData.length > 4) {
+          const leftArrowAvailable = leftArrowHomes.cloneNode(true);
+          availableItems.append(leftArrowAvailable);
+          const rightArrowAvailable = rightArrowHomes.cloneNode(true);
+          availableItems.append(rightArrowAvailable);
+        }
+      }
+    }).catch((error) => {
+      console.log(`Error${error}`);
+    });
+});

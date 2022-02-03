@@ -549,12 +549,26 @@ h1 {
     /*position: relative;*/
 }
 
+.available-container {
+    position: relative;
+}
+
+.available-hotels {
+    background-color: #EAF0F9;
+}
+
+.available-items {
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+
+}
+
 .homes-group-items-slider {
     display: flex;
     justify-content: flex-start;
     max-width: inherit;
     transition: all ease 1s;
-
 }
 
 .hidden-item {
