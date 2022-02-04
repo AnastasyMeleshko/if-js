@@ -722,9 +722,11 @@ searchButton.addEventListener("click", () => {
         document.body.append(shadowBlock);
         document.body.style.overflow = "hidden";
       }
-      if ((searchAdults === "0") && (searchChildren > 0)) {
-        const informBlockText = document.createTextNode("Quantaty of adults can't be less than children. Please double check your request.");
+      if (((searchAdults === "0") && (searchChildren > 0)) || (searchAdults === "0")) {
+        const informBlockText = document.createTextNode("Quantaty of adults can't be equal 0 or less than children.");
+        const informBlockText2 = document.createTextNode("Please double check your request.");
         informBlock.append(informBlockText);
+        informBlock.append(informBlockText2);
         informBlock.append(agreedButton);
         document.body.append(shadowBlock);
         document.body.style.overflow = "hidden";
