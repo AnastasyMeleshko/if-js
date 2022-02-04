@@ -674,6 +674,7 @@ searchButton.addEventListener("click", () => {
 
   const searchAdults = adultsInputBigScreen.innerHTML;
   const searchRooms = roomsInputBigScreen.innerHTML;
+  const searchChildrenInitial = childrenInputBigScreen.innerHTML;
   let searchChildren = "";
 
   const allActiveSelects = document.querySelectorAll(".select-age-wrap");
@@ -722,7 +723,7 @@ searchButton.addEventListener("click", () => {
         document.body.append(shadowBlock);
         document.body.style.overflow = "hidden";
       }
-      if (((searchAdults === "0") && (searchChildren > 0)) || (searchAdults === "0")) {
+      if ((searchAdults === "0") && (searchChildrenInitial >= 0)) {
         const informBlockText = document.createTextNode("Quantaty of adults can't be equal 0 or less than children.");
         const informBlockText2 = document.createTextNode("Please double check your request.");
         informBlock.append(informBlockText);
