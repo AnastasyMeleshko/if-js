@@ -549,12 +549,26 @@ h1 {
     /*position: relative;*/
 }
 
-.homes-group-items-slider {
+.available-container {
+    position: relative;
+}
+
+.available-hotels {
+    background-color: #EAF0F9;
+}
+
+.available-items {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+}
+
+.homes-group-items-slider, .available-items-slider {
     display: flex;
     justify-content: flex-start;
     max-width: inherit;
     transition: all ease 1s;
-
 }
 
 .hidden-item {
@@ -1421,6 +1435,62 @@ i {
 .shown {
     display: flex;
 }
+
+.shadow-block {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    line-height: 18px;
+    font-style: normal;
+    font-weight: 500;
+
+}
+
+.inform-block {
+    width: 50%;
+    height: 28%;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    color: #000000;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.confirm-btn {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    background-color: #3077C6;
+    border: 3px solid #3077C6;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 24px;
+    line-height: 28px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 12px 57px;
+    cursor: pointer;
+    width: 20%;
+    max-height: 72px;
+    transition: all 0.3s ease-in-out;
+    margin-top: 50px;
+}
+
 
     /* For mobile phones: */
 [class*="col-"] {
@@ -2998,10 +3068,15 @@ i {
         background-color: #F5BD41;
         border-top-right-radius: 8px 8px;
         border-top-left-radius: 8px 8px;
+        position: relative;
     }
 
     .form-destination-hidden > input {
         padding-left: 49px;
+    }
+
+    .label-destination-hidden {
+        display: flex;
     }
 
     .form-img-loupe {
@@ -3011,10 +3086,6 @@ i {
     }
 
     .form-destination-shown  {
-        display: none;
-    }
-
-    .form-destination {
         display: none;
     }
 
@@ -3232,7 +3303,6 @@ i {
         transform: translateX(50%);
         border: 2px solid #10367C;
     }
-
 
 }
 
@@ -3587,7 +3657,10 @@ i {
     .form-destination-shown  {
         display: flex;
         position: relative;
+    }
 
+    .form-destination {
+        max-width: 100%;
     }
 
     .left-container {
@@ -3784,6 +3857,7 @@ i {
         border: 0;
         transform: translateX(0);
     }
+
 
 }
 
