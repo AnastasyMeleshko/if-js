@@ -84,18 +84,28 @@ function insertHomesItem(homesItemCreated) {
 }
 
 function createInitialItems() {
-  fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
-    .then((response) => response.json())
-    .then((data) => {
-      const dataFinal = data;
-      for (let i = 0; i < dataFinal.length; i++) {
-        const homesItemCreated = createHomesItem(dataFinal, i);
-        insertHomesItem(homesItemCreated);
-      }
-    })
-    .catch((err) => {
-      console.log("Fetch Error :-S", err);
-    });
+  let initialHomesObj;
+  if (((sessionStorage.getItem("homesInitialData")) === "undefined") || (sessionStorage.length === 0)) {
+    fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
+      .then((response) => response.json())
+      .then((data) => {
+        const dataFinal = data;
+        initialHomesObj = JSON.stringify(dataFinal);
+        sessionStorage.setItem("homesInitialData", initialHomesObj);
+        for (let i = 0; i < dataFinal.length; i++) {
+          const homesItemCreated = createHomesItem(dataFinal, i);
+          insertHomesItem(homesItemCreated);
+        }
+      }).catch((err) => {
+        console.log("Fetch Error :", err);
+      });
+  } else if (sessionStorage.getItem("homesInitialData").length !== 0) {
+    const initialHomesObjForUsage = JSON.parse(sessionStorage.getItem("homesInitialData"));
+    for (let i = 0; i < initialHomesObjForUsage.length; i++) {
+      const homesItemCreated = createHomesItem(initialHomesObjForUsage, i);
+      insertHomesItem(homesItemCreated);
+    }
+  }
 }
 
 createInitialItems();
@@ -662,6 +672,7 @@ const leftArrowHomes = document.querySelector(".arrow-homes-left");
 const rightArrowHomes = document.querySelector(".arrow-homes");
 
 const searchButton = document.querySelector(".search-button");
+
 searchButton.addEventListener("click", () => {
   const mainSectionsWrap = document.querySelector(".main-sections-wrapper");
   const availableHotelsWrap = document.querySelector(".available-hotels");
@@ -671,9 +682,14 @@ searchButton.addEventListener("click", () => {
   }
 
   const searchRequest = destInputBigScreen.value;
+  sessionStorage.setItem("searchRequest", JSON.stringify(searchRequest));
 
   const searchAdults = adultsInputBigScreen.innerHTML;
+  sessionStorage.setItem("searchAdults", JSON.stringify(searchAdults));
+
   const searchRooms = roomsInputBigScreen.innerHTML;
+  sessionStorage.setItem("searchRooms", JSON.stringify(searchRooms));
+
   const searchChildrenInitial = childrenInputBigScreen.innerHTML;
   let searchChildren = "";
 
@@ -686,6 +702,7 @@ searchButton.addEventListener("click", () => {
   });
 
   const resultChildrenSearch = searchChildren.slice(0, -1);
+  sessionStorage.setItem("resultChildrenSearch", JSON.stringify(resultChildrenSearch));
 
   const shadowBlock = document.createElement("div");
   shadowBlock.classList.add("shadow-block");
@@ -708,7 +725,7 @@ searchButton.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       const finalData = data;
-
+      sessionStorage.setItem("resultOfUserSearch", JSON.stringify(finalData));
       if (finalData.length === 0) {
         const informBlockText = document.createTextNode("There are no suitable results matching your request. Please search again.");
         informBlock.append(informBlockText);
