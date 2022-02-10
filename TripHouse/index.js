@@ -682,13 +682,10 @@ searchButton.addEventListener("click", () => {
   }
 
   const searchRequest = destInputBigScreen.value;
-  sessionStorage.setItem("searchRequest", JSON.stringify(searchRequest));
 
   const searchAdults = adultsInputBigScreen.innerHTML;
-  sessionStorage.setItem("searchAdults", JSON.stringify(searchAdults));
 
   const searchRooms = roomsInputBigScreen.innerHTML;
-  sessionStorage.setItem("searchRooms", JSON.stringify(searchRooms));
 
   const searchChildrenInitial = childrenInputBigScreen.innerHTML;
   let searchChildren = "";
@@ -702,7 +699,6 @@ searchButton.addEventListener("click", () => {
   });
 
   const resultChildrenSearch = searchChildren.slice(0, -1);
-  sessionStorage.setItem("resultChildrenSearch", JSON.stringify(resultChildrenSearch));
 
   const shadowBlock = document.createElement("div");
   shadowBlock.classList.add("shadow-block");
@@ -725,7 +721,6 @@ searchButton.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       const finalData = data;
-      sessionStorage.setItem("resultOfUserSearch", JSON.stringify(finalData));
       if (finalData.length === 0) {
         const informBlockText = document.createTextNode("There are no suitable results matching your request. Please search again.");
         informBlock.append(informBlockText);
