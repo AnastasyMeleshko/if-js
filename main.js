@@ -1245,23 +1245,20 @@ function changeStyle() {
 // textFirst.addEventListener("click", changeStyle());
 // textMiddle.addEventListener("click", changeStyle());
 // textLast.addEventListener("click", changeStyle());
-
 // lesson-14
-
 const formEl = document.getElementById("form");
-
 formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(formEl);
-
   console.log(formData.get("file"));
-
   const res = await fetch("https://fe-student-api.herokuapp.com/api/file", {
     method: "POST",
-    headers: {
-      "Content-Type": "form/multipart",
-    },
-    mode: "no-cors",
+    // headers: {
+    //   // "Content-Type": "form-data/multipart application/json",
+    //   // "Content-Type": "application/json",
+    //   "Content-Type": "multipart/form-data"
+    // },
+    // mode: "no-cors",
     body: formData,
   }).then((response) => {
     if (!response.ok) {
