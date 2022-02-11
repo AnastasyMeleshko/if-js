@@ -830,7 +830,7 @@
 // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 //
 
-//1 способ
+// 1 способ
 
 // const result = [];
 // function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
@@ -871,15 +871,14 @@
 // // число старта недели от 0 до 6, где 0 - понедельник
 // getCalendarMonth(30, 7, 5);
 
-
-//2 способ
+// 2 способ
 
 const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   const resultMonthArray = [];
   let weekArray = [];
   let currentWeekDay = 0;
 
-  //добиваем первую неделю
+  // добиваем первую неделю
   if (dayOfWeek) {
     for (let i = 0; i < dayOfWeek; i++) {
       weekArray.unshift(daysInMonth - i);
@@ -893,9 +892,9 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   currentWeekDay++;
   weekArray = [];
 
-  //основная часть месяца
-  for(let i=currentWeekDay; i<=daysInMonth; i++) {
-    if(weekArray.length === daysInWeek) {
+  // основная часть месяца
+  for (let i = currentWeekDay; i <= daysInMonth; i++) {
+    if (weekArray.length === daysInWeek) {
       resultMonthArray.push(weekArray);
       weekArray = [i];
       currentWeekDay = i;
@@ -904,11 +903,11 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
     }
   }
 
-  //добиваем последнюю неделю
-  if(currentWeekDay <= daysInMonth) {
+  // добиваем последнюю неделю
+  if (currentWeekDay <= daysInMonth) {
     weekArray = [];
     while (weekArray.length < daysInWeek) {
-      if(currentWeekDay > daysInMonth) {
+      if (currentWeekDay > daysInMonth) {
         currentWeekDay = 1;
       }
       weekArray.push(currentWeekDay++);
@@ -917,7 +916,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   }
 
   return resultMonthArray;
-}
+};
 
 const daysInMonth = 28;
 const daysInWeek = 7;
@@ -1218,8 +1217,7 @@ students.getInfo();
 // textMiddle.addEventListener("click", changeStyle());
 // textLast.addEventListener("click", changeStyle());
 
-
-//2 способ
+// 2 способ
 
 const textFirst = document.getElementById("text1");
 const textMiddle = document.getElementById("text2");
@@ -1229,21 +1227,49 @@ const colors = {
   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
 };
 function* gen() {
-  for(let element of colors.data){
+  for (const element of colors.data) {
     yield element;
   }
 }
 function changeStyle() {
   let index = 1;
   return function () {
-    let iterator = gen();
-    for(let i = 0; i < index; i++){
+    const iterator = gen();
+    for (let i = 0; i < index; i++) {
       this.style.color = iterator.next().value;
     }
     iterator.next().done ? index = 1 : index++;
   };
 }
 
-textFirst.addEventListener("click", changeStyle());
-textMiddle.addEventListener("click", changeStyle());
-textLast.addEventListener("click", changeStyle());
+// textFirst.addEventListener("click", changeStyle());
+// textMiddle.addEventListener("click", changeStyle());
+// textLast.addEventListener("click", changeStyle());
+
+// lesson-14
+
+const formEl = document.getElementById("form");
+
+formEl.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const formData = new FormData(formEl);
+
+  console.log(formData.get("file"));
+
+  const res = await fetch("https://fe-student-api.herokuapp.com/api/file", {
+    method: "POST",
+    headers: {
+      "Content-Type": "form/multipart",
+    },
+    mode: "no-cors",
+    body: formData,
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    return response.json();
+  })
+    .then((result) => result)
+    .catch(error => console.log(error.message));
+  console.log(res);
+});
