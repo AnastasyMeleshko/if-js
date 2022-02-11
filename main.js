@@ -1245,6 +1245,7 @@ function changeStyle() {
 // textFirst.addEventListener("click", changeStyle());
 // textMiddle.addEventListener("click", changeStyle());
 // textLast.addEventListener("click", changeStyle());
+
 // lesson-14
 const formEl = document.getElementById("form");
 formEl.addEventListener("submit", async (event) => {
@@ -1270,3 +1271,23 @@ formEl.addEventListener("submit", async (event) => {
     .catch(error => console.log(error.message));
   console.log(res);
 });
+
+const formTwoWrap = document.querySelector(".form-2-wrapper");
+const inputInside = document.getElementById("file-2");
+const labelTwo = document.querySelector(".label-2");
+
+function downloadImg() {
+  inputInside.oninput = function(event) {
+      let file = event.target.files[0];
+      let reader = new FileReader();
+      reader.onloadend = function () {
+        formTwoWrap.style.backgroundImage = `url('${reader.result}')`;
+      }
+      labelTwo.innerHTML = "";
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+  };
+}
+
+formTwoWrap.addEventListener("click", downloadImg);

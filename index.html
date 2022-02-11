@@ -12,10 +12,22 @@
 <!--    <p id="text1">Text 1</p>-->
 <!--    <p id="text2">Text 2</p>-->
 <!--    <p id="text3">Text 3</p>-->
-<form id="form" class="form">
-    <input type="file" name="file" required>
-    <button type="submit">Отправить</button>
-</form>
+<div class="first-wrap">
+    <p>First part of the task</p>
+    <form id="form" class="form">
+        <input type="file" name="file" required>
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+<div class="second-wrap">
+    <p>Second part of the task</p>
+    <div class="form-2-wrapper">
+        <form id="form-2" class="form-2">
+            <label for="file-2" class="label-2">Нажмите, чтобы загрузить картинку</label>
+            <input id="file-2" type="file" name="file" required>
+        </form>
+    </div>
+</div>
     <script src="main.js"></script>
 </body>
 </html>
