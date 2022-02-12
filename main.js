@@ -1259,7 +1259,7 @@ formEl.addEventListener("submit", async (event) => {
       'Content-type': 'multipart/form-data',
     },
     body: formData,
-  }
+  };
 
   const res = await fetch("https://fe-student-api.herokuapp.com/api/file", options).then((response) => {
     if (!response.ok) {
