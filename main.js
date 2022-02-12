@@ -1252,16 +1252,16 @@ formEl.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(formEl);
   console.log(formData.get("file"));
-  const res = await fetch("https://fe-student-api.herokuapp.com/api/file", {
+
+  let options = {
     method: "POST",
-    // headers: {
-    //   // "Content-Type": "form-data/multipart application/json",
-    //   // "Content-Type": "application/json",
-    //   "Content-Type": "multipart/form-data"
-    // },
-    // mode: "no-cors",
+    header: {
+      'Content-type': 'multipart/form-data',
+    },
     body: formData,
-  }).then((response) => {
+  }
+
+  const res = await fetch("https://fe-student-api.herokuapp.com/api/file", options).then((response) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
