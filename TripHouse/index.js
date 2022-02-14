@@ -83,6 +83,21 @@ function insertHomesItem(homesItemCreated) {
   homesGroupItemsSlider.append(homesItemCreated);
 }
 
+function bubbleSort(array, field) {
+  let swapped;
+  do {
+    swapped = false;
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i][field] > array[i + 1][field]) {
+        let temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+        swapped = true;
+      }
+    }
+  } while (swapped);
+}
+
 function createInitialItems() {
   let initialHomesObj;
   if (((sessionStorage.getItem("homesInitialData")) === "undefined") || (sessionStorage.length === 0)) {
@@ -90,6 +105,7 @@ function createInitialItems() {
       .then((response) => response.json())
       .then((data) => {
         const dataFinal = data;
+        bubbleSort(dataFinal, 'name');
         initialHomesObj = JSON.stringify(dataFinal);
         sessionStorage.setItem("homesInitialData", initialHomesObj);
         for (let i = 0; i < dataFinal.length; i++) {
