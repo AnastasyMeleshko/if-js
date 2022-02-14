@@ -1291,3 +1291,38 @@ function downloadImg() {
 }
 
 formTwoWrap.addEventListener("click", downloadImg);
+
+// lesson 15 (part 2)
+// Используюя структуру данных Stack, напишите функцию,
+// которая будет проверять правильность синтаксиса фигурных скобок в объекте js по строке.
+// Пример валидных входных данных: {user: {name: "John", age: 21}}
+// Пример невалидных входных данных: {user: {name: }{"John", age: 21{}}
+
+const bracketPairs = {
+  '{' : '}',
+}
+const closingBrackets = ['}'];
+
+function checkBrackets(string) {
+  const stack = [];
+  for (char of string) {
+    if (closingBrackets.includes(char)) {
+
+      let topElementOfStack = stack[stack.length-1];
+
+      if (char === topElementOfStack) {
+        stack.pop();
+      }
+      else {
+        return false;
+      }
+    }
+    else if (char in bracketPairs) {
+      stack.push(bracketPairs[char]);
+    }
+  }
+  return stack.length === 0
+}
+
+console.log(checkBrackets('{user: {name: "John", age: 21}}'));
+console.log(checkBrackets('{user: {name: }{"John", age: 21{}}'));
