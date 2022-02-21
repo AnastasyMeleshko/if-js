@@ -6,6 +6,8 @@
     <meta name="keywords" content="HTML, CSS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TripHouse_site</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+    <link rel="stylesheet" href="./Styles/Calendar.css">
     <link rel="stylesheet" href="./Styles/Styles.css">
 </head>
     <body>
@@ -39,7 +41,7 @@
                       <h1 class="col-lg-12">Discover stays<br>to live, work or just relax</h1>
                               <form action="" class="form-main col-lg-12">
                                       <div class="form-destination form-destination-shown form-item">
-                                          <input type="text" id="user-destination" class="form-input input-destination" name="user-destination" required value>
+                                          <input type="text" id="user-destination" class="form-input input-destination" name="user-destination" required value autocomplete="off">
                                           <label class="form-label label-destination" for="user-destination">Your destination or hotel name</label>
                                       </div>
                                       <div class="left-container">
@@ -47,18 +49,18 @@
                                               <div class="form-img-loupe">
                                                   <svg class="form-loupe"><use href="./img/Sprite.svg/#loupe"></use></svg>
                                               </div>
-                                              <input type="text" id="user-destination-hidden" class="form-input input-destination" name="user-destination" required>
+                                              <input type="text" id="user-destination-hidden" class="form-input input-destination" name="user-destination" required autocomplete="off">
                                               <label class="form-label label-destination-hidden label-destination" for="user-destination-hidden">
                                                   Your destination or hotel name
                                               </label>
                                           </div>
                                           <div class="form-dates">
                                               <div class="form-item check-inn">
-                                                  <input type="text" class="form-input input-date" name="user-check-in-date" id="form-user-check-in" required>
+                                                  <input type="text" class="form-input input-date" name="user-check-in-date" id="form-user-check-in" required autocomplete="off">
                                                   <label class="form-label label-inn" for="form-user-check-in">Check-in date</label>
                                               </div>
                                               <div class="form-item check-out">
-                                                  <input type="text" class="form-input input-date" name="user-check-out-date" id="form-user-check-out" required>
+                                                  <input type="text" class="form-input input-date" name="user-check-out-date" id="form-user-check-out" required autocomplete="off">
                                                   <label class="form-label label-out" for="form-user-check-out">Check-out date</label>
                                               </div>
                                           </div>
@@ -66,15 +68,15 @@
                                               <div class="form-numbers-wrap">
                                                   <div class="form-numbers">
                                                       <div class="form-adults form-numbers-item">
-                                                          <input type="text" class="form-input input-adults numbers-input" name="user-adults" id="form-user-adults">
+                                                          <input type="text" class="form-input input-adults numbers-input" name="user-adults" id="form-user-adults" autocomplete="off">
                                                           <label class="form-label label-adults" for="form-user-adults">Adults</label>
                                                       </div>
                                                       <div class="form-children form-numbers-item">
-                                                          <input type="text" class="form-input input-children numbers-input" name="user-children" id="form-user-children">
+                                                          <input type="text" class="form-input input-children numbers-input" name="user-children" id="form-user-children" autocomplete="off">
                                                           <label class="form-label label-children" for="form-user-children">Children</label>
                                                       </div>
                                                       <div class="form-rooms form-numbers-item">
-                                                          <input type="text" class="form-input input-rooms numbers-input" name="user-rooms" id="form-user-rooms">
+                                                          <input type="text" class="form-input input-rooms numbers-input" name="user-rooms" id="form-user-rooms" autocomplete="off">
                                                           <label class="form-label label-rooms" for="form-user-rooms">Rooms</label>
                                                       </div>
                                                   </div>
@@ -85,6 +87,38 @@
                                       </div>
                                     </div>
                               </form>
+                      <div class="date-picker">
+                          <div class="selected-date"></div>
+                          <div class="dates">
+                              <div class="months-first">
+                                  <div class="month">
+                                      <div class="arrows prev-mth">&lt;</div>
+                                      <div class="mth"></div>
+                                      <div class="arrows next-mth">&gt;</div>
+                                  </div>
+<!--                                  <div class="week-day"></div>-->
+                                  <div class="days"></div>
+                              </div>
+                              <div class="months-second">
+                                  <div class="month">
+                                      <div class="arrows prev-mth">&lt;</div>
+                                      <div class="mth"></div>
+                                      <div class="arrows next-mth">&gt;</div>
+                                  </div>
+<!--                                  <div class="week-day"></div>-->
+                                  <div class="days"></div>
+                              </div>
+                          </div>
+<!--                          <div class="dates second-date">-->
+<!--                              <div class="month">-->
+<!--                                  <div class="arrows prev-mth">&lt;</div>-->
+<!--                                  <div class="mth"></div>-->
+<!--                                  <div class="arrows next-mth">&gt;</div>-->
+<!--                              </div>-->
+<!--                              <div class="week-day"></div>-->
+<!--                              <div class="days"></div>-->
+<!--                          </div>-->
+                      </div>
                       <div class="header-download-app col-lg-12">
                           <a href="#" target="_blank"><img src="img/Google-play.png" alt="Google-play"></a>
                           <a href="#" target="_blank"><img src="img/App-store.png" alt="App-store"></a>
@@ -436,6 +470,7 @@
                         <p class="footer-text col-lg-12 col-md-12 col-sm-12 col-xs-12">&#169; 2020 Triphouse, Inc. All rights reserved</p>
                 </div>
             </footer>
-        <script src="index.js"></script>
+        <script src="./js/index.js"></script>
+        <script src="./js/calendar.js"></script>
     </body>
 </html>
