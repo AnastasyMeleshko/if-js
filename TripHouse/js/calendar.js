@@ -1,5 +1,6 @@
 const date_picker_element = document.querySelector('.date-picker');
 const selected_date_element = document.querySelector('.date-picker .selected-date');
+
 const dates_element = document.querySelector('.date-picker .dates');
 const mth_element = document.querySelector('.date-picker .dates .month .mth');
 const mth_element2 = document.querySelector('.months-second .month .mth');
@@ -8,8 +9,15 @@ const prev_mth_element = document.querySelector('.date-picker .dates .month .pre
 const days_element = document.querySelector('.date-picker .dates .days');
 const days_element2 = document.querySelector('.months-second .days');
 
+
+
+const checkInBtn = document.querySelector(".check-in-btn");
+const checkOutBtn = document.querySelector(".check-out-btn");
+const clearBtn = document.querySelector(".clear-btn");
+
 const inputCheckInn = document.getElementById("form-user-check-in");
 const inputCheckOut = document.getElementById("form-user-check-out");
+const formLabel = document.querySelector(".form-label");
 const blockCheckInn = document.querySelector(".form-item, .check-inn");
 const blockCheckOut = document.querySelector(".form-item, .check-out");
 
@@ -21,10 +29,15 @@ let day = date.getDate();
 let month = date.getMonth();
 let year = date.getFullYear();
 
-let selectedDate = date;
-let selectedDay = day;
-let selectedMonth = month;
-let selectedYear = year;
+let selectedDate;
+let selectedDay;
+let selectedMonth;
+let selectedYear;
+let today_date = date;
+let today_Day = day;
+let today_Month = month;
+let today_Year = year;
+
 
 mth_element.textContent = months[month] + ' ' + year;
 mth_element2.textContent = months[month+1] + ' ' + year;
@@ -36,15 +49,7 @@ populateDates();
 
 // EVENT LISTENERS
 date_picker_element.addEventListener('click', toggleDatePicker);
-// inputCheckInn.addEventListener('click', toggleDatePicker2);
-// inputCheckOut.addEventListener('click', toggleDatePicker3);
-// inputCheckInn.addEventListener('click', toggleDatePicker2);
-// blockCheckInn.addEventListener('click', toggleDatePicker2);
-
-
-// document.body.addEventListener('click', toggleDatePicker3);
 document.body.addEventListener('click', toggleDatePicker2);
-// document.body.addEventListener('click', toggleDatePicker3);
 
 next_mth_element.addEventListener('click', goToNextMonth);
 prev_mth_element.addEventListener('click', goToPrevMonth);
@@ -57,61 +62,29 @@ function toggleDatePicker (e) {
 }
 
 function toggleDatePicker2 (e) {
-  // console.log(e.target);
-  // if (e.target === inputCheckInn) {
     if ((e.target.closest === days_element)
       || (e.target === inputCheckInn)
+      || (e.target === inputCheckOut)
+      || (e.target === formLabel)
       || (e.target.classList.contains("day"))
+      || (e.target.classList.contains("mth"))
+      || (e.target.classList.contains("week"))
+      || (e.target.classList.contains("dates"))
+      || (e.target.classList.contains("month"))
+      || (e.target.classList.contains("week-day"))
+      || (e.target.classList.contains("dates-buttons"))
+      || (e.target.classList.contains("month-first"))
+      || (e.target.classList.contains("month-second"))
+      || (e.target.classList.contains("check-in-btn"))
+      || (e.target.classList.contains("check-out-btn"))
+      || (e.target.classList.contains("clear-btn"))
       || (e.target.classList.contains("arrows")) ){
       dates_element.classList.add('active');
     }
     else {
       dates_element.classList.remove('active');
     }
-  // }
 }
-
-
-
-// function toggleDatePicker3 (e) {
-//   // console.log(e.target);
-//   if (e.target === inputCheckOut) {
-//   if ((e.target.closest === days_element)
-//     || (e.target === inputCheckOut)
-//     || (e.target.classList.contains("day"))
-//     || (e.target.classList.contains("arrows")) ){
-//     dates_element[1].classList.add('active');
-//   } else {
-//     dates_element[1].classList.remove('active');
-//   }
-//   }
-// }
-
-// function toggleDatePicker3 (e) {
-//   if ((e.target === inputCheckOut)
-//     || (e.target.closest === blockCheckOut)
-//     || (e.target.closest === days_element)
-//     || (e.target.classList.contains("day"))
-//     || (e.target.classList.contains("arrows")) ){
-//     dates_element.classList.add('active');
-//   } else {
-//     dates_element.classList.remove('active');
-//   }
-// }
-
-
-// function toggleDatePicker3 (e) {
-//   if ((e.target === inputCheckOut)
-//     || (e.target.closest === blockCheckOut)
-//     || (e.target.closest === days_element)
-//     || (e.target.classList.contains("day"))
-//     || (e.target.classList.contains("arrows")) ){
-//     dates_element[1].classList.add('active');
-//   } else {
-//     dates_element[1].classList.remove('active');
-//   }
-// }
-
 
 function goToNextMonth (e) {
   let nextmonth;
@@ -156,6 +129,12 @@ function goToPrevMonth (e) {
 
 function populateDates (e) {
   let amount_days;
+
+  let firstChosenDate;
+  let secondChosenDate;
+  let firstChosenMonth;
+  let secondChosenMonth;
+
   days_element.innerHTML = '';
   days_element2.innerHTML = '';
   let weekDayAll = document.querySelectorAll(".week-day");
@@ -180,13 +159,68 @@ function populateDates (e) {
     amount_days = 28;
   }
 
+  let firstActiveMonth = months[month];
+
   for (let i = 0; i < amount_days; i++) {
     const day_element = document.createElement('div');
     day_element.classList.add('day');
     day_element.textContent = i + 1;
 
+
     if (selectedDay === (i + 1) && selectedYear === year && selectedMonth === month) {
       day_element.classList.add('selected');
+      if ((checkInBtn.classList.contains("chosen")) && (checkOutBtn.classList.contains("chosen"))) {
+        day_element.classList.remove('selected');
+      }
+    }
+
+    // if ((firstChosenDate === (i + 1)) && (months.indexOf(firstChosenMonth) === month)) {
+    //   day_element.classList.add('frozen');
+    // }
+
+    if (today_Day === (i + 1) && today_Year === year && today_Month === month) {
+      day_element.classList.add('today-date');
+    }
+
+    let firstChosenDate2 = inputCheckInn.value.slice(-2);
+    let firstChosenMonth2 = inputCheckInn.value.slice(5,8);
+
+    if (Number(firstChosenDate2) !== 0) {
+      if ((Number(firstChosenDate2) === (i+1)) && (months.indexOf(firstChosenMonth2) === month + 1) && (day_element.classList.contains(`${firstChosenMonth2}-day`))) {
+        day_element.classList.add('frozen');
+      }
+    }
+
+    let secondChosenDate2 = inputCheckOut.value.slice(-2);
+    let secondChosenMonth2 = inputCheckOut.value.slice(5,8);
+
+    if (Number(secondChosenDate2) !== 0) {
+      if ((Number(secondChosenDate2) === (i+1)) && (months.indexOf(secondChosenMonth2) === month + 1) && (day_element.classList.contains(`${secondChosenMonth2}-day`))) {
+        day_element.classList.add('frozen');
+      }
+    }
+
+    if ((Number(secondChosenDate2) !== 0) && (Number(firstChosenDate2) !== 0)) {
+      let start = Number(firstChosenDate2)+1;
+      let end = Number(secondChosenDate2);
+      for( let j=start; j<end; j++) {
+        if (i + 1 === start-1) {
+          console.log(day_element.classList)
+          if (day_element.classList.contains(`${firstChosenMonth2}-day`)) {
+            day_element.classList.add('frozen');
+
+          }
+        }
+        if (i + 1 === j) {
+          day_element.classList.add('between');
+        }
+        if (i + 1 === end) {
+          if (day_element.classList.contains(`${secondChosenMonth2}-day`)) {
+            day_element.classList.add('frozen');
+          }
+        }
+
+      }
     }
 
     day_element.addEventListener('click', function () {
@@ -198,7 +232,29 @@ function populateDates (e) {
       selected_date_element.textContent = formatDate(selectedDate);
       selected_date_element.dataset.value = selectedDate;
 
-      inputCheckInn.value = formatDate(selectedDate);
+      let choosenDate = formatDate(selectedDate);
+      let activeDateSecond = inputCheckOut.value;
+
+      if (!checkInBtn.classList.contains("chosen")) {
+        inputCheckInn.value = choosenDate;
+      }
+      else {
+
+        firstChosenDate = inputCheckInn.value.slice(-2);
+        firstChosenMonth = inputCheckInn.value.slice(5,8);
+
+        if (activeDateSecond) {
+          if (checkOutBtn.classList.contains("chosen")) {
+            inputCheckOut.value = activeDateSecond;
+          }
+          if (!checkOutBtn.classList.contains("chosen")) {
+            inputCheckOut.value = formatDate(selectedDate);
+          }
+        } else {
+          inputCheckOut.value = formatDate(selectedDate);
+        }
+      }
+
 
       populateDates();
     });
@@ -208,6 +264,11 @@ function populateDates (e) {
   }
 
   let activeMonth1 = mth_element.textContent.slice(0,3);
+
+  days_element.childNodes.forEach((elem) => {
+    elem.classList.add(`${activeMonth1}-day`);
+  })
+
   let activeYear1 = mth_element.textContent.slice(-4);
   let dayOfWeeks1 = showDaysOfWeeks(activeMonth1, activeYear1);
   dayOfWeeks1.classList.add("first-month");
@@ -215,6 +276,7 @@ function populateDates (e) {
   firstMonth.insertBefore(dayOfWeeks1,days_element);
 
   let nextMonth = months.indexOf(mth_element2.textContent.slice(0,3));
+  let secondMonth2 = mth_element2.textContent.slice(0,3);
   let yearInNextMonth = mth_element2.textContent.slice(-4);
 
   if ((nextMonth === 0) ||
@@ -239,6 +301,51 @@ function populateDates (e) {
 
     if (selectedDay === (i + 1) && selectedYear === yearInNextMonth && selectedMonth === nextMonth) {
       day_element2.classList.add('selected');
+      if ((checkInBtn.classList.contains("chosen")) && (checkOutBtn.classList.contains("chosen"))) {
+        day_element2.classList.remove('selected');
+      }
+    }
+
+    firstChosenDate = inputCheckInn.value.slice(-2);
+    firstChosenMonth = inputCheckInn.value.slice(5,8);
+
+    if (Number(firstChosenDate) !== 0) {
+      if ((Number(firstChosenDate) === (i+1)) && (months.indexOf(firstChosenMonth) === nextMonth + 1) &&  (day_element2.classList.contains(`${firstChosenMonth}-day`))) {
+        day_element2.classList.add('frozen');
+      }
+    }
+
+    secondChosenDate = inputCheckOut.value.slice(-2);
+    secondChosenMonth = inputCheckOut.value.slice(5,8);
+
+    if (Number(secondChosenDate) !== 0) {
+      if ((Number(secondChosenDate) === (i+1)) && (months.indexOf(secondChosenMonth) === nextMonth + 1) && (day_element2.classList.contains(`${secondChosenMonth}-day`))) {
+        day_element2.classList.add('frozen');
+      }
+    }
+
+    if ((Number(secondChosenDate) !== 0) && (Number(firstChosenDate) !== 0)) {
+      let start = Number(firstChosenDate);
+      let end = Number(secondChosenDate);
+      for( let j=start+1; j<end; j++) {
+        if (i + 1 === start)  {
+          // if (day_element2.classList.contains(`${firstChosenMonth}-day`)) {
+          day_element2.classList.add('frozen');
+          // }
+          // console.log(start)
+        }
+        if (i + 1 === j) {
+          // if ((day_element2.classList.contains(`${secondChosenMonth}-day`)) || (day_element2.classList.contains(`${firstChosenMonth}-day`))) {
+          //   day_element2.classList.add('between');
+          // }
+          day_element2.classList.add('between');
+        }
+        if (i + 1 === end) {
+          if (day_element2.classList.contains(`${secondChosenMonth}-day`)) {
+            day_element2.classList.add('frozen');
+          }
+        }
+      }
     }
 
     day_element2.addEventListener('click', function () {
@@ -250,16 +357,82 @@ function populateDates (e) {
       selected_date_element.textContent = formatDate(selectedDate);
       selected_date_element.dataset.value = selectedDate;
 
-      inputCheckOut.value = formatDate(selectedDate);
+      let choosenDate = formatDate(selectedDate);
+      let activeDateSecond = inputCheckOut.value;
+      if (!checkInBtn.classList.contains("chosen")) {
+        inputCheckInn.value = choosenDate;
+      }else {
+
+        firstChosenDate = inputCheckInn.value.slice(-2);
+        firstChosenMonth = inputCheckInn.value.slice(5,8);
+
+        if (activeDateSecond) {
+           if (checkOutBtn.classList.contains("chosen")) {
+             inputCheckOut.value = activeDateSecond;
+           }
+          if (!checkOutBtn.classList.contains("chosen")) {
+              inputCheckOut.value = formatDate(selectedDate);
+            }
+        } else {
+          inputCheckOut.value = formatDate(selectedDate);
+        }
+      }
 
       populateDates();
     });
 
+
     days_element2.appendChild(day_element2);
+
+    days_element2.childNodes.forEach((elem) => {
+      elem.classList.add(`${secondMonth2}-day`);
+    })
 
   }
 
-  // showDaysOfWeeks(nextMonth, yearInNextMonth);
+  let allDays = document.querySelectorAll('.date-picker .dates .days .day');
+
+  checkInBtn.addEventListener("click", addChosenDate);
+  checkOutBtn.addEventListener("click", addChosenDate);
+
+  function addChosenDate() {
+    let activeChoice = document.querySelector(".selected");
+    let frozenDate;
+    let firstDate;
+    if (activeChoice) {
+      checkInBtn.classList.add("chosen");
+      activeChoice.classList.add("frozen");
+      if (activeChoice.classList.contains("frozen")) {
+        firstDate = activeChoice;
+      }
+      let activeDateFirst = inputCheckInn.value;
+      allDays.forEach((day) => {
+        if ((day.innerHTML === firstDate.innerHTML) && (selectedMonth === activeDateFirst.slice(5,8))) {
+          day.classList.add("frozen");
+        }
+      })
+    }
+    if ((checkInBtn.classList.contains("chosen")) && (activeChoice) && (inputCheckOut.value)) {
+      checkOutBtn.classList.add("chosen");
+      activeDateSecond = inputCheckOut.value;
+    }
+
+  }
+
+  clearBtn.addEventListener("click", clearDates);
+
+  function clearDates() {
+    checkInBtn.classList.remove("chosen");
+    checkOutBtn.classList.remove("chosen");
+    inputCheckOut.value = "";
+    inputCheckInn.value = "";
+    allDays.forEach((day) => {
+        day.classList.remove("selected");
+        day.classList.remove("frozen");
+        day.classList.remove("between");
+    })
+  }
+
   let nextMonth2 = mth_element2.textContent.slice(0,3);
   let dayOfWeeks2 = showDaysOfWeeks(nextMonth2, yearInNextMonth);
   dayOfWeeks2.classList.add("second-month");
@@ -312,10 +485,5 @@ function showDaysOfWeeks(activeMonth, activeYear) {
   }
   return weekDays;
 }
-//
-// let activeMonth1 = mth_element.textContent.slice(0,3);
-// let activeYear1 = mth_element.textContent.slice(-4);
-// showDaysOfWeeks(activeMonth1, activeYear1);
-//
-// let nextMonth = months.indexOf(mth_element2.textContent.slice(0,3));
-// let yearInNextMonth = mth_element2.textContent.slice(-4);
+
+

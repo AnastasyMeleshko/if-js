@@ -1,7 +1,7 @@
 .date-picker {
     position: relative;
     width: 100%;
-    max-width: 540px;
+    max-width: 700px;
     height: 0;
     background-color: transparent;
     margin: 30px auto;
@@ -22,6 +22,8 @@
     color: #313131;
     font-size: 28px;
 }
+
+
 
 .date-picker .dates {
     display: none;
@@ -48,13 +50,14 @@
     padding: 5px;
     width: 90%;
     display: flex;
+    border-radius: 8px;
 }
 
 .months-first, .months-second {
-    width:50%;
+    width:40%;
 }
-.months-first {
-    margin-right: 25px;
+.months-first, .months-second {
+    margin-right: 10px;
 }
 
 
@@ -96,8 +99,81 @@
 }
 .date-picker .dates .days .day.selected {
     background-color: #3077C6;
+    color: #FFFFFF;
 }
 
 .date-picker .dates .second-date .active {
     left: 270px;
+}
+
+.date-picker .dates .months-second .month {
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.dates-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 20%;
+    margin: 0 auto;
+}
+
+.check-in-btn, .check-out-btn, .clear-btn {
+    display: flex;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border: 1px solid #3077C6;
+    border-radius: 8px;
+    color: #3077C6;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 10px 10px;
+    cursor: pointer;
+    width: 100%;
+    max-height: 60px;
+    transition: all 0.3s ease-in-out;
+}
+
+.clear-btn {
+    width: 60%
+}
+
+.check-in-btn, .check-out-btn {
+    margin-bottom: 20px;
+}
+
+.check-in-btn:hover, .check-out-btn:hover, .clear-btn:hover {
+    background-color: #3077C6;
+    color: #FFFFFF;
+    transition: .5s;
+    border: 1px solid #3077C6;
+}
+
+.date-picker .dates .days .today-date {
+    color: #3077C6;
+}
+
+.chosen {
+    color: #FFFFFF;
+    background-color: #3077C6;
+}
+
+.date-picker .dates .days .day.selected.frozen, .date-picker .dates .days .day.frozen {
+    background-color: #3077C6;
+    color: #FFFFFF;
+}
+
+.date-picker .dates .days .day.between {
+    background-color: #F3F3F4;
+}
+
+.date-picker .dates .days .day.end {
+    background-color: #BFBFBF;
+}
+
+.without-color {
+    background-color: transparent;
 }
