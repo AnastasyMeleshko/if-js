@@ -884,3 +884,14 @@ searchButton.addEventListener("click", () => {
       console.log(`Error${error}`);
     });
 });
+
+const signUpCross = document.querySelector('.sign-up-cross');
+const signUpCrossHidden = document.querySelector('.sign-up-hidden-cross');
+
+function hideAdvertisement() {
+  let signUpBanner = document.querySelector('.sign-up-banner');
+  signUpBanner.style.display = "none";
+}
+
+signUpCross.addEventListener('click', hideAdvertisement);
+signUpCrossHidden.addEventListener('click', hideAdvertisement);

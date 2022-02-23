@@ -874,6 +874,7 @@ h1 {
     right: 0;
     transform: translate(-50%, 50%);
     cursor: pointer;
+    transition: all 0.1s;
 }
 
 .sign-up-hidden-cross {
@@ -883,6 +884,11 @@ h1 {
     cursor: pointer;
     margin-right: 16px;
     display: inline-flex;
+    transition: all 0.1s;
+}
+
+.sign-up-cross:hover, .sign-up-hidden-cross:hover {
+    fill: #3077C6;
 }
 
 .reviews {
