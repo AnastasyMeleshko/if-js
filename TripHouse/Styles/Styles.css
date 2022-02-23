@@ -2097,6 +2097,45 @@ i {
         border: 2px solid #10367C;
     }
 
+    .date-picker {
+        top: -525px;
+        left: 12px;
+        width: 85%;
+    }
+
+    .date-picker .dates.active {
+        flex-wrap: wrap;
+        border: 2px solid #10367C;
+        justify-content: space-around;
+    }
+
+    .months-first, .months-second {
+        width: 50%;
+    }
+
+    .dates-buttons {
+        flex-direction: row;
+        justify-content: center;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .dates-buttons .check-in-btn, .dates-buttons .check-out-btn  {
+        width: 155px;
+    }
+    .dates-buttons > button {
+        margin: 10px 0;
+    }
+
+
+    .dates-buttons button:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    .months-second, .months-first {
+        width: 45%;
+    }
+
 }
 
 @media only screen and (min-width: 480px) {
@@ -2706,6 +2745,45 @@ i {
         transform: translateX(50%);
         border: 2px solid #10367C;
     }
+
+    .date-picker {
+        top: -525px;
+        left: 12px;
+        width: 85%;
+    }
+
+    .date-picker .dates.active {
+        flex-wrap: wrap;
+        border: 2px solid #10367C;
+        justify-content: space-around;
+    }
+
+    .months-first, .months-second {
+        width: 50%;
+    }
+
+    .dates-buttons {
+        flex-direction: row;
+        justify-content: center;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .dates-buttons .check-in-btn, .dates-buttons .check-out-btn  {
+        width: 155px;
+    }
+    .dates-buttons > button {
+        margin: 10px 0;
+    }
+
+
+    .dates-buttons button:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    .months-second, .months-first {
+        width: 45%;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -3303,6 +3381,33 @@ i {
         border: 2px solid #10367C;
     }
 
+    .date-picker {
+        top: -525px;
+        left: 12px;
+        width: 100%;
+    }
+
+    .date-picker .dates.active {
+        border: 2px solid #10367C;
+        flex-wrap: nowrap;
+    }
+
+    .dates-buttons {
+        flex-direction: column;
+        max-width: 24%;
+        margin: 0 auto;
+    }
+
+    .dates-buttons button:not(:last-child) {
+        margin-right: 0;
+    }
+
+
+    .dates-buttons .check-in-btn, .dates-buttons .check-out-btn  {
+        width: 110px;
+    }
+
+
 }
 
 
@@ -3857,6 +3962,34 @@ i {
         transform: translateX(0);
     }
 
+    .date-picker {
+        top: -15px;
+        left: 80px;
+        width: 100%;
+    }
+
+    .date-picker .dates.active {
+        border: 2px solid transparent;
+        flex-wrap: nowrap;
+    }
+
+    .dates-buttons {
+        flex-direction: column;
+        max-width: 24%;
+        margin: 0 auto;
+    }
+
+    .dates-buttons button:not(:last-child) {
+        margin-right: 0;
+    }
+
+    .check-in-btn, .check-out-btn {
+       width: 100%;
+    }
+
+    .dates-buttons .check-in-btn, .dates-buttons .check-out-btn  {
+        width: 110px;
+    }
 
 }
 

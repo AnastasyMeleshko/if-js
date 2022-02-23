@@ -1,5 +1,7 @@
 .date-picker {
     position: relative;
+    top: -15px;
+    left: 80px;
     width: 100%;
     max-width: 700px;
     height: 0;
@@ -54,7 +56,7 @@
 }
 
 .months-first, .months-second {
-    width:40%;
+    width: 38%;
 }
 .months-first, .months-second {
     margin-right: 10px;
@@ -116,7 +118,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    max-width: 20%;
+    max-width: 24%;
     margin: 0 auto;
 }
 
@@ -174,6 +176,6 @@
     background-color: #BFBFBF;
 }
 
-.without-color {
-    background-color: transparent;
+.date-picker .dates .days .day.before-today, .date-picker .dates .days .day.before-start{
+    color: #c5c3c3;
 }
