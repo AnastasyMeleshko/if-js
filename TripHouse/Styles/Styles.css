@@ -675,6 +675,7 @@ h1 {
     background-color: #F3F3F4;
     border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 .best-button-three {
