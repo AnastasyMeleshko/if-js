@@ -895,3 +895,108 @@ function hideAdvertisement() {
 
 signUpCross.addEventListener('click', hideAdvertisement);
 signUpCrossHidden.addEventListener('click', hideAdvertisement);
+
+
+// The best destinations
+
+const regions = ["Maldives", "Spain", "Norway", "Island", "Japan", "France", "Scottland", "Russia"];
+const cities = ["Berlin, Germany", "Paris, France", "Budapest, Hungary", "London, United Kingdom", "Barcelona, Spain", "Tbilisi, Georgia", "Moscow, Russia", "Amsterdam, Netherlands"];
+const places = ["Edinburgh Castle, Edinburgh, United Kingdom", "Neuschwanstein, Fussen, Germany", "Big Ben, London, United Kingdom", "Colosseum, Roma, Italy", "Matterhorn, Zermatt, Switzerland", "Morskie Oko, Poland", "Krka, Croatia", "Cabo da roca, Sintra, Portugal"];
+const destinationBtns = ["regions", "cities", "places"];
+
+function preloadImages() {
+  for (let i =0; i<destinationBtns.length; i++) {
+    for(let j = 1; j <= 8; j++) {
+      const img = new Image();
+
+      if (destinationBtns[i] === "regions") {
+        img.src = `./img/regions/${j}.png`;
+      }
+      if (destinationBtns[i] === "cities") {
+        img.src = `./img/cities/${j}.png`;
+      }
+      if (destinationBtns[i] === "places") {
+        img.src = `./img/places/${j}.png`;
+      }
+    }
+  }
+}
+
+preloadImages();
+
+const bestButtons = document.querySelector('.best-nav');
+
+function changeImage(event) {
+
+  if(event.target.classList.contains('best-button')) {
+
+    const allDestinationImages = document.querySelectorAll('.best-item-img');
+    const allBestItemTitles = document.querySelectorAll('.best-item-title');
+    const buttonRegions = document.querySelector('.best-button-one');
+    const buttonCities = document.querySelector('.best-button-two');
+    const buttonPlaces = document.querySelector('.best-button-three');
+    const buttonPlaces2 = document.querySelector('.best-button-three-hidden');
+
+    allDestinationImages.forEach((img, index) => {
+      if (event.target.dataset.button === "regions") {
+        img.src = `./img/regions/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonRegions.classList.remove("active");
+      }
+
+      if (event.target.dataset.button === "cities") {
+        img.src = `./img/cities/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonCities.classList.remove('active');
+      }
+
+      if (event.target.dataset.button === "places") {
+        img.src = `./img/places/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonPlaces.classList.remove('active');
+        buttonPlaces2.classList.remove('active');
+      }
+    });
+
+    allBestItemTitles.forEach((title, index) => {
+      if (event.target.dataset.button === "regions") {
+        title.innerHTML = `${regions[index]}`;
+      }
+
+      if (event.target.dataset.button === "cities") {
+        title.innerHTML = `${cities[index]}`
+      }
+
+      if (event.target.dataset.button === "places") {
+        title.innerHTML = `${places[index]}`
+      }
+    });
+  }
+}
+
+bestButtons.addEventListener("click", changeImage);
+
+const arrowBest = document.querySelector(".arrow-best");
+const bestItemsSecondBlock = document.querySelector(".best-items-second");
+
+function hideBestBlock(e) {
+
+  if ((e.target.classList.contains("arrow-element")) ||
+    (e.target.classList.contains("arrow-best")) ||
+    (e.target.classList.contains("arrow-use")) ||
+    (e.target.classList.contains("arrow-icon")) ||
+     (e.target.classList.contains("best-arrow-icon")) ){
+    if (bestItemsSecondBlock.style.display !== "none") {
+      bestItemsSecondBlock.style.display = "none";
+      arrowBest.classList.remove("rotate-arrow");
+    } else {
+      bestItemsSecondBlock.style.display = "flex";
+      arrowBest.classList.add("rotate-arrow");
+    }
+  }
+}
+
+arrowBest.addEventListener("click", hideBestBlock);

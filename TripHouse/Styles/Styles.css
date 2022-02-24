@@ -682,7 +682,7 @@ h1 {
     flex-grow: 2;
 }
 
-.best-button:focus {
+.best-button.active {
     color: #FFFFFF;
     background-color: #3077C6;
 }
@@ -691,6 +691,11 @@ h1 {
     display: flex;
     text-align: left;
     margin-bottom: 48px;
+}
+
+.best-items-second {
+    display: none;
+    transition: all 0.3s;
 }
 
 .best-item {
@@ -3999,5 +4004,7 @@ i {
 
 }
 
-
+.rotate-arrow {
+    transform: rotate(-90deg);
+}
 
