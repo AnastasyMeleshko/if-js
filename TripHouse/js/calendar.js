@@ -31,7 +31,6 @@ let selectedDate;
 let selectedDay;
 let selectedMonth;
 let selectedYear;
-let today_date = date;
 let today_Day = day;
 let today_Month = month;
 let today_Year = year;
@@ -84,37 +83,61 @@ function toggleDatePicker2 (e) {
     }
 }
 
-function goToNextMonth (e) {
-  prev_mth_element.style.opacity = "1";
-
-  let nextmonth;
-  let nextyear;
-  month++;
-  if (month > 11) {
-    month = 0;
-    year++;
-  }
-
-  mth_element.textContent = months[month] + ' ' + year;
-  mth_element2.textContent = months[month+1] + ' ' + year;
-
-  if (month === 11) {
-    nextmonth = 0;
-    nextyear = year + 1;
-    mth_element2.textContent = months[nextmonth] + ' ' + nextyear;
-  }
-
-  populateDates();
+let nextYear = `${year+1}`;
+let lastMonthToShow;
+if (month < 11) {
+  lastMonthToShow = `${months[month-1]}`;
+} else {
+  lastMonthToShow = `${months[0]}`;
 }
 
+function goToNextMonth (e) {
+    let currentMonthShown = document.querySelector(".months-first .month .mth");
+    if (currentMonthShown.innerHTML !== `${lastMonthToShow} ${nextYear}`) {
+      prev_mth_element.style.opacity = "1";
+      next_mth_element.style.opacity = "1";
 
+      let nextmonth;
+      let nextyear;
+      month++;
+      if (month > 11) {
+        month = 0;
+        year++;
+      }
+
+      mth_element.textContent = months[month] + ' ' + year;
+      mth_element2.textContent = months[month+1] + ' ' + year;
+
+      if (month === 11) {
+        nextmonth = 0;
+        nextyear = year + 1;
+        mth_element2.textContent = months[nextmonth] + ' ' + nextyear;
+      }
+
+      populateDates();
+    }
+    if (currentMonthShown.innerHTML === `${lastMonthToShow} ${nextYear}`) {
+      next_mth_element.style.opacity = "0";
+    }
+
+}
 
 function goToPrevMonth (e) {
   let currentMonth = date.getMonth();
+  let currentYear = date.getFullYear();
   let currentMonthShown = document.querySelector(".months-first .month .mth");
+
+  if (currentMonthShown.innerHTML !== `${lastMonthToShow} ${nextYear}`) {
+    next_mth_element.style.opacity = "1";
+    prev_mth_element.style.opacity = "1";
+  }
+  if (currentMonthShown.innerHTML === `${currentMonthShown.innerHTML.slice(0,3)} ${currentYear}`) {
+    prev_mth_element.style.opacity = "0";
+  }
 
   if (months.indexOf(currentMonthShown.innerHTML.slice(0,3)) !== currentMonth) {
     prev_mth_element.style.opacity = "1";
+    next_mth_element.style.opacity = "1";
 
     let prevmonth;
     let nextyear;
@@ -131,12 +154,7 @@ function goToPrevMonth (e) {
       nextyear = year + 1;
       mth_element2.textContent = months[prevmonth] + ' ' + nextyear;
     }
-
     populateDates();
-  }
-
-  if (months.indexOf(currentMonthShown.innerHTML.slice(0,3)) === currentMonth) {
-    prev_mth_element.style.opacity = "0";
   }
 
 }
