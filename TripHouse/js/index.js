@@ -315,7 +315,7 @@ function createSelect() {
     const valueOfAge = document.createElement("option");
     valueOfAge.setAttribute("value", `value${i} years old`);
     valueOfAge.innerHTML = `${i} years old`;
-    if (i === 8) {
+    if (i === 0) {
       valueOfAge.setAttribute("selected", "selected");
     }
     selectAge.append(valueOfAge);
@@ -407,12 +407,12 @@ function changeCounterAdults(event) {
 
     function countAdults(event) {
       const counterDisplayElem = document.querySelector(".counter-number-Adults");
-      if ((counter1 === 0) || (counter1 <= 30)) {
+      if ((counter1 === 1) || (counter1 <= 30)) {
         changeCounter1();
       }
 
-      if (counter1 === -1) {
-        counter1 = 0;
+      if (counter1 === 0) {
+        counter1 = 1;
       }
 
       if (counter1 === 31) {
@@ -432,16 +432,16 @@ function changeCounterAdults(event) {
       }
 
       function updateDisplay() {
-        if ((counter1 !== -1) && (counter1 !== 31)) {
+        if ((counter1 !== 0) && (counter1 !== 31)) {
           counterDisplayElem.innerHTML = counter1;
           formLabelAdults.innerHTML = `${counter1} Adults`;
         }
 
-        if (counterDisplayElem.innerHTML === "0") {
+        if (counterDisplayElem.innerHTML === "1") {
           buttonMinusAdults.style.setProperty("--btn-minus-color", "#CECECE");
         }
 
-        if ((counterDisplayElem.innerHTML > 0) && (counterDisplayElem.innerHTML < 30)) {
+        if ((counterDisplayElem.innerHTML > 1) && (counterDisplayElem.innerHTML < 30)) {
           buttonMinusAdults.style.setProperty("--btn-minus-color", "#3077C6");
           buttonPlusAdults.style.setProperty("--btn-plus-color", "#3077C6");
         }
@@ -644,9 +644,7 @@ allBtns.forEach((button) => button.addEventListener("click", changeCounterChildr
 allBtns.forEach((button) => button.addEventListener("click", changeCounterRooms));
 const event = new Event("click");
 buttonPlusAdults.dispatchEvent(event);
-buttonPlusAdults.dispatchEvent(event);
 buttonPlusRooms.dispatchEvent(event);
-buttonPlusChildren.dispatchEvent(event);
 numbersWrap.dispatchEvent(event);
 document.body.dispatchEvent(event);
 
@@ -694,6 +692,7 @@ const searchButton = document.querySelector(".search-button");
 searchButton.addEventListener("click", () => {
   const mainSectionsWrap = document.querySelector(".main-sections-wrapper");
   const availableHotelsWrap = document.querySelector(".available-hotels");
+  const availableTitle = document.querySelector(".available-title");
 
   if (mainSectionsWrap.firstElementChild.classList.contains("available-hotels")) {
     mainSectionsWrap.removeChild(availableHotelsWrap);
@@ -787,11 +786,14 @@ searchButton.addEventListener("click", () => {
         availableHotels.append(availableItems);
         availableHotelsWrap.append(availableHotels);
 
+
+
         const offersSection = document.querySelector(".offers");
         if (mainSectionsWrap.firstElementChild.classList.contains("available-hotels")) {
           mainSectionsWrap.removeChild(availableHotelsWrap);
         }
         mainSectionsWrap.insertBefore(availableHotelsWrap, offersSection);
+        availableHotelsWrap.scrollIntoView();
 
         for (let i = 0; i < finalData.length; i++) {
           const homesItemCreated = createHomesItem(finalData, i);
