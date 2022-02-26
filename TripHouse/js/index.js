@@ -645,6 +645,8 @@ allBtns.forEach((button) => button.addEventListener("click", changeCounterRooms)
 const event = new Event("click");
 buttonPlusAdults.dispatchEvent(event);
 buttonPlusRooms.dispatchEvent(event);
+buttonPlusChildren.dispatchEvent(event);
+buttonMinusChildren.dispatchEvent(event);
 numbersWrap.dispatchEvent(event);
 document.body.dispatchEvent(event);
 

@@ -870,6 +870,7 @@ h1 {
     background-color: #FFFFFF;
     border-radius: 8px;
     border: 1px solid #3077C6;
+    transition: all 0.3s;
 }
 
 .sign-up-btn:hover {
@@ -877,6 +878,7 @@ h1 {
     background-color: #3077C6;
     border: 1px solid #3077C6;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 .sign-up-user {
