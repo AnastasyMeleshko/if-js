@@ -908,6 +908,7 @@ const regions = ["Maldives", "Spain", "Norway", "Island", "Japan", "France", "Sc
 const cities = ["Berlin, Germany", "Paris, France", "Budapest, Hungary", "London, United Kingdom", "Barcelona, Spain", "Tbilisi, Georgia", "Moscow, Russia", "Amsterdam, Netherlands"];
 const places = ["Edinburgh Castle, Edinburgh, United Kingdom", "Neuschwanstein, Fussen, Germany", "Big Ben, London, United Kingdom", "Colosseum, Roma, Italy", "Matterhorn, Zermatt, Switzerland", "Morskie Oko, Poland", "Krka, Croatia", "Cabo da roca, Sintra, Portugal"];
 const destinationBtns = ["regions", "cities", "places"];
+const slider2 = document.querySelector(".best-items-slider");
 
 function preloadImages() {
   for (let i =0; i<destinationBtns.length; i++) {
@@ -985,7 +986,7 @@ function changeImage(event) {
 bestButtons.addEventListener("click", changeImage);
 
 const arrowBest = document.querySelector(".arrow-best");
-const bestItemsSecondBlock = document.querySelector(".best-items-second");
+const bestItemsSecondBlocks = document.querySelectorAll(".best-items-second-line");
 
 function hideBestBlock(e) {
 
@@ -994,14 +995,101 @@ function hideBestBlock(e) {
     (e.target.classList.contains("arrow-use")) ||
     (e.target.classList.contains("arrow-icon")) ||
      (e.target.classList.contains("best-arrow-icon")) ){
-    if (bestItemsSecondBlock.style.display !== "none") {
-      bestItemsSecondBlock.style.display = "none";
-      arrowBest.classList.remove("rotate-arrow");
-    } else {
-      bestItemsSecondBlock.style.display = "flex";
-      arrowBest.classList.add("rotate-arrow");
-    }
+
+    slider2.style.flexWrap = "wrap";
+
+    bestItemsSecondBlocks.forEach((elem) => {
+      if (elem.style.display !== "none") {
+        elem.style.display = "none";
+        arrowBest.classList.remove("rotate-arrow");
+      } else {
+        elem.style.display = "flex";
+        arrowBest.classList.add("rotate-arrow");
+      }
+    })
   }
 }
 
 arrowBest.addEventListener("click", hideBestBlock);
+
+
+
+window.addEventListener("resize", () => {
+  function getCoords(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.x;
+  }
+
+  const screenWidth = innerWidth;
+
+  const sliderBestElements = document.querySelectorAll(".best-item");
+  const hideBestElems = document.querySelectorAll(".best-items-second-line");
+
+  for (let i = 0; i < sliderBestElements.length; i++) {
+    const coords = getCoords(sliderBestElements[i]);
+
+    if ((screenWidth < 1280) && (screenWidth > 1210)) {
+      slider2.style.flexWrap = "nowrap";
+    }
+
+    if ((screenWidth <= 1210) && (screenWidth > 768) && (coords > 700) && (coords < 1135)) {
+      sliderBestElements[i].classList.add("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+
+    if (screenWidth >= 1200) {
+      sliderBestElements[i].classList.remove("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+      arrowBest.classList.add("rotate-arrow");
+      count2 = 0;
+      rollSlider2();
+    }
+
+    if ((screenWidth < 768) && (coords > 520) && (coords < 700)) {
+      sliderBestElements[i].classList.add("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+
+    if ((screenWidth > 768) && sliderBestElements[i].classList.contains("hidden-item") && (coords > 600) && (coords < 650)) {
+      sliderBestElements[i].classList.remove("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+  }
+}, false);
+
+const arrowBestRight = document.querySelector(".arrow-best-hidden");
+
+let count2 = 0;
+arrowBestRight.addEventListener("click", () => {
+  const sliderElements = document.querySelectorAll(".best-item");
+  for (let i = 0; i < sliderElements.length; i++) {
+    sliderElements[i].classList.remove("hidden-item");
+    sliderElements[i].style.display = "flex";
+  }
+  count2++;
+  if ((sliderElements.length - 4) < count2) {
+    count2 = 0;
+  }
+
+  rollSlider2();
+});
+
+const arrowBestLeft = document.querySelector(".arrow-best-left-hidden");
+
+arrowBestLeft.addEventListener("click", () => {
+  const sliderElements = document.querySelectorAll(".best-item");
+  for (let i = 0; i < sliderElements.length; i++) {
+    sliderElements[i].classList.remove("hidden-item");
+    sliderElements[i].style.display = "flex";
+  }
+  count2--;
+  if (count2 < 0) {
+    count2 = 4;
+  }
+  rollSlider2();
+});
+
+function rollSlider2() {
+  slider2.style.transform = `translate(-${count2 * (297 + 14)}px )`;
+}
+
