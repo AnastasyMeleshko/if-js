@@ -1,0 +1,181 @@
+.date-picker {
+    position: relative;
+    top: -15px;
+    left: 80px;
+    width: 100%;
+    max-width: 700px;
+    height: 0;
+    background-color: transparent;
+    margin: 30px auto;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+
+    cursor: pointer;
+    user-select: none;
+}
+
+.date-picker .selected-date {
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    color: #313131;
+    font-size: 28px;
+}
+
+
+
+.date-picker .dates {
+    display: none;
+    position: absolute;
+    top: -25%;
+    left: 30px;
+    right: 0;
+
+    background-color: #FFF;
+}
+
+.date-picker .dates.active {
+    display: flex;
+}
+
+.date-picker .dates .month{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #EEE;
+}
+
+.dates {
+    padding: 5px;
+    width: 90%;
+    display: flex;
+    border-radius: 8px;
+}
+
+.months-first, .months-second {
+    width: 38%;
+}
+.months-first, .months-second {
+    margin-right: 10px;
+}
+
+
+.week-day {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.date-picker .dates .month .arrows {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #313131;
+    font-size: 20px;
+}
+
+.date-picker .dates .month .arrows:hover {
+    background-color: #F3F3F3;
+}
+
+.date-picker .dates .month .arrows:active {
+    background-color: #3077C6;
+}
+
+.date-picker .dates .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 170px;
+}
+.date-picker .dates .days .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #313131;
+}
+.date-picker .dates .days .day.selected {
+    background-color: #3077C6;
+    color: #FFFFFF;
+}
+
+.date-picker .dates .second-date .active {
+    left: 270px;
+}
+
+.date-picker .dates .months-second .month {
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.dates-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 24%;
+    margin: 0 auto;
+}
+
+.check-in-btn, .check-out-btn, .clear-btn {
+    display: flex;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border: 1px solid #3077C6;
+    border-radius: 8px;
+    color: #3077C6;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 10px 10px;
+    cursor: pointer;
+    width: 100%;
+    max-height: 60px;
+    transition: all 0.3s ease-in-out;
+}
+
+.clear-btn {
+    width: 60%
+}
+
+.check-in-btn, .check-out-btn {
+    margin-bottom: 20px;
+}
+
+.check-in-btn:hover, .check-out-btn:hover, .clear-btn:hover {
+    background-color: #3077C6;
+    color: #FFFFFF;
+    transition: .5s;
+    border: 1px solid #3077C6;
+}
+
+.date-picker .dates .days .today-date {
+    color: #3077C6;
+}
+
+.chosen {
+    color: #FFFFFF;
+    background-color: #3077C6;
+}
+
+.date-picker .dates .days .day.selected.frozen, .date-picker .dates .days .day.frozen {
+    background-color: #3077C6;
+    color: #FFFFFF;
+}
+
+.date-picker .dates .days .day.between {
+    background-color: #F3F3F4;
+}
+
+.date-picker .dates .days .day.end {
+    background-color: #BFBFBF;
+}
+
+.date-picker .dates .days .day.before-today, .date-picker .dates .days .day.before-start{
+    color: #c5c3c3;
+}

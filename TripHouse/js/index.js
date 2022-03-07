@@ -110,6 +110,7 @@ function createInitialItems() {
         sessionStorage.setItem("homesInitialData", initialHomesObj);
         for (let i = 0; i < dataFinal.length; i++) {
           const homesItemCreated = createHomesItem(dataFinal, i);
+          homesItemCreated.classList.add("initial-homes-item");
           insertHomesItem(homesItemCreated);
         }
       }).catch((err) => {
@@ -119,6 +120,7 @@ function createInitialItems() {
     const initialHomesObjForUsage = JSON.parse(sessionStorage.getItem("homesInitialData"));
     for (let i = 0; i < initialHomesObjForUsage.length; i++) {
       const homesItemCreated = createHomesItem(initialHomesObjForUsage, i);
+      homesItemCreated.classList.add("initial-homes-item");
       insertHomesItem(homesItemCreated);
     }
   }
@@ -130,7 +132,7 @@ const arrowHomes = document.querySelector(".arrow-homes");
 
 let count = 0;
 arrowHomes.addEventListener("click", () => {
-  const sliderElements = document.querySelectorAll(".homes-item");
+  const sliderElements = document.querySelectorAll(".initial-homes-item");
   for (let i = 0; i < sliderElements.length; i++) {
     sliderElements[i].classList.remove("hidden-item");
   }
@@ -139,13 +141,13 @@ arrowHomes.addEventListener("click", () => {
     count = 0;
   }
 
-  rollSlider();
+  rollSlider1();
 });
 
 const arrowHomesLeft = document.querySelector(".arrow-homes-left");
 
 arrowHomesLeft.addEventListener("click", () => {
-  const sliderElements = document.querySelectorAll(".homes-item");
+  const sliderElements = document.querySelectorAll(".initial-homes-item");
   for (let i = 0; i < sliderElements.length; i++) {
     sliderElements[i].classList.remove("hidden-item");
   }
@@ -153,12 +155,12 @@ arrowHomesLeft.addEventListener("click", () => {
   if (count < 0) {
     count = 4;
   }
-  rollSlider();
+  rollSlider1();
 });
 
 const slider = document.querySelector(".homes-group-items-slider");
 
-function rollSlider() {
+function rollSlider1() {
   slider.style.transform = `translate(-${count * (300 + 14)}px )`;
 }
 
@@ -313,7 +315,7 @@ function createSelect() {
     const valueOfAge = document.createElement("option");
     valueOfAge.setAttribute("value", `value${i} years old`);
     valueOfAge.innerHTML = `${i} years old`;
-    if (i === 8) {
+    if (i === 0) {
       valueOfAge.setAttribute("selected", "selected");
     }
     selectAge.append(valueOfAge);
@@ -405,12 +407,12 @@ function changeCounterAdults(event) {
 
     function countAdults(event) {
       const counterDisplayElem = document.querySelector(".counter-number-Adults");
-      if ((counter1 === 0) || (counter1 <= 30)) {
+      if ((counter1 === 1) || (counter1 <= 30)) {
         changeCounter1();
       }
 
-      if (counter1 === -1) {
-        counter1 = 0;
+      if (counter1 === 0) {
+        counter1 = 1;
       }
 
       if (counter1 === 31) {
@@ -430,16 +432,16 @@ function changeCounterAdults(event) {
       }
 
       function updateDisplay() {
-        if ((counter1 !== -1) && (counter1 !== 31)) {
+        if ((counter1 !== 0) && (counter1 !== 31)) {
           counterDisplayElem.innerHTML = counter1;
           formLabelAdults.innerHTML = `${counter1} Adults`;
         }
 
-        if (counterDisplayElem.innerHTML === "0") {
+        if (counterDisplayElem.innerHTML === "1") {
           buttonMinusAdults.style.setProperty("--btn-minus-color", "#CECECE");
         }
 
-        if ((counterDisplayElem.innerHTML > 0) && (counterDisplayElem.innerHTML < 30)) {
+        if ((counterDisplayElem.innerHTML > 1) && (counterDisplayElem.innerHTML < 30)) {
           buttonMinusAdults.style.setProperty("--btn-minus-color", "#3077C6");
           buttonPlusAdults.style.setProperty("--btn-plus-color", "#3077C6");
         }
@@ -642,9 +644,9 @@ allBtns.forEach((button) => button.addEventListener("click", changeCounterChildr
 allBtns.forEach((button) => button.addEventListener("click", changeCounterRooms));
 const event = new Event("click");
 buttonPlusAdults.dispatchEvent(event);
-buttonPlusAdults.dispatchEvent(event);
 buttonPlusRooms.dispatchEvent(event);
 buttonPlusChildren.dispatchEvent(event);
+buttonMinusChildren.dispatchEvent(event);
 numbersWrap.dispatchEvent(event);
 document.body.dispatchEvent(event);
 
@@ -692,6 +694,7 @@ const searchButton = document.querySelector(".search-button");
 searchButton.addEventListener("click", () => {
   const mainSectionsWrap = document.querySelector(".main-sections-wrapper");
   const availableHotelsWrap = document.querySelector(".available-hotels");
+  const availableTitle = document.querySelector(".available-title");
 
   if (mainSectionsWrap.firstElementChild.classList.contains("available-hotels")) {
     mainSectionsWrap.removeChild(availableHotelsWrap);
@@ -785,11 +788,14 @@ searchButton.addEventListener("click", () => {
         availableHotels.append(availableItems);
         availableHotelsWrap.append(availableHotels);
 
+
+
         const offersSection = document.querySelector(".offers");
         if (mainSectionsWrap.firstElementChild.classList.contains("available-hotels")) {
           mainSectionsWrap.removeChild(availableHotelsWrap);
         }
         mainSectionsWrap.insertBefore(availableHotelsWrap, offersSection);
+        availableHotelsWrap.scrollIntoView();
 
         for (let i = 0; i < finalData.length; i++) {
           const homesItemCreated = createHomesItem(finalData, i);
@@ -882,3 +888,208 @@ searchButton.addEventListener("click", () => {
       console.log(`Error${error}`);
     });
 });
+
+const signUpCross = document.querySelector('.sign-up-cross');
+const signUpCrossHidden = document.querySelector('.sign-up-hidden-cross');
+
+function hideAdvertisement() {
+  let signUpBanner = document.querySelector('.sign-up-banner');
+  signUpBanner.style.display = "none";
+  let bestcontainer = document.querySelector(".best-container");
+  bestcontainer.style.paddingBottom = "0";
+}
+
+signUpCross.addEventListener('click', hideAdvertisement);
+signUpCrossHidden.addEventListener('click', hideAdvertisement);
+
+// The best destinations
+
+const regions = ["Maldives", "Spain", "Norway", "Island", "Japan", "France", "Scottland", "Russia"];
+const cities = ["Berlin, Germany", "Paris, France", "Budapest, Hungary", "London, United Kingdom", "Barcelona, Spain", "Tbilisi, Georgia", "Moscow, Russia", "Amsterdam, Netherlands"];
+const places = ["Edinburgh Castle, Edinburgh, United Kingdom", "Neuschwanstein, Fussen, Germany", "Big Ben, London, United Kingdom", "Colosseum, Roma, Italy", "Matterhorn, Zermatt, Switzerland", "Morskie Oko, Poland", "Krka, Croatia", "Cabo da roca, Sintra, Portugal"];
+const destinationBtns = ["regions", "cities", "places"];
+const slider2 = document.querySelector(".best-items-slider");
+
+function preloadImages() {
+  for (let i =0; i<destinationBtns.length; i++) {
+    for(let j = 1; j <= 8; j++) {
+      const img = new Image();
+
+      if (destinationBtns[i] === "regions") {
+        img.src = `./img/regions/${j}.png`;
+      }
+      if (destinationBtns[i] === "cities") {
+        img.src = `./img/cities/${j}.png`;
+      }
+      if (destinationBtns[i] === "places") {
+        img.src = `./img/places/${j}.png`;
+      }
+    }
+  }
+}
+
+preloadImages();
+
+const bestButtons = document.querySelector('.best-nav');
+
+function changeImage(event) {
+
+  if(event.target.classList.contains('best-button')) {
+
+    const allDestinationImages = document.querySelectorAll('.best-item-img');
+    const allBestItemTitles = document.querySelectorAll('.best-item-title');
+    const buttonRegions = document.querySelector('.best-button-one');
+    const buttonCities = document.querySelector('.best-button-two');
+    const buttonPlaces = document.querySelector('.best-button-three');
+    const buttonPlaces2 = document.querySelector('.best-button-three-hidden');
+
+    allDestinationImages.forEach((img, index) => {
+      if (event.target.dataset.button === "regions") {
+        img.src = `./img/regions/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonRegions.classList.remove("active");
+      }
+
+      if (event.target.dataset.button === "cities") {
+        img.src = `./img/cities/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonCities.classList.remove('active');
+      }
+
+      if (event.target.dataset.button === "places") {
+        img.src = `./img/places/${index + 1}.png`;
+        event.target.classList.add('active');
+      } else {
+        buttonPlaces.classList.remove('active');
+        buttonPlaces2.classList.remove('active');
+      }
+    });
+
+    allBestItemTitles.forEach((title, index) => {
+      if (event.target.dataset.button === "regions") {
+        title.innerHTML = `${regions[index]}`;
+      }
+
+      if (event.target.dataset.button === "cities") {
+        title.innerHTML = `${cities[index]}`
+      }
+
+      if (event.target.dataset.button === "places") {
+        title.innerHTML = `${places[index]}`
+      }
+    });
+  }
+}
+
+bestButtons.addEventListener("click", changeImage);
+
+const arrowBest = document.querySelector(".arrow-best");
+const bestItemsSecondBlocks = document.querySelectorAll(".best-items-second-line");
+
+function hideBestBlock(e) {
+
+  if ((e.target.classList.contains("arrow-element")) ||
+    (e.target.classList.contains("arrow-best")) ||
+    (e.target.classList.contains("arrow-use")) ||
+    (e.target.classList.contains("arrow-icon")) ||
+     (e.target.classList.contains("best-arrow-icon")) ){
+
+    slider2.style.flexWrap = "wrap";
+
+    bestItemsSecondBlocks.forEach((elem) => {
+      if (elem.style.display !== "none") {
+        elem.style.display = "none";
+        arrowBest.classList.remove("rotate-arrow");
+      } else {
+        elem.style.display = "flex";
+        arrowBest.classList.add("rotate-arrow");
+      }
+    })
+  }
+}
+
+arrowBest.addEventListener("click", hideBestBlock);
+
+
+
+window.addEventListener("resize", () => {
+  function getCoords(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.x;
+  }
+
+  const screenWidth = innerWidth;
+
+  const sliderBestElements = document.querySelectorAll(".best-item");
+  const hideBestElems = document.querySelectorAll(".best-items-second-line");
+
+  for (let i = 0; i < sliderBestElements.length; i++) {
+    const coords = getCoords(sliderBestElements[i]);
+
+    if ((screenWidth < 1280) && (screenWidth > 1210)) {
+      slider2.style.flexWrap = "nowrap";
+    }
+
+    if ((screenWidth <= 1210) && (screenWidth > 768) && (coords > 700) && (coords < 1135)) {
+      sliderBestElements[i].classList.add("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+
+    if (screenWidth >= 1200) {
+      sliderBestElements[i].classList.remove("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+      arrowBest.classList.add("rotate-arrow");
+      count2 = 0;
+      rollSlider2();
+    }
+
+    if ((screenWidth < 768) && (coords > 520) && (coords < 700)) {
+      sliderBestElements[i].classList.add("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+
+    if ((screenWidth > 768) && sliderBestElements[i].classList.contains("hidden-item") && (coords > 600) && (coords < 650)) {
+      sliderBestElements[i].classList.remove("hidden-item");
+      sliderBestElements[i].style.display = "flex";
+    }
+  }
+}, false);
+
+const arrowBestRight = document.querySelector(".arrow-best-hidden");
+
+let count2 = 0;
+arrowBestRight.addEventListener("click", () => {
+  const sliderElements = document.querySelectorAll(".best-item");
+  for (let i = 0; i < sliderElements.length; i++) {
+    sliderElements[i].classList.remove("hidden-item");
+    sliderElements[i].style.display = "flex";
+  }
+  count2++;
+  if ((sliderElements.length - 4) < count2) {
+    count2 = 0;
+  }
+
+  rollSlider2();
+});
+
+const arrowBestLeft = document.querySelector(".arrow-best-left-hidden");
+
+arrowBestLeft.addEventListener("click", () => {
+  const sliderElements = document.querySelectorAll(".best-item");
+  for (let i = 0; i < sliderElements.length; i++) {
+    sliderElements[i].classList.remove("hidden-item");
+    sliderElements[i].style.display = "flex";
+  }
+  count2--;
+  if (count2 < 0) {
+    count2 = 4;
+  }
+  rollSlider2();
+});
+
+function rollSlider2() {
+  slider2.style.transform = `translate(-${count2 * (297 + 14)}px )`;
+}
+
