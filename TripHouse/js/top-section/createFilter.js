@@ -1,0 +1,42 @@
+function createFilter(dataForFilters) {
+  const filtersBlockElement = document.createElement("div");
+  filtersBlockElement.classList.add("filters-block-element");
+  const labelAdults2 = document.createElement("span");
+  labelAdults2.innerHTML = `${dataForFilters}`;
+  labelAdults2.classList.add("filter-text");
+  const classTextName = `filter-text-${dataForFilters}`;
+  labelAdults2.classList.add(classTextName);
+  filtersBlockElement.append(labelAdults2);
+  const squareButtonMinus = document.createElement("div");
+  squareButtonMinus.classList.add("square-button");
+  squareButtonMinus.classList.add("square-button-minus");
+  squareButtonMinus.classList.add(`button-minus-${dataForFilters}`);
+  squareButtonMinus.classList.add(`minus-btn-${dataForFilters}`);
+  const minusInBtn = document.createElement("div");
+  minusInBtn.classList.add("minus-in-btn");
+  minusInBtn.classList.add("minus-minus-in-btn");
+  squareButtonMinus.append(minusInBtn);
+  filtersBlockElement.append(squareButtonMinus);
+  const counter = document.createElement("div");
+  counter.classList.add("counter-number");
+  counter.classList.add(`counter-number-${dataForFilters}`);
+  counter.innerHTML = "0";
+  filtersBlockElement.append(counter);
+  const squareButtonPlus = document.createElement("div");
+  squareButtonPlus.classList.add("square-button");
+  squareButtonPlus.classList.add("square-button-plus");
+  squareButtonPlus.classList.add(`button-plus-${dataForFilters}`);
+  squareButtonPlus.classList.add(`plus-btn-${dataForFilters}`);
+  const minusInBtn2 = document.createElement("div");
+  minusInBtn2.classList.add("minus-in-btn");
+  minusInBtn2.classList.add("minus-in-btn-plus");
+  squareButtonPlus.append(minusInBtn2);
+  const minusInBtnVertical = document.createElement("div");
+  minusInBtnVertical.classList.add("minus-in-btn-vertical");
+  minusInBtnVertical.classList.add("minus-in-btn-plus");
+  squareButtonPlus.append(minusInBtnVertical);
+  filtersBlockElement.append(squareButtonPlus);
+  return filtersBlockElement;
+}
+
+export {createFilter};
