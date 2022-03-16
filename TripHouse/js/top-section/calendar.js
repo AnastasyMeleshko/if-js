@@ -35,7 +35,6 @@ let today_Day = day;
 let today_Month = month;
 let today_Year = year;
 
-
 mth_element.textContent = months[month] + ' ' + year;
 mth_element2.textContent = months[month+1] + ' ' + year;
 
@@ -161,6 +160,7 @@ function goToPrevMonth (e) {
 
 function populateDates (e) {
   let amount_days;
+  let amount_days2;
 
   let firstChosenDate;
   let secondChosenDate;
